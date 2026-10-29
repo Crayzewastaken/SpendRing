@@ -136,6 +136,7 @@ class MainActivity : Activity() {
     private fun handleTestIntent(i: Intent) {
         if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
         i.getStringExtra("sr_plan")?.let { Plan.importCode(this, it); i.removeExtra("sr_plan"); loadBudgetFields() }
+        i.getStringExtra("sr_purchases")?.let { store.importPurchases(it)?.let { r -> toast("Imported ${r.first}, skipped ${r.second}") }; i.removeExtra("sr_purchases") }
         val tabExtra = i.getIntExtra("sr_tab", -1)
         val text = i.getStringExtra("sr_text")
         if (text != null) {
@@ -325,6 +326,7 @@ class MainActivity : Activity() {
         col.addView(b, lp(8))
 
         col.addView(button("+  Add a purchase", Colors.SURFACE, Colors.ACCENT) { editDialog(null) }, lp(16))
+        col.addView(button("Import purchases from a code", Colors.SURFACE, Colors.PURPLE) { importDialog() }, lp(10))
 
         col.addView(section("FUEL"))
         fuelBox = card()
@@ -729,6 +731,31 @@ class MainActivity : Activity() {
         planBox.addView(button("Update my plan", Colors.FIELD, Colors.FG) { planDialog() }, lp(16))
     }
 
+    private fun importDialog() {
+        val wrap = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(8), dp(20), 0) }
+        wrap.addView(label("Paste a purchases code from Claude. Anything already in the app is skipped, so it's safe to paste the same code twice.", 13f, Colors.MUTED))
+        val code = field("Paste the code here", "", InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS).apply {
+            minLines = 3; maxLines = 6; textSize = 13f; typeface = Typeface.MONOSPACE
+        }
+        wrap.addView(code, lp(10))
+        val dlg = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+            .setTitle("Import purchases")
+            .setView(wrap)
+            .setPositiveButton("Import", null)
+            .setNegativeButton("Cancel", null)
+            .create()
+        dlg.setOnShowListener {
+            dlg.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val r = store.importPurchases(code.text.toString())
+                if (r == null) { code.error = "That isn't a purchases code. Copy the whole thing and try again."; return@setOnClickListener }
+                Notifier.changed(this); refresh()
+                toast("Added ${r.first} purchases" + if (r.second > 0) ", skipped ${r.second} already here" else "")
+                dlg.dismiss()
+            }
+        }
+        dlg.show()
+    }
+
     private fun planDialog() {
         val p = Plan.load(this)
         val wrap = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(8), dp(20), 0) }
@@ -803,7 +830,11 @@ class MainActivity : Activity() {
         box.addView(r1)
         val r2 = row()
         r2.addView(dot(Store.colorOf(t.cat), 8))
-        val src = if (t.source.startsWith("wallet")) "Wallet" else "Added by you"
+        val src = when {
+            t.source.startsWith("wallet") -> "Wallet"
+            t.source == "import" -> "Imported"
+            else -> "Added by you"
+        }
         r2.addView(label("${t.cat}  ·  ${dayFmt.format(Date(t.ts))}, ${timeFmt.format(Date(t.ts))}  ·  $src", 12.5f, Colors.MUTED).apply {
             setPadding(dp(6), 0, 0, 0)
         })
@@ -845,6 +876,12 @@ class MainActivity : Activity() {
         wrap.addView(amount, lp(8))
         wrap.addView(label("Category", 12.5f, Colors.MUTED).apply { setPadding(0, dp(12), 0, 0) })
         wrap.addView(spinner)
+        val allShop = android.widget.CheckBox(this).apply {
+            text = "Use this category for every purchase from this shop"
+            setTextColor(Colors.FG)
+            isChecked = true
+        }
+        wrap.addView(allShop, lp(4))
         wrap.addView(refund, lp(8))
         wrap.addView(dateBtnLocal)
         if (existing != null && existing.raw.isNotBlank()) {
@@ -872,7 +909,13 @@ class MainActivity : Activity() {
                     store.replace(existing.copy(merchant = name, amount = signed, cat = cat, ts = cal.timeInMillis))
                     toast("Saved")
                 }
-                if (existing == null || existing.cat != cat) store.rememberCategory(name, cat)
+                if (existing == null || existing.cat != cat) {
+                    if (allShop.isChecked) {
+                        store.rememberCategory(name, cat)
+                        val n = store.recategorize(name, cat)
+                        if (n > 0) toast("$name is now $cat ($n purchases changed)")
+                    }
+                }
                 Notifier.changed(this)
                 refresh()
                 dlg.dismiss()

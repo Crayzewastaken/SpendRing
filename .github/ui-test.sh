@@ -78,6 +78,13 @@ feed "Kmart" "Refund of \$15.00 with Visa ••4821" 3
 # the same Uber Eats notification again (should be skipped as a duplicate)
 feed "Uber Eats" "\$31.45 with Visa ••4821" 6
 
+# ---- 4b. Import purchases from a code (one new, one already captured from Wallet)
+TODAY=$(date +%F); D40=$(date -d "-40 hours" +%F)
+echo "{\"purchases\":[[\"Corner Cafe\",6.5,\"$TODAY 08:15\",\"Eating out\"],[\"WOOLWORTHS 1234\",34.2,\"$D40\"]]}" > purchases.json
+adb push purchases.json /data/local/tmp/purchases.json
+adb shell "am start -n $PKG/.MainActivity --es sr_purchases \"\$(cat /data/local/tmp/purchases.json)\""
+sleep 2
+
 # ---- 5. A real posted notification, read by the listener service itself
 for U in "su 2000" ""; do
   adb shell "$U cmd notification post -S bigtext -t 'Coles' coles1 '\$23.10 with Visa ••4821'" >> $OUT/post-output.txt 2>&1

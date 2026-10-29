@@ -185,6 +185,64 @@ class Store(ctx: Context) {
         sp.edit().putString("catMemory", j.toString()).apply()
     }
 
+    /** Changes the category of every purchase from this shop (same name, ignoring case and symbols). */
+    @Synchronized
+    fun recategorize(merchant: String, cat: String): Int {
+        val key = merchantKey(merchant)
+        var n = 0
+        saveTxns(txns().map { if (merchantKey(it.merchant) == key && it.cat != cat) { n++; it.copy(cat = cat) } else it })
+        return n
+    }
+
+    /**
+     * Adds purchases from an import code: {"purchases":[["Shop", 12.50, "2026-10-29", "Category"], ...]}
+     * (time optional as "2026-10-29 14:05", category optional). Skips ones already in the app.
+     * Returns (added, skipped), or null if the text isn't a purchase code.
+     */
+    @Synchronized
+    fun importPurchases(text: String): Pair<Int, Int>? {
+        val arr = try {
+            val t = text.trim()
+            if (t.startsWith("[")) JSONArray(t) else JSONObject(t).optJSONArray("purchases")
+        } catch (_: Exception) { null } ?: return null
+        val list = txns().toMutableList()
+        val catNames = CATEGORIES.map { it.name }
+        var added = 0
+        var skipped = 0
+        for (i in 0 until arr.length()) {
+            val row = arr.optJSONArray(i) ?: continue
+            val m = row.optString(0).trim().ifEmpty { "Purchase" }
+            val amt = row.optDouble(1, Double.NaN)
+            if (amt.isNaN() || amt == 0.0) { skipped++; continue }
+            val ds = row.optString(2)
+            val ts = parseDateTime(ds)
+            if (ts == null) { skipped++; continue }
+            val dayStart = parseDate(ds.take(10))?.timeInMillis ?: ts
+            val k = merchantKey(m).take(5)
+            // Same amount, same day, and the shop names start the same ("WOOLWORTHS 2648" = "Woolworths").
+            val dup = list.any {
+                abs(it.amount - amt) < 0.005 && it.ts >= dayStart && it.ts < dayStart + DAY &&
+                    merchantKey(it.merchant).take(5) == k
+            }
+            if (dup) { skipped++; continue }
+            val c = row.optString(3, "").let { given -> catNames.firstOrNull { it.equals(given, true) } } ?: guessCategory(m)
+            val t = Txn(newId(), m, amt, c, ts, "import", "")
+            list.add(t)
+            added++
+        }
+        saveTxns(list)
+        return added to skipped
+    }
+
+    private fun parseDateTime(s: String): Long? {
+        val d = parseDate(s.take(10)) ?: return null
+        val tm = Regex("""(\d{1,2}):(\d{2})""").find(s.drop(10))
+        if (tm != null) {
+            d.set(Calendar.HOUR_OF_DAY, tm.groupValues[1].toInt()); d.set(Calendar.MINUTE, tm.groupValues[2].toInt())
+        } else d.set(Calendar.HOUR_OF_DAY, 12)
+        return d.timeInMillis
+    }
+
     fun guessCategory(merchant: String): String {
         val j = try { JSONObject(sp.getString("catMemory", "{}") ?: "{}") } catch (_: Exception) { JSONObject() }
         val key = merchantKey(merchant)
@@ -317,11 +375,11 @@ class Store(ctx: Context) {
 
         val CATEGORIES = listOf(
             Category("Groceries", 0xFF3FC39D.toInt(), listOf("woolworths", "coles", "aldi", "iga", "foodworks", "harris farm", "costco", "butcher", "fruit", "market")),
-            Category("Eating out", 0xFFF08A4B.toInt(), listOf("mcdonald", "maccas", "kfc", "hungry jack", "subway", "domino", "pizza", "cafe", "coffee", "grill", "sushi", "guzman", "nando", "oporto", "uber eats", "ubereats", "menulog", "doordash", "bar ", "restaurant", "bakery", "boost", "zambrero", "red rooster", "grilld", "starbucks", "kebab", "thai", "noodle")),
-            Category(FUEL, 0xFFF0C23A.toInt(), listOf("bp ", "bp express", "shell", "ampol", "caltex", "7-eleven", "7 eleven", "7eleven", "united petrol", "puma", "liberty", "metro petroleum", "fuel", "petrol", "costco fuel")),
+            Category("Eating out", 0xFFF08A4B.toInt(), listOf("mcdonald", "maccas", "kfc", "hungry jack", "subway", "domino", "pizza", "cafe", "coffee", "grill", "sushi", "guzman", "nando", "oporto", "uber eats", "ubereats", "menulog", "doordash", "bar ", "restaurant", "bakery", "boost", "zambrero", "red rooster", "grilld", "starbucks", "kebab", "thai", "noodle", "hjs", "hj's", "zarraffa", "gong cha", "chatime", "bakehouse", "taco bell", "deliverect", "hotel", "tavern", "pho", "saigon", "sai gon", "dumpling", "burger", "bubble tea")),
+            Category(FUEL, 0xFFF0C23A.toInt(), listOf("bp ", "bp express", "shell", "ampol", "caltex", "7-eleven", "7 eleven", "7eleven", "united petrol", "puma", "liberty", "metro petroleum", "fuel", "petrol", "costco fuel", "pearl energy", "freedom fuels", "coles express", "astron")),
             Category("Transport", 0xFF7A9BFF.toInt(), listOf("translink", "go card", "uber trip", "uber *trip", "didi", "ola ", "parking", "linkt", "transurban", "taxi", "13cabs")),
             Category("Shopping", 0xFFB58CFF.toInt(), listOf("kmart", "target", "big w", "jb hi", "amazon", "ebay", "myer", "david jones", "officeworks", "bunnings", "rebel", "uniqlo", "h&m", "temu", "shein", "apple", "harvey norman", "the good guys", "best&less", "cotton on")),
-            Category("Fun", 0xFFFF6FAE.toInt(), listOf("event cinemas", "hoyts", "dendy", "steam", "playstation", "xbox", "nintendo", "ticketek", "ticketmaster", "bowling", "timezone", "netflix", "spotify")),
+            Category("Fun", 0xFFFF6FAE.toInt(), listOf("event cinemas", "hoyts", "dendy", "steam", "playstation", "xbox", "nintendo", "ticketek", "ticketmaster", "bowling", "timezone", "netflix", "spotify", "reading cinemas", "the lott", "lotto", "tatts")),
             Category("Health", 0xFF4FD1E0.toInt(), listOf("chemist", "pharmacy", "priceline", "terrywhite", "doctor", "medical", "dental", "gym", "fitness", "anytime", "physio")),
             Category("Other", 0xFF93A5A1.toInt(), emptyList()),
         )
