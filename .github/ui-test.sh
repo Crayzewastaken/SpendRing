@@ -15,20 +15,17 @@ adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 
-# ---- 1. First open: no budget yet -> settings screen
+# ---- 1. First open: no budget yet, so the Budget tab with the import box
 adb shell am start -n $PKG/.MainActivity
 sleep 4
 adb exec-out screencap -p > $OUT/1-first-open.png
 adb shell am force-stop $PKG
 
-# ---- 2. Seed a budget: $600 a fortnight, refill in 9 days. Also read notifications from the shell
+# ---- 2. Keep the imported budget; also read notifications from the shell (for the listener test)
 NEXT=$(date -d "+9 days" +%F)
 cat > spendring.xml <<EOF
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <map>
-    <float name="budget" value="600.0" />
-    <string name="cycle">fortnightly</string>
-    <string name="nextRefill">$NEXT</string>
     <boolean name="askedNotif" value="true" />
     <string name="watchApps">com.google.android.apps.walletnfcrel
 com.google.android.gms
@@ -49,6 +46,17 @@ adb shell am start -n $PKG/.MainActivity
 sleep 3
 adb exec-out screencap -p > $OUT/2-budget-set-no-access.png
 
+# Import a sample budget code (made-up numbers, same shape as a real one)
+adb shell am start -n $PKG/.MainActivity --ei sr_tab 1
+sleep 2
+adb exec-out screencap -p > $OUT/2b-import-box.png
+cat > plan.json <<'JSON'
+{"pay":1200,"rent":180,"saving":700,"spending":150,"fuelMonthly":160,"bills":[["Rent",390],["Phone",45],["Fuel",160]],"savingsBalance":3000,"savingsDate":"2026-10-20","payAnchor":"2026-09-15","cashbackMin":500,"cashback":40,"extra":{"2026-11-10":200},"lumps":[["2027-07-25",1500,"Tax refund"]]}
+JSON
+adb push plan.json /data/local/tmp/plan.json
+adb shell "am start -n $PKG/.MainActivity --es sr_plan \"\$(cat /data/local/tmp/plan.json)\""
+sleep 2
+
 # ---- 3. Turn on notification access, as the user would in Settings
 adb shell cmd notification allow_listener $PKG/$PKG.WalletListener
 sleep 3
@@ -58,12 +66,13 @@ feed() { # title text hoursAgo
   adb shell "am start -n $PKG/.MainActivity --es sr_title '$1' --es sr_text '$2' --ei sr_hours_ago $3" >/dev/null
   sleep 1.2
 }
-feed "Woolworths" "\$84.20 with Visa ••4821" 110
-feed "Google Wallet" "You paid A\$12.50 at Guzman y Gomez" 98
-feed "BP Express" "\$65.00 with Visa ••4821" 75
-feed "Kmart" "\$39.00 · Mastercard ••1234" 30
-feed "Transaction declined" "\$250.00 at JB Hi-Fi was declined" 20
-feed "Card added" "Your Visa is ready to use in Google Wallet" 19
+feed "Aldi" "\$41.30 with Visa ••4821" 100
+feed "Woolworths" "\$34.20 with Visa ••4821" 40
+feed "Google Wallet" "You paid A\$12.50 at Guzman y Gomez" 30
+feed "BP Express" "\$65.00 with Visa ••4821" 20
+feed "Kmart" "\$39.00 · Mastercard ••1234" 10
+feed "Transaction declined" "\$250.00 at JB Hi-Fi was declined" 9
+feed "Card added" "Your Visa is ready to use in Google Wallet" 8
 feed "Uber Eats" "\$31.45 with Visa ••4821" 6
 feed "Kmart" "Refund of \$15.00 with Visa ••4821" 3
 # the same Uber Eats notification again (should be skipped as a duplicate)
@@ -92,7 +101,13 @@ sleep 1
 adb exec-out screencap -p > $OUT/5-budget-scrolled.png
 adb shell input swipe 540 1700 540 600 400
 sleep 1
-adb exec-out screencap -p > $OUT/5b-budget-purchases.png
+adb exec-out screencap -p > $OUT/5b-budget-plan.png
+adb shell input swipe 540 1700 540 600 400
+sleep 1
+adb exec-out screencap -p > $OUT/5c-budget-plan2.png
+adb shell input swipe 540 1700 540 600 400
+sleep 1
+adb exec-out screencap -p > $OUT/5d-budget-purchases.png
 adb shell uiautomator dump /data/local/tmp/ui.xml >/dev/null 2>&1
 adb pull /data/local/tmp/ui.xml $OUT/ui-budget.xml >/dev/null 2>&1
 tap_text() {

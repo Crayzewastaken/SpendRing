@@ -61,6 +61,8 @@ class MainActivity : Activity() {
     private lateinit var catBox: LinearLayout
     private lateinit var listBox: LinearLayout
     private lateinit var pastBox: LinearLayout
+    private lateinit var planBox: LinearLayout
+    private lateinit var fuelBox: LinearLayout
 
     // Settings
     private lateinit var logBox: LinearLayout
@@ -123,6 +125,7 @@ class MainActivity : Activity() {
     /** Used by the automated emulator test to feed in sample Wallet notifications. */
     private fun handleTestIntent(i: Intent) {
         if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
+        i.getStringExtra("sr_plan")?.let { Plan.importCode(this, it); i.removeExtra("sr_plan"); loadBudgetFields() }
         val tabExtra = i.getIntExtra("sr_tab", -1)
         val text = i.getStringExtra("sr_text")
         if (text != null) {
@@ -236,9 +239,9 @@ class MainActivity : Activity() {
         budgetSummary = label("", 14f, Colors.MUTED).apply { setPadding(0, dp(6), 0, 0) }
         col.addView(budgetSummary)
 
-        col.addView(section("YOUR BUDGET"))
+        col.addView(section("SPENDING MONEY"))
         val b = card()
-        b.addView(label("Budget for each cycle (AUD)", 13f, Colors.MUTED))
+        b.addView(label("For the card each cycle (AUD). Fuel has its own allowance below.", 13f, Colors.MUTED))
         budgetField = field("e.g. 600", "", InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
         b.addView(budgetField, lp(6))
         b.addView(label("Money comes in every", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
@@ -252,7 +255,7 @@ class MainActivity : Activity() {
             cyc.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { if (i > 0) leftMargin = dp(8) })
         }
         b.addView(cyc, lp(6))
-        b.addView(label("Next refill date", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
+        b.addView(label("Next refill (payday)", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
         dateBtn = label("Pick a date", 16f, Colors.FG, true).apply {
             background = rounded(Colors.FIELD, 10f); setPadding(dp(14), dp(12), dp(14), dp(12))
             setOnClickListener { pickRefillDate() }
@@ -262,6 +265,14 @@ class MainActivity : Activity() {
         col.addView(b, lp(8))
 
         col.addView(button("+  Add a purchase", Colors.SURFACE, Colors.ACCENT) { editDialog(null) }, lp(16))
+
+        col.addView(section("FUEL"))
+        fuelBox = card()
+        col.addView(fuelBox, lp(8))
+
+        col.addView(section("YOUR PLAN"))
+        planBox = card()
+        col.addView(planBox, lp(8))
 
         col.addView(section("WHERE IT WENT"))
         catBox = card()
@@ -451,7 +462,7 @@ class MainActivity : Activity() {
         else "Set your budget below to start."
 
         catBox.removeAllViews()
-        val byCat = s.txns.groupBy { it.cat }.mapValues { e -> e.value.sumOf { it.amount } }
+        val byCat = s.txns.filter { it.cat != Store.FUEL }.groupBy { it.cat }.mapValues { e -> e.value.sumOf { it.amount } }
             .filter { it.value > 0.004 }.toList().sortedByDescending { it.second }
         if (byCat.isEmpty()) {
             catBox.addView(label("Nothing spent yet this cycle.", 14f, Colors.MUTED))
@@ -502,6 +513,9 @@ class MainActivity : Activity() {
             }
         }
 
+        renderFuel(s)
+        renderPlan()
+
         // ---- Settings
         accessStatus.text = if (listening) "✓  Notification access is on" else "Notification access is off"
         accessStatus.setTextColor(if (listening) Colors.OK else Colors.WARN)
@@ -522,6 +536,138 @@ class MainActivity : Activity() {
                 logBox.addView(label(e.optString("result"), 12.5f, if (added) Colors.OK else Colors.WARN, true))
             }
         }
+    }
+
+    private fun renderFuel(s: Summary) {
+        fuelBox.removeAllViews()
+        val r = row()
+        r.addView(dot(Store.colorOf(Store.FUEL)))
+        r.addView(label("Fuel this fortnight", 15f, Colors.FG, true).apply { setPadding(dp(8), 0, 0, 0) },
+            LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        r.addView(label("${Store.money(s.fuelSpent, false)} of ${Store.money(s.fuelBudget, false)}", 15f,
+            if (s.fuelSpent > s.fuelBudget) Colors.BAD else Colors.FG, true).apply { typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD) })
+        fuelBox.addView(r)
+        val frac = if (s.fuelBudget > 0) (s.fuelSpent / s.fuelBudget).toFloat() else 0f
+        fuelBox.addView(bar(frac.coerceAtMost(1f), if (frac > 1f) Colors.BAD else Store.colorOf(Store.FUEL)),
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(6)).apply { topMargin = dp(8) })
+        fuelBox.addView(label("Your \$${trimNum(Plan.load(this).fuelMonthly)}/month fuel bill, tracked on its own so filling up doesn't use your spending money.", 12.5f, Colors.MUTED), lp(8))
+    }
+
+    private fun renderPlan() {
+        val p = Plan.load(this)
+        val now = System.currentTimeMillis()
+        planBox.removeAllViews()
+        if (p.isEmpty) {
+            planBox.addView(label("Bring in your budget", 16f, Colors.FG, true))
+            planBox.addView(label("Paste the import code Claude gave you. It sets your spending money, paydays, fuel, bills and savings. It stays on this phone only.", 13f, Colors.MUTED), lp(4))
+            val code = field("Paste the code here", "", InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS).apply {
+                minLines = 2; maxLines = 4; textSize = 13f; typeface = Typeface.MONOSPACE
+            }
+            planBox.addView(code, lp(10))
+            planBox.addView(button("Import my budget", Colors.ACCENT, Colors.BG) {
+                val np = Plan.importCode(this, code.text.toString())
+                if (np == null) { code.error = "That doesn't look like a budget code. Copy the whole thing and try again." }
+                else {
+                    Notifier.changed(this); loadBudgetFields(); refresh()
+                    toast("Budget imported: ${Store.money(np.spending, false)} a fortnight, refills every payday")
+                }
+            }, lp(10))
+            planBox.addView(button("Type it in instead", Colors.FIELD, Colors.FG) { planDialog() }, lp(8))
+            return
+        }
+        fun line(name: String, value: String, color: Int = Colors.FG, top: Int = 8) {
+            val r = row()
+            r.addView(label(name, 14f, Colors.MUTED), LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+            r.addView(label(value, 14f, color, true).apply { typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD) })
+            planBox.addView(r, lp(top))
+        }
+        val next = p.nextPayday(now)
+        planBox.addView(label("Pay ${Store.money(p.pay, false)} every 2nd Tuesday", 16f, Colors.FG, true))
+        planBox.addView(label(if (next != null) "Next payday ${dayFmt.format(Date(next))}" else "", 13f, Colors.MUTED), lp(2))
+
+        line("Rent", Store.money(p.rent, false), Colors.FG, 12)
+        line("Savings + investing", Store.money(p.saving, false))
+        line("Stays for bills + spending", Store.money(p.staysInAccount, false))
+
+        planBox.addView(label("BILLS EACH MONTH", 11f, Colors.MUTED, true).apply { letterSpacing = 0.09f }, lp(18))
+        p.bills.forEach { (n, a) -> line(n, Store.money(a, false), Colors.FG, 6) }
+        line("Total", Store.money(p.billsMonthly, false), Colors.FG, 8)
+
+        planBox.addView(label("SAVINGS", 11f, Colors.MUTED, true).apply { letterSpacing = 0.09f }, lp(18))
+        line("Now (estimate)", Store.money(p.savingsAt(now), false), Colors.OK, 6)
+        val dec31 = Store.parseDate("${Calendar.getInstance().get(Calendar.YEAR)}-12-31")?.timeInMillis ?: now
+        line("By 31 Dec", Store.money(p.savingsAt(dec31), false))
+        val goals = listOf(10000.0, 20000.0, 30000.0, 40000.0).filter { it > p.savingsAt(now) }.take(2)
+        val mon = SimpleDateFormat("MMM yyyy", Locale.getDefault())
+        goals.forEach { g -> p.goalDate(g)?.let { line("${Store.money(g, false)} around", mon.format(Date(it))) } }
+        planBox.addView(label("From ${Store.money(p.savingsBalance, false)} on ${dayFmt.format(Date(p.savingsDate))}, plus ${Store.money(p.saving, false)} each payday, extra hours and expected windfalls.", 12f, Colors.MUTED), lp(6))
+
+        planBox.addView(label("CARD CASHBACK", 11f, Colors.MUTED, true).apply { letterSpacing = 0.09f }, lp(18))
+        val card = store.cardThisMonth(now)
+        val hit = card >= p.cashbackMin
+        line("On the card this month", "${Store.money(card, false)} / ${Store.money(p.cashbackMin, false)}", if (hit) Colors.OK else Colors.FG, 6)
+        planBox.addView(bar((card / p.cashbackMin).toFloat().coerceIn(0f, 1f), if (hit) Colors.OK else Colors.ACCENT),
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(6)).apply { topMargin = dp(8) })
+        planBox.addView(label(if (hit) "Cashback unlocked: ${Store.money(p.cashback, false)} this month." else
+            "${Store.money(p.cashbackMin - card, false)} more on the card this month for ${Store.money(p.cashback, false)} cashback. Purchases Wallet sees count here.", 12f, Colors.MUTED), lp(6))
+
+        planBox.addView(button("Update my plan", Colors.FIELD, Colors.FG) { planDialog() }, lp(16))
+    }
+
+    private fun planDialog() {
+        val p = Plan.load(this)
+        val wrap = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(8), dp(20), 0) }
+        val num = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        fun add(title: String, v: Double): EditText {
+            wrap.addView(label(title, 12.5f, Colors.MUTED).apply { setPadding(0, dp(10), 0, dp(4)) })
+            val f = field("", trimNum(v), num); wrap.addView(f); return f
+        }
+        val pay = add("Pay each fortnight (after tax)", p.pay)
+        val rent = add("Rent each fortnight", p.rent)
+        val saving = add("Savings + investing each fortnight", p.saving)
+        val spending = add("Spending money each fortnight", p.spending)
+        val fuel = add("Fuel each month", p.fuelMonthly)
+        val bal = add("Savings balance today", p.savingsAt(System.currentTimeMillis()))
+        wrap.addView(label("Bills each month, one per line (name and amount)", 12.5f, Colors.MUTED).apply { setPadding(0, dp(10), 0, dp(4)) })
+        val bills = field("", p.bills.joinToString("\n") { "${it.first} ${trimNum(it.second)}" },
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_CAP_WORDS).apply { minLines = 3 }
+        wrap.addView(bills)
+
+        val dlg = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+            .setTitle("Update my plan")
+            .setView(ScrollView(this).apply { addView(wrap) })
+            .setPositiveButton("Save", null)
+            .setNegativeButton("Cancel", null)
+            .create()
+        dlg.setOnShowListener {
+            dlg.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                fun v(e: EditText, old: Double) = e.text.toString().replace(",", "").replace("$", "").trim().toDoubleOrNull() ?: old
+                val billList = bills.text.toString().split("\n").mapNotNull { l ->
+                    val m = Regex("""^(.*?)[\s:$]+([\d,]+(?:\.\d+)?)\s*$""").find(l.trim()) ?: return@mapNotNull null
+                    val amt = m.groupValues[2].replace(",", "").toDoubleOrNull() ?: return@mapNotNull null
+                    m.groupValues[1].trim().ifEmpty { "Bill" } to amt
+                }
+                val newBal = v(bal, p.savingsBalance)
+                val balChanged = Math.abs(newBal - p.savingsAt(System.currentTimeMillis())) > 0.5
+                val np = p.copy(
+                    pay = v(pay, p.pay), rent = v(rent, p.rent), saving = v(saving, p.saving),
+                    spending = v(spending, p.spending), fuelMonthly = v(fuel, p.fuelMonthly),
+                    bills = if (billList.isEmpty()) p.bills else billList,
+                    savingsBalance = if (balChanged) newBal else p.savingsBalance,
+                    savingsDate = if (balChanged || p.savingsDate == 0L) System.currentTimeMillis() else p.savingsDate,
+                    payAnchor = p.payAnchor.ifEmpty { store.nextRefill },
+                )
+                if (np.pay <= 0) { pay.error = "Enter your pay"; return@setOnClickListener }
+                Plan.save(this, np)
+                if (p.isEmpty || np.spending != p.spending || np.fuelMonthly != p.fuelMonthly) Plan.applyToBudget(this, np)
+                Notifier.changed(this)
+                loadBudgetFields()
+                refresh()
+                toast("Plan saved")
+                dlg.dismiss()
+            }
+        }
+        dlg.show()
     }
 
     private fun txnRow(t: Txn): View {

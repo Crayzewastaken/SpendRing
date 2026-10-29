@@ -35,8 +35,14 @@ object Notifier {
         val s = store.summary()
         val title = if (t.amount < 0) "Refund ${Store.money(-t.amount)} from ${t.merchant}"
         else "${Store.money(t.amount)} at ${t.merchant}"
-        val left = if (s.left >= 0) "${Store.money(s.left)} left" else "${Store.money(-s.left)} over budget"
-        val body = "$left · ${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} to refill · ${Store.money(s.perDay, false)}/day"
+        val days = "${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} to payday"
+        val body = if (t.cat == Store.FUEL) {
+            val fl = s.fuelBudget - s.fuelSpent
+            (if (fl >= 0) "${Store.money(fl)} fuel money left" else "${Store.money(-fl)} over the fuel budget") + " · $days"
+        } else {
+            val left = if (s.left >= 0) "${Store.money(s.left)} left" else "${Store.money(-s.left)} over budget"
+            "$left · $days · ${Store.money(s.perDay, false)}/day"
+        }
 
         val open = PendingIntent.getActivity(
             ctx, 0, Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP),

@@ -46,8 +46,10 @@ data class Cycle(val start: Long, val end: Long) {
 data class Summary(
     val budget: Double,
     val cycle: Cycle?,
-    val txns: List<Txn>,   // this cycle, newest first
-    val spent: Double,
+    val txns: List<Txn>,   // this cycle, newest first (fuel included)
+    val spent: Double,     // spending money used (fuel not included)
+    val fuelSpent: Double,
+    val fuelBudget: Double,
     val left: Double,
     val daysLeft: Int,
     val perDay: Double,
@@ -79,6 +81,11 @@ class Store(ctx: Context) {
     var nextRefill: String
         get() = sp.getString("nextRefill", "") ?: ""
         set(v) = sp.edit().putString("nextRefill", v).apply()
+
+    /** Fuel has its own allowance per cycle, so filling up doesn't eat the spending money. */
+    var fuelBudget: Double
+        get() = sp.getFloat("fuelBudget", 92f).toDouble()
+        set(v) = sp.edit().putFloat("fuelBudget", v.toFloat()).apply()
 
     var notifyOnPurchase: Boolean
         get() = sp.getBoolean("notifyOnPurchase", true)
@@ -228,7 +235,8 @@ class Store(ctx: Context) {
         val all = txns()
         val inCycle = (if (cyc != null) all.filter { it.ts >= cyc.start && it.ts < cyc.end } else all)
             .sortedByDescending { it.ts }
-        val spent = inCycle.sumOf { it.amount }
+        val spent = inCycle.filter { it.cat != FUEL }.sumOf { it.amount }
+        val fuel = inCycle.filter { it.cat == FUEL }.sumOf { it.amount }
         val left = b - spent
         val daysLeft = if (cyc != null) max(1, ceil((cyc.end - now) / DAY.toDouble()).toInt()) else 0
         val perDay = if (daysLeft > 0) max(0.0, left) / daysLeft else 0.0
@@ -239,15 +247,25 @@ class Store(ctx: Context) {
             spent / b > timeFrac + 0.10 -> Summary.State.FAST
             else -> Summary.State.ON_TRACK
         }
-        return Summary(b, cyc, inCycle, spent, left, daysLeft, perDay, timeFrac, state)
+        return Summary(b, cyc, inCycle, spent, fuel, fuelBudget, left, daysLeft, perDay, timeFrac, state)
     }
 
-    fun spentIn(c: Cycle): Double = txns().filter { it.ts >= c.start && it.ts < c.end }.sumOf { it.amount }
+    fun spentIn(c: Cycle): Double = txns().filter { it.ts >= c.start && it.ts < c.end && it.cat != FUEL }.sumOf { it.amount }
+
+    /** Everything put on the card this calendar month (for the cashback target). */
+    fun cardThisMonth(now: Long = System.currentTimeMillis()): Double {
+        val c = Calendar.getInstance().apply {
+            timeInMillis = now; set(Calendar.DAY_OF_MONTH, 1); set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+        }
+        return txns().filter { it.ts >= c.timeInMillis && it.ts <= now }.sumOf { it.amount }
+    }
 
     companion object {
         const val DAY = 86_400_000L
         const val WALLET = "com.google.android.apps.walletnfcrel"
         const val GMS = "com.google.android.gms"
+        const val FUEL = "Fuel"
         const val DEFAULT_APPS = "$WALLET\n$GMS"
 
         val DATE = SimpleDateFormat("yyyy-MM-dd", Locale.US)
@@ -279,7 +297,8 @@ class Store(ctx: Context) {
         val CATEGORIES = listOf(
             Category("Groceries", 0xFF3FC39D.toInt(), listOf("woolworths", "coles", "aldi", "iga", "foodworks", "harris farm", "costco", "butcher", "fruit", "market")),
             Category("Eating out", 0xFFF08A4B.toInt(), listOf("mcdonald", "maccas", "kfc", "hungry jack", "subway", "domino", "pizza", "cafe", "coffee", "grill", "sushi", "guzman", "nando", "oporto", "uber eats", "ubereats", "menulog", "doordash", "bar ", "restaurant", "bakery", "boost", "zambrero", "red rooster", "grilld", "starbucks", "kebab", "thai", "noodle")),
-            Category("Transport", 0xFF7A9BFF.toInt(), listOf("translink", "go card", "uber", "didi", "ola ", "bp ", "shell", "ampol", "caltex", "7-eleven", "7 eleven", "7eleven", "united petrol", "puma", "parking", "linkt", "transurban", "fuel")),
+            Category(FUEL, 0xFFF0C23A.toInt(), listOf("bp ", "bp express", "shell", "ampol", "caltex", "7-eleven", "7 eleven", "7eleven", "united petrol", "puma", "liberty", "metro petroleum", "fuel", "petrol", "costco fuel")),
+            Category("Transport", 0xFF7A9BFF.toInt(), listOf("translink", "go card", "uber trip", "uber *trip", "didi", "ola ", "parking", "linkt", "transurban", "taxi", "13cabs")),
             Category("Shopping", 0xFFB58CFF.toInt(), listOf("kmart", "target", "big w", "jb hi", "amazon", "ebay", "myer", "david jones", "officeworks", "bunnings", "rebel", "uniqlo", "h&m", "temu", "shein", "apple", "harvey norman", "the good guys", "best&less", "cotton on")),
             Category("Fun", 0xFFFF6FAE.toInt(), listOf("event cinemas", "hoyts", "dendy", "steam", "playstation", "xbox", "nintendo", "ticketek", "ticketmaster", "bowling", "timezone", "netflix", "spotify")),
             Category("Health", 0xFF4FD1E0.toInt(), listOf("chemist", "pharmacy", "priceline", "terrywhite", "doctor", "medical", "dental", "gym", "fitness", "anytime", "physio")),
