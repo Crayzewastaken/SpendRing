@@ -1,17 +1,22 @@
 package com.spendring.app
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.provider.Settings
+import android.service.notification.NotificationListenerService
 import android.text.InputType
 import android.view.Gravity
 import android.view.View
@@ -30,35 +35,37 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+/** Three tabs: Main (the ring and four numbers), Budget (settings, purchases, add), Settings. */
 class MainActivity : Activity() {
 
     private lateinit var store: Store
-    private lateinit var root: FrameLayout
-    private lateinit var homeScroll: ScrollView
-    private lateinit var settingsScroll: ScrollView
-    private var inSettings = false
+    private lateinit var pages: List<ScrollView>
+    private val tabViews = ArrayList<TextView>()
+    private var tab = 0
 
-    // Home pieces that refresh
+    // Main
     private lateinit var ring: RingView
     private lateinit var accessBox: LinearLayout
+    private lateinit var statLeft: TextView
     private lateinit var statSpent: TextView
-    private lateinit var statPerDay: TextView
+    private lateinit var statDays: TextView
     private lateinit var statRefill: TextView
-    private lateinit var cycleBar: View
-    private lateinit var cycleBarTrack: FrameLayout
-    private lateinit var cycleText: TextView
-    private lateinit var catBox: LinearLayout
-    private lateinit var listBox: LinearLayout
-    private lateinit var pastBox: LinearLayout
 
-    // Settings pieces
+    // Budget
     private lateinit var budgetField: EditText
     private lateinit var dateBtn: TextView
     private val cycleBtns = LinkedHashMap<String, TextView>()
     private var pendingCycle = "fortnightly"
     private var pendingDate = ""
+    private lateinit var budgetSummary: TextView
+    private lateinit var catBox: LinearLayout
+    private lateinit var listBox: LinearLayout
+    private lateinit var pastBox: LinearLayout
+
+    // Settings
     private lateinit var logBox: LinearLayout
     private lateinit var accessStatus: TextView
+    private lateinit var batteryStatus: TextView
 
     private val dayFmt = SimpleDateFormat("EEE d MMM", Locale.getDefault())
     private val timeFmt = SimpleDateFormat("h:mm a", Locale.getDefault())
@@ -66,15 +73,19 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         store = Store(this)
-        root = FrameLayout(this).apply { setBackgroundColor(Colors.BG) }
-        buildHome()
-        buildSettings()
-        root.addView(homeScroll)
-        root.addView(settingsScroll)
-        settingsScroll.visibility = View.GONE
+
+        val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(Colors.BG) }
+        val content = FrameLayout(this)
+        pages = listOf(buildMain(), buildBudget(), buildSettings())
+        pages.forEach { content.addView(it) }
+        root.addView(content, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
+        root.addView(View(this).apply { setBackgroundColor(Colors.LINE) }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1))
+        root.addView(buildTabBar())
         setContentView(root)
+
         handleTestIntent(intent)
-        if (!store.isSetUp) openSettings()
+        loadBudgetFields()
+        show(if (store.isSetUp) 0 else 1)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -85,6 +96,10 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         Notifier.onChange = { refresh() }
+        // If Android dropped the connection to the notification reader, ask it to reconnect.
+        if (WalletListener.isEnabled(this)) {
+            try { NotificationListenerService.requestRebind(ComponentName(this, WalletListener::class.java)) } catch (_: Exception) {}
+        }
         refresh()
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED &&
@@ -102,113 +117,346 @@ class MainActivity : Activity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (inSettings && store.isSetUp) closeSettings() else super.onBackPressed()
+        if (tab != 0 && store.isSetUp) show(0) else super.onBackPressed()
     }
 
     /** Used by the automated emulator test to feed in sample Wallet notifications. */
     private fun handleTestIntent(i: Intent) {
         if (applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE == 0) return
-        val text = i.getStringExtra("sr_text") ?: return
-        val title = i.getStringExtra("sr_title") ?: ""
-        val ago = i.getIntExtra("sr_hours_ago", 0)
-        val ts = System.currentTimeMillis() - ago * 3_600_000L
-        WalletListener.ingest(this, store, "test", title, text, ts, strict = false)
-        i.removeExtra("sr_text")
+        val tabExtra = i.getIntExtra("sr_tab", -1)
+        val text = i.getStringExtra("sr_text")
+        if (text != null) {
+            val title = i.getStringExtra("sr_title") ?: ""
+            val ago = i.getIntExtra("sr_hours_ago", 0)
+            val ts = System.currentTimeMillis() - ago * 3_600_000L
+            WalletListener.ingest(this, store, "test", title, text, ts, strict = false)
+            i.removeExtra("sr_text")
+        }
+        if (tabExtra in 0..2 && ::pages.isInitialized) show(tabExtra)
     }
 
-    // ================================================================== HOME
+    // ================================================================== tabs
 
-    private fun buildHome() {
+    private fun buildTabBar(): View {
+        val bar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setBackgroundColor(Colors.SURFACE)
+            setPadding(dp(8), dp(4), dp(8), dp(4))
+        }
+        listOf("◔" to "Main", "＄" to "Budget", "⚙" to "Settings").forEachIndexed { i, (icon, name) ->
+            val t = TextView(this).apply {
+                text = "$icon\n$name"
+                textSize = 12.5f
+                gravity = Gravity.CENTER
+                typeface = Typeface.DEFAULT_BOLD
+                setLineSpacing(0f, 1.1f)
+                setPadding(0, dp(8), 0, dp(8))
+                contentDescription = name
+                setOnClickListener { show(i) }
+            }
+            tabViews.add(t)
+            bar.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        }
+        return bar
+    }
+
+    private fun show(i: Int) {
+        if (i != 1 && !store.isSetUp && i != 2) { toast("Save your budget first"); return }
+        tab = i
+        pages.forEachIndexed { j, p -> p.visibility = if (j == i) View.VISIBLE else View.GONE }
+        tabViews.forEachIndexed { j, t ->
+            val on = j == i
+            t.setTextColor(if (on) Colors.ACCENT else Colors.MUTED)
+            t.background = if (on) rounded(Colors.FIELD, 12f) else null
+        }
+        if (i == 1) loadBudgetFields()
+        refresh()
+    }
+
+    // ================================================================== MAIN
+
+    private fun buildMain(): ScrollView {
         val col = column()
-
-        val top = row()
-        top.addView(label("Spend Ring", 26f, Colors.FG, true), LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
-        top.addView(pill("Settings") { openSettings() })
-        col.addView(top)
+        col.addView(label("Spend Ring", 26f, Colors.FG, true))
 
         accessBox = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         col.addView(accessBox, lp(12))
 
         ring = RingView(this)
-        ring.setOnClickListener { if (!store.isSetUp) openSettings() }
-        col.addView(ring, lp(8))
+        ring.setOnClickListener { if (!store.isSetUp) show(1) }
+        col.addView(ring, lp(16))
 
-        // Stats strip
-        val stats = card()
-        val statRow = row()
-        statSpent = statCell(statRow, "SPENT")
-        statPerDay = statCell(statRow, "PER DAY LEFT")
-        statRefill = statCell(statRow, "REFILL IN")
-        stats.addView(statRow)
-        cycleBarTrack = FrameLayout(this).apply { background = rounded(Colors.TRACK, 6f) }
-        cycleBar = View(this).apply { background = rounded(Colors.MUTED, 6f) }
-        cycleBarTrack.addView(cycleBar, FrameLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT))
-        stats.addView(cycleBarTrack, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(6)).apply { topMargin = dp(12) })
-        cycleText = label("", 12.5f, Colors.MUTED).apply { setPadding(0, dp(8), 0, 0); gravity = Gravity.CENTER }
-        stats.addView(cycleText)
-        col.addView(stats, lp(16))
+        val grid = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val r1 = row()
+        statLeft = bigStat(r1, "LEFT TO SPEND", 0)
+        statSpent = bigStat(r1, "SPENT", 10)
+        val r2 = row()
+        statDays = bigStat(r2, "DAYS LEFT", 0)
+        statRefill = bigStat(r2, "REFILL IN", 10)
+        grid.addView(r1)
+        grid.addView(r2, lp(10))
+        col.addView(grid, lp(20))
 
-        col.addView(button("+  Add a purchase yourself", Colors.SURFACE, Colors.ACCENT) { editDialog(null) }, lp(12))
+        col.addView(label("Everything stays on this phone. No internet, no accounts.", 12f, Colors.MUTED).apply {
+            gravity = Gravity.CENTER; setPadding(0, dp(24), 0, dp(8))
+        })
+        return scroll(col)
+    }
+
+    private fun bigStat(parent: LinearLayout, title: String, leftMarginDp: Int): TextView {
+        val c = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = rounded(Colors.SURFACE, 16f, Colors.LINE)
+            setPadding(dp(16), dp(14), dp(16), dp(14))
+        }
+        c.addView(label(title, 11f, Colors.MUTED, true).apply { letterSpacing = 0.09f })
+        val v = label("–", 24f, Colors.FG, true).apply {
+            typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD); setPadding(0, dp(6), 0, 0)
+            maxLines = 1
+        }
+        c.addView(v)
+        parent.addView(c, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { leftMargin = dp(leftMarginDp) })
+        return v
+    }
+
+    // ================================================================== BUDGET
+
+    private fun buildBudget(): ScrollView {
+        val col = column()
+        val top = row()
+        top.addView(label("Budget", 26f, Colors.FG, true), LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+        top.addView(label("+  Add", 15f, Colors.BG, true).apply {
+            background = rounded(Colors.ACCENT, 20f)
+            setPadding(dp(16), dp(9), dp(16), dp(9))
+            contentDescription = "Add a purchase"
+            setOnClickListener { editDialog(null) }
+        })
+        col.addView(top)
+
+        budgetSummary = label("", 14f, Colors.MUTED).apply { setPadding(0, dp(6), 0, 0) }
+        col.addView(budgetSummary)
+
+        col.addView(section("YOUR BUDGET"))
+        val b = card()
+        b.addView(label("Budget for each cycle (AUD)", 13f, Colors.MUTED))
+        budgetField = field("e.g. 600", "", InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
+        b.addView(budgetField, lp(6))
+        b.addView(label("Money comes in every", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
+        val cyc = row()
+        listOf("weekly" to "Week", "fortnightly" to "Fortnight", "monthly" to "Month").forEachIndexed { i, (k, v) ->
+            val t = label(v, 15f, Colors.FG, true).apply {
+                gravity = Gravity.CENTER; setPadding(0, dp(11), 0, dp(11))
+                setOnClickListener { pendingCycle = k; paintCycle() }
+            }
+            cycleBtns[k] = t
+            cyc.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { if (i > 0) leftMargin = dp(8) })
+        }
+        b.addView(cyc, lp(6))
+        b.addView(label("Next refill date", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
+        dateBtn = label("Pick a date", 16f, Colors.FG, true).apply {
+            background = rounded(Colors.FIELD, 10f); setPadding(dp(14), dp(12), dp(14), dp(12))
+            setOnClickListener { pickRefillDate() }
+        }
+        b.addView(dateBtn, lp(6))
+        b.addView(button("Save budget", Colors.ACCENT, Colors.BG) { saveBudget() }, lp(16))
+        col.addView(b, lp(8))
+
+        col.addView(button("+  Add a purchase", Colors.SURFACE, Colors.ACCENT) { editDialog(null) }, lp(16))
 
         col.addView(section("WHERE IT WENT"))
         catBox = card()
         col.addView(catBox, lp(8))
 
         col.addView(section("PURCHASES THIS CYCLE"))
+        col.addView(label("Tap one to change it or delete it.", 12.5f, Colors.MUTED).apply { setPadding(dp(2), dp(4), 0, 0) })
         listBox = card(pad = 0)
         col.addView(listBox, lp(8))
 
         col.addView(section("PAST CYCLES"))
         pastBox = card()
         col.addView(pastBox, lp(8))
+        return scroll(col)
+    }
 
-        col.addView(label("Everything stays on this phone. No internet, no accounts.", 12f, Colors.MUTED).apply {
+    private fun loadBudgetFields() {
+        budgetField.setText(if (store.budget > 0) trimNum(store.budget) else "")
+        pendingCycle = store.cycleKind
+        if (store.isSetUp) store.currentCycle()
+        pendingDate = store.nextRefill
+        paintCycle(); paintDate()
+    }
+
+    private fun paintCycle() {
+        cycleBtns.forEach { (k, v) ->
+            val on = k == pendingCycle
+            v.background = rounded(if (on) Colors.ACCENT else Colors.FIELD, 10f)
+            v.setTextColor(if (on) Colors.BG else Colors.FG)
+        }
+    }
+
+    private fun paintDate() {
+        val c = Store.parseDate(pendingDate)
+        dateBtn.text = if (c != null) SimpleDateFormat("EEEE d MMMM yyyy", Locale.getDefault()).format(c.time) else "Pick a date"
+        dateBtn.setTextColor(if (c != null) Colors.FG else Colors.MUTED)
+    }
+
+    private fun pickRefillDate() {
+        val c = Store.parseDate(pendingDate) ?: Calendar.getInstance().apply { add(Calendar.DAY_OF_MONTH, 7) }
+        DatePickerDialog(this, { _, y, m, d ->
+            val cal = Calendar.getInstance().apply { set(y, m, d) }
+            pendingDate = Store.DATE.format(cal.time)
+            paintDate()
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show()
+    }
+
+    private fun saveBudget() {
+        val v = budgetField.text.toString().replace(",", "").replace("$", "").trim().toDoubleOrNull()
+        if (v == null || v <= 0) { budgetField.error = "Enter a budget above \$0"; return }
+        if (pendingDate.isEmpty()) { toast("Pick your next refill date"); return }
+        val first = !store.isSetUp
+        store.budget = v
+        store.cycleKind = pendingCycle
+        store.nextRefill = pendingDate
+        Notifier.changed(this)
+        toast("Budget saved")
+        loadBudgetFields()
+        if (first) show(0) else refresh()
+    }
+
+    // ================================================================== SETTINGS
+
+    private fun buildSettings(): ScrollView {
+        val col = column()
+        col.addView(label("Settings", 26f, Colors.FG, true))
+
+        col.addView(section("READING GOOGLE WALLET"))
+        val n = card()
+        accessStatus = label("", 15f, Colors.FG, true)
+        n.addView(accessStatus)
+        n.addView(label("Spend Ring logs a purchase every time Google Wallet shows a payment notification. Keep Wallet's notifications switched on.", 13f, Colors.MUTED), lp(6))
+        n.addView(button("Open notification access", Colors.FIELD, Colors.FG) { openListenerSettings() }, lp(10))
+        batteryStatus = label("", 15f, Colors.FG, true).apply { setPadding(0, dp(18), 0, 0) }
+        n.addView(batteryStatus)
+        n.addView(label("Some phones (Samsung especially) stop apps in the background, which can make it miss a purchase. Allow it to run unrestricted.", 13f, Colors.MUTED), lp(6))
+        n.addView(button("Allow running in the background", Colors.FIELD, Colors.FG) { askBattery() }, lp(10))
+        val notifySw = Switch(this).apply {
+            text = "After each purchase, show how much is left"
+            setTextColor(Colors.FG); textSize = 15f
+            isChecked = store.notifyOnPurchase
+            setOnCheckedChangeListener { _, on -> store.notifyOnPurchase = on }
+        }
+        n.addView(notifySw, lp(18))
+        col.addView(n, lp(8))
+
+        col.addView(section("RECENT WALLET NOTIFICATIONS"))
+        col.addView(label("Every payment notification and what Spend Ring did with it.", 12.5f, Colors.MUTED).apply { setPadding(dp(2), dp(4), 0, 0) })
+        logBox = card()
+        col.addView(logBox, lp(8))
+
+        col.addView(section("TRY A NOTIFICATION"))
+        val tcard = card()
+        tcard.addView(label("Type the text of a Wallet notification to check it reads it right. It's added as a real purchase, so delete it afterwards if it was only a test.", 13f, Colors.MUTED))
+        val tTitle = field("Title, e.g. Woolworths", "")
+        val tText = field("Text, e.g. \$23.45 with Visa ••1234", "")
+        tcard.addView(tTitle, lp(8))
+        tcard.addView(tText, lp(8))
+        tcard.addView(button("Read it", Colors.FIELD, Colors.FG) {
+            val res = WalletListener.ingest(this, store, "typed in", tTitle.text.toString(), tText.text.toString(), System.currentTimeMillis(), strict = false)
+            toast(res)
+            tTitle.setText(""); tText.setText("")
+            refresh()
+        }, lp(10))
+        col.addView(tcard, lp(8))
+
+        col.addView(section("ADVANCED"))
+        val adv = card()
+        adv.addView(label("Apps to read, one per line. Google Wallet is the main one. You can add your bank app's package name if it also sends purchase alerts; the same purchase from two apps is only counted once.", 13f, Colors.MUTED))
+        val apps = field("", store.watchApps, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE).apply {
+            minLines = 2; textSize = 13f; typeface = Typeface.MONOSPACE
+        }
+        adv.addView(apps, lp(8))
+        adv.addView(button("Save apps", Colors.FIELD, Colors.FG) {
+            store.watchApps = apps.text.toString().trim().ifEmpty { Store.DEFAULT_APPS }
+            apps.setText(store.watchApps); toast("Saved")
+        }, lp(10))
+        adv.addView(button("Delete all purchases", Colors.FIELD, Colors.BAD) {
+            AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                .setTitle("Delete all purchases?")
+                .setMessage("This removes every purchase from Spend Ring. Your budget stays.")
+                .setPositiveButton("Delete all") { _, _ ->
+                    store.sp.edit().putString("txns", "[]").commit()
+                    Notifier.changed(this); refresh(); toast("All purchases deleted")
+                }
+                .setNegativeButton("Cancel", null).show()
+        }, lp(16))
+        col.addView(adv, lp(8))
+
+        val ver = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (_: Exception) { "" }
+        col.addView(label("Spend Ring $ver · works offline", 12f, Colors.MUTED).apply {
             gravity = Gravity.CENTER; setPadding(0, dp(20), 0, dp(8))
         })
-        homeScroll = scroll(col)
+        return scroll(col)
     }
+
+    private fun isBatteryFree(): Boolean =
+        (getSystemService(POWER_SERVICE) as? PowerManager)?.isIgnoringBatteryOptimizations(packageName) ?: false
+
+    @SuppressLint("BatteryLife")
+    private fun askBattery() {
+        try {
+            startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))
+        } catch (_: Exception) {
+            try { startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) } catch (_: Exception) {}
+        }
+    }
+
+    private fun openListenerSettings() {
+        try {
+            startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+        } catch (_: Exception) {
+            startActivity(Intent(Settings.ACTION_SETTINGS))
+        }
+        toast("Find Spend Ring and turn it on")
+    }
+
+    // ================================================================== refresh
 
     private fun refresh() {
         if (!::ring.isInitialized) return
         val s = store.summary()
-        ring.summary = s
+        val listening = WalletListener.isEnabled(this)
 
-        // Access warnings
+        // ---- Main
+        ring.summary = s
         accessBox.removeAllViews()
-        if (!WalletListener.isEnabled(this)) {
+        if (!listening) {
             accessBox.addView(warnCard(
                 "Turn on notification access",
-                "Spend Ring needs to see your Google Wallet notifications to log purchases by itself.",
+                "Spend Ring needs to see your Google Wallet notifications to log every purchase by itself.",
                 "Turn on",
             ) { openListenerSettings() })
         } else if (!store.isSetUp) {
-            accessBox.addView(warnCard("Set your budget", "Add your budget and next refill date to start tracking.", "Set up") { openSettings() })
+            accessBox.addView(warnCard("Set your budget", "Add your budget and next refill date to start.", "Set up") { show(1) })
         }
-
+        statLeft.text = if (s.cycle != null) Store.money(s.left, false) else "–"
+        statLeft.setTextColor(if (s.left < 0) Colors.BAD else Colors.of(s.state).let { if (s.state == Summary.State.NOT_SET) Colors.FG else it })
         statSpent.text = Store.money(s.spent, false)
-        statPerDay.text = if (s.cycle != null) Store.money(s.perDay, false) else "–"
-        statRefill.text = if (s.cycle != null) "${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"}" else "–"
         val cyc = s.cycle
-        if (cyc != null) {
-            cycleText.text = "${dayFmt.format(Date(cyc.start))}  →  next refill ${dayFmt.format(Date(cyc.end))}"
-            cycleBarTrack.post {
-                cycleBar.layoutParams = (cycleBar.layoutParams as FrameLayout.LayoutParams).apply {
-                    width = (cycleBarTrack.width * s.timeFrac).toInt()
-                }
-                cycleBar.requestLayout()
-            }
-        } else {
-            cycleText.text = "Set your budget and refill date in Settings."
-        }
+        statDays.text = if (cyc != null) "${s.daysLeft}" else "–"
+        statRefill.text = if (cyc != null) dayFmt.format(Date(cyc.end)) else "–"
 
-        // Categories
+        // ---- Budget
+        budgetSummary.text = if (cyc != null)
+            "${dayFmt.format(Date(cyc.start))} → ${dayFmt.format(Date(cyc.end))}  ·  ${Store.money(s.perDay, false)} a day left"
+        else "Set your budget below to start."
+
         catBox.removeAllViews()
         val byCat = s.txns.groupBy { it.cat }.mapValues { e -> e.value.sumOf { it.amount } }
             .filter { it.value > 0.004 }.toList().sortedByDescending { it.second }
         if (byCat.isEmpty()) {
             catBox.addView(label("Nothing spent yet this cycle.", 14f, Colors.MUTED))
         } else {
-            val max = byCat.first().second
+            val top = byCat.first().second
             val total = byCat.sumOf { it.second }
             byCat.forEachIndexed { i, (cat, v) ->
                 val r = row()
@@ -220,16 +468,15 @@ class MainActivity : Activity() {
                     setPadding(dp(8), 0, 0, 0); minWidth = dp(36); gravity = Gravity.END
                 })
                 catBox.addView(r, if (i == 0) lp(0) else lp(12))
-                catBox.addView(bar((v / max).toFloat(), Store.colorOf(cat)), LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(5)).apply { topMargin = dp(6) })
+                catBox.addView(bar((v / top).toFloat(), Store.colorOf(cat)), LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(5)).apply { topMargin = dp(6) })
             }
         }
 
-        // Purchases
         listBox.removeAllViews()
         if (s.txns.isEmpty()) {
             listBox.addView(label(
-                if (WalletListener.isEnabled(this)) "No purchases yet. Your next Google Wallet tap will show up here."
-                else "No purchases yet.", 14f, Colors.MUTED,
+                if (listening) "No purchases yet. Your next Google Wallet tap will show up here." else "No purchases yet.",
+                14f, Colors.MUTED,
             ).apply { setPadding(dp(16), dp(16), dp(16), dp(16)) })
         } else {
             s.txns.forEachIndexed { i, t ->
@@ -238,14 +485,12 @@ class MainActivity : Activity() {
             }
         }
 
-        // Past cycles
         pastBox.removeAllViews()
-        val past = store.pastCycles(4)
-        val withData = past.map { it to store.spentIn(it) }
-        if (s.cycle == null || withData.all { it.second == 0.0 }) {
+        val past = store.pastCycles(4).map { it to store.spentIn(it) }
+        if (cyc == null || past.all { it.second == 0.0 }) {
             pastBox.addView(label("Your previous cycles will show here.", 14f, Colors.MUTED))
         } else {
-            withData.forEachIndexed { i, (c, spent) ->
+            past.forEachIndexed { i, (c, spent) ->
                 val r = row()
                 r.addView(label("${dayFmt.format(Date(c.start))} – ${dayFmt.format(Date(c.end - 1))}", 14f, Colors.FG),
                     LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
@@ -257,7 +502,26 @@ class MainActivity : Activity() {
             }
         }
 
-        if (inSettings) refreshSettings()
+        // ---- Settings
+        accessStatus.text = if (listening) "✓  Notification access is on" else "Notification access is off"
+        accessStatus.setTextColor(if (listening) Colors.OK else Colors.WARN)
+        val free = isBatteryFree()
+        batteryStatus.text = if (free) "✓  Allowed to run in the background" else "Background running is restricted"
+        batteryStatus.setTextColor(if (free) Colors.OK else Colors.WARN)
+
+        logBox.removeAllViews()
+        val log = store.logEntries()
+        if (log.isEmpty()) {
+            logBox.addView(label("None yet. When Google Wallet shows a payment, it appears here.", 13f, Colors.MUTED))
+        } else {
+            log.take(20).forEachIndexed { i, e ->
+                val added = e.optString("result").startsWith("Added")
+                val t = Date(e.optLong("ts"))
+                logBox.addView(label("${dayFmt.format(t)}, ${timeFmt.format(t)}", 11.5f, Colors.MUTED), if (i == 0) lp(0) else lp(12))
+                logBox.addView(label("${e.optString("title")}  ${e.optString("text")}".trim(), 13.5f, Colors.FG).apply { maxLines = 3 })
+                logBox.addView(label(e.optString("result"), 12.5f, if (added) Colors.OK else Colors.WARN, true))
+            }
+        }
     }
 
     private fun txnRow(t: Txn): View {
@@ -278,7 +542,7 @@ class MainActivity : Activity() {
         box.addView(r1)
         val r2 = row()
         r2.addView(dot(Store.colorOf(t.cat), 8))
-        val src = if (t.source == "wallet") "Wallet" else "Added by you"
+        val src = if (t.source.startsWith("wallet")) "Wallet" else "Added by you"
         r2.addView(label("${t.cat}  ·  ${dayFmt.format(Date(t.ts))}, ${timeFmt.format(Date(t.ts))}  ·  $src", 12.5f, Colors.MUTED).apply {
             setPadding(dp(6), 0, 0, 0)
         })
@@ -362,194 +626,6 @@ class MainActivity : Activity() {
             }
         }
         dlg.show()
-    }
-
-    // ================================================================== SETTINGS
-
-    private fun buildSettings() {
-        val col = column()
-        val top = row()
-        top.addView(label("‹  Back", 17f, Colors.ACCENT, true).apply {
-            setPadding(0, dp(4), dp(16), dp(4)); setOnClickListener { closeSettings() }
-        })
-        col.addView(top)
-        col.addView(label("Settings", 26f, Colors.FG, true).apply { setPadding(0, dp(8), 0, 0) })
-
-        // Budget
-        col.addView(section("YOUR BUDGET"))
-        val b = card()
-        b.addView(label("Budget for each cycle (AUD)", 13f, Colors.MUTED))
-        budgetField = field("e.g. 600", "", InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
-        b.addView(budgetField, lp(6))
-        b.addView(label("Money comes in every", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
-        val cyc = row()
-        listOf("weekly" to "Week", "fortnightly" to "Fortnight", "monthly" to "Month").forEachIndexed { i, (k, v) ->
-            val t = label(v, 15f, Colors.FG, true).apply {
-                gravity = Gravity.CENTER; setPadding(0, dp(11), 0, dp(11))
-                setOnClickListener { pendingCycle = k; paintCycle() }
-            }
-            cycleBtns[k] = t
-            cyc.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { if (i > 0) leftMargin = dp(8) })
-        }
-        b.addView(cyc, lp(6))
-        b.addView(label("Next refill date", 13f, Colors.MUTED).apply { setPadding(0, dp(16), 0, 0) })
-        dateBtn = label("Pick a date", 16f, Colors.FG, true).apply {
-            background = rounded(Colors.FIELD, 10f); setPadding(dp(14), dp(12), dp(14), dp(12))
-            setOnClickListener { pickRefillDate() }
-        }
-        b.addView(dateBtn, lp(6))
-        b.addView(button("Save budget", Colors.ACCENT, Colors.BG) { saveBudget() }, lp(16))
-        col.addView(b, lp(8))
-
-        // Notifications
-        col.addView(section("READING GOOGLE WALLET"))
-        val n = card()
-        accessStatus = label("", 15f, Colors.FG, true)
-        n.addView(accessStatus)
-        n.addView(button("Open notification access", Colors.FIELD, Colors.FG) { openListenerSettings() }, lp(10))
-        val notifySw = Switch(this).apply {
-            text = "After each purchase, show how much is left"
-            setTextColor(Colors.FG); textSize = 15f
-            isChecked = store.notifyOnPurchase
-            setOnCheckedChangeListener { _, on -> store.notifyOnPurchase = on }
-        }
-        n.addView(notifySw, lp(14))
-        col.addView(n, lp(8))
-
-        // Test box
-        col.addView(section("TRY A NOTIFICATION"))
-        val tcard = card()
-        tcard.addView(label("Paste or type the text of a Wallet notification to check it reads it right. It gets added as a real purchase, so delete it after if it was only a test.", 13f, Colors.MUTED))
-        val tTitle = field("Title, e.g. Woolworths", "")
-        val tText = field("Text, e.g. \$23.45 with Visa ••1234", "")
-        tcard.addView(tTitle, lp(8))
-        tcard.addView(tText, lp(8))
-        tcard.addView(button("Read it", Colors.FIELD, Colors.FG) {
-            val res = WalletListener.ingest(this, store, "typed in", tTitle.text.toString(), tText.text.toString(), System.currentTimeMillis(), strict = false)
-            toast(res)
-            tTitle.setText(""); tText.setText("")
-            refresh()
-        }, lp(10))
-        col.addView(tcard, lp(8))
-
-        // Log
-        col.addView(section("RECENT WALLET NOTIFICATIONS"))
-        logBox = card()
-        col.addView(logBox, lp(8))
-
-        // Advanced
-        col.addView(section("ADVANCED"))
-        val adv = card()
-        adv.addView(label("Apps to read, one per line. Google Wallet is the main one. Add a bank app's package name here if it also sends purchase alerts.", 13f, Colors.MUTED))
-        val apps = field("", store.watchApps, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE).apply {
-            minLines = 2; textSize = 13f; typeface = Typeface.MONOSPACE
-        }
-        adv.addView(apps, lp(8))
-        adv.addView(button("Save apps", Colors.FIELD, Colors.FG) {
-            store.watchApps = apps.text.toString().trim().ifEmpty { Store.DEFAULT_APPS }
-            apps.setText(store.watchApps); toast("Saved")
-        }, lp(10))
-        adv.addView(button("Delete all purchases", Colors.FIELD, Colors.BAD) {
-            AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
-                .setTitle("Delete all purchases?")
-                .setMessage("This removes every purchase from Spend Ring. Your budget settings stay.")
-                .setPositiveButton("Delete all") { _, _ ->
-                    store.sp.edit().putString("txns", "[]").commit()
-                    Notifier.changed(this); refresh(); toast("All purchases deleted")
-                }
-                .setNegativeButton("Cancel", null).show()
-        }, lp(16))
-        col.addView(adv, lp(8))
-
-        val ver = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (_: Exception) { "" }
-        col.addView(label("Spend Ring $ver · works offline", 12f, Colors.MUTED).apply {
-            gravity = Gravity.CENTER; setPadding(0, dp(20), 0, dp(8))
-        })
-        settingsScroll = scroll(col)
-    }
-
-    private fun openSettings() {
-        inSettings = true
-        budgetField.setText(if (store.budget > 0) trimNum(store.budget) else "")
-        pendingCycle = store.cycleKind
-        pendingDate = if (store.isSetUp) { store.currentCycle(); store.nextRefill } else store.nextRefill
-        paintCycle(); paintDate()
-        refreshSettings()
-        homeScroll.visibility = View.GONE
-        settingsScroll.visibility = View.VISIBLE
-        settingsScroll.scrollTo(0, 0)
-    }
-
-    private fun closeSettings() {
-        if (!store.isSetUp) { toast("Save your budget first"); return }
-        inSettings = false
-        settingsScroll.visibility = View.GONE
-        homeScroll.visibility = View.VISIBLE
-        refresh()
-    }
-
-    private fun refreshSettings() {
-        val on = WalletListener.isEnabled(this)
-        accessStatus.text = if (on) "✓  Notification access is on" else "Notification access is off"
-        accessStatus.setTextColor(if (on) Colors.OK else Colors.WARN)
-
-        logBox.removeAllViews()
-        val log = store.logEntries()
-        if (log.isEmpty()) {
-            logBox.addView(label("None yet. When Google Wallet shows a payment, it appears here with what Spend Ring did with it.", 13f, Colors.MUTED))
-        } else {
-            log.take(15).forEachIndexed { i, e ->
-                val added = e.optString("result").startsWith("Added")
-                val t = Date(e.optLong("ts"))
-                logBox.addView(label("${dayFmt.format(t)}, ${timeFmt.format(t)}", 11.5f, Colors.MUTED), if (i == 0) lp(0) else lp(12))
-                logBox.addView(label("${e.optString("title")}  ${e.optString("text")}".trim(), 13.5f, Colors.FG).apply { maxLines = 3 })
-                logBox.addView(label(e.optString("result"), 12.5f, if (added) Colors.OK else Colors.WARN, true))
-            }
-        }
-    }
-
-    private fun paintCycle() {
-        cycleBtns.forEach { (k, v) ->
-            val on = k == pendingCycle
-            v.background = rounded(if (on) Colors.ACCENT else Colors.FIELD, 10f)
-            v.setTextColor(if (on) Colors.BG else Colors.FG)
-        }
-    }
-
-    private fun paintDate() {
-        val c = Store.parseDate(pendingDate)
-        dateBtn.text = if (c != null) SimpleDateFormat("EEEE d MMMM yyyy", Locale.getDefault()).format(c.time) else "Pick a date"
-        dateBtn.setTextColor(if (c != null) Colors.FG else Colors.MUTED)
-    }
-
-    private fun pickRefillDate() {
-        val c = Store.parseDate(pendingDate) ?: Calendar.getInstance().apply { add(Calendar.DAY_OF_MONTH, 7) }
-        DatePickerDialog(this, { _, y, m, d ->
-            val cal = Calendar.getInstance().apply { set(y, m, d) }
-            pendingDate = Store.DATE.format(cal.time)
-            paintDate()
-        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show()
-    }
-
-    private fun saveBudget() {
-        val v = budgetField.text.toString().replace(",", "").replace("$", "").trim().toDoubleOrNull()
-        if (v == null || v <= 0) { budgetField.error = "Enter a budget above \$0"; return }
-        if (pendingDate.isEmpty()) { toast("Pick your next refill date"); return }
-        store.budget = v
-        store.cycleKind = pendingCycle
-        store.nextRefill = pendingDate
-        Notifier.changed(this)
-        toast("Budget saved")
-        closeSettings()
-    }
-
-    private fun openListenerSettings() {
-        try {
-            startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-        } catch (_: Exception) {
-            startActivity(Intent(Settings.ACTION_SETTINGS))
-        }
-        toast("Find Spend Ring and turn it on")
     }
 
     // ================================================================== small view helpers

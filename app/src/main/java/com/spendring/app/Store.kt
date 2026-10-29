@@ -122,12 +122,15 @@ class Store(ctx: Context) {
     @Synchronized
     fun remove(id: String) = saveTxns(txns().filter { it.id != id })
 
-    /** True if a Wallet purchase like this one was already recorded in the last few minutes. */
+    /**
+     * True if this purchase was already recorded: same shop and amount within 3 minutes, or the same
+     * amount within 3 minutes from another app (e.g. Wallet and a bank app both announce one tap).
+     */
     @Synchronized
-    fun isDuplicate(merchant: String, amount: Double, ts: Long): Boolean =
+    fun isDuplicate(merchant: String, amount: Double, ts: Long, source: String): Boolean =
         txns().any {
-            it.source == "wallet" && abs(it.amount - amount) < 0.005 &&
-                it.merchant.equals(merchant, ignoreCase = true) && abs(it.ts - ts) < 3 * 60_000L
+            it.source != "manual" && abs(it.amount - amount) < 0.005 && abs(it.ts - ts) < 3 * 60_000L &&
+                (it.merchant.equals(merchant, ignoreCase = true) || it.source != source)
         }
 
     /** Notification ids already handled, so an updated or re-shown notification isn't counted twice. */

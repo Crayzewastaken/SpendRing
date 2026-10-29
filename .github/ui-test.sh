@@ -75,18 +75,23 @@ sleep 3
 adb shell "cmd notification post -S bigtext -t 'Weekly summary' sum1 'You have 3 new offers'"
 sleep 2
 
-adb shell am start -n $PKG/.MainActivity
+# Main tab
+adb shell am start -n $PKG/.MainActivity --ei sr_tab 0
 sleep 2
-adb exec-out screencap -p > $OUT/3-dashboard.png
-adb shell input swipe 540 1900 540 700 400
-sleep 1
-adb exec-out screencap -p > $OUT/4-dashboard-scrolled.png
-adb shell input swipe 540 1900 540 700 400
-sleep 1
-adb exec-out screencap -p > $OUT/5-dashboard-bottom.png
+adb exec-out screencap -p > $OUT/3-main.png
 
+# Budget tab
+adb shell am start -n $PKG/.MainActivity --ei sr_tab 1
+sleep 2
+adb exec-out screencap -p > $OUT/4-budget.png
+adb shell input swipe 540 1700 540 600 400
+sleep 1
+adb exec-out screencap -p > $OUT/5-budget-scrolled.png
+adb shell input swipe 540 1700 540 600 400
+sleep 1
+adb exec-out screencap -p > $OUT/5b-budget-purchases.png
 adb shell uiautomator dump /data/local/tmp/ui.xml >/dev/null 2>&1
-adb pull /data/local/tmp/ui.xml $OUT/ui-home.xml >/dev/null 2>&1
+adb pull /data/local/tmp/ui.xml $OUT/ui-budget.xml >/dev/null 2>&1
 tap_text() {
   B=$(grep -oE "text=\"$1\"[^>]*bounds=\"\[[0-9]+,[0-9]+\]\[[0-9]+,[0-9]+\]\"" $2 | grep -oE '\[[0-9]+,[0-9]+\]\[[0-9]+,[0-9]+\]' | head -1)
   if [ -n "$B" ]; then
@@ -95,25 +100,30 @@ tap_text() {
     adb shell input tap $(((X1+X2)/2)) $(((Y1+Y2)/2))
   fi
 }
-tap_text "Woolworths" $OUT/ui-home.xml
+tap_text "Woolworths" $OUT/ui-budget.xml
 sleep 1.5
 adb exec-out screencap -p > $OUT/6-edit-dialog.png
 adb shell input keyevent KEYCODE_BACK
 sleep 1
-
-# ---- 6. Settings (with the notification log)
-adb shell input swipe 540 600 540 2000 200; adb shell input swipe 540 600 540 2000 200
+adb shell input swipe 540 600 540 2000 200; adb shell input swipe 540 600 540 2000 200; adb shell input swipe 540 600 540 2000 200
 sleep 1
 adb shell uiautomator dump /data/local/tmp/ui.xml >/dev/null 2>&1
-adb pull /data/local/tmp/ui.xml $OUT/ui-home2.xml >/dev/null 2>&1
-tap_text "Settings" $OUT/ui-home2.xml
+adb pull /data/local/tmp/ui.xml $OUT/ui-budget2.xml >/dev/null 2>&1
+tap_text "+  Add" $OUT/ui-budget2.xml
 sleep 1.5
+adb exec-out screencap -p > $OUT/6b-add-dialog.png
+adb shell input keyevent KEYCODE_BACK
+sleep 1
+
+# Settings tab
+adb shell am start -n $PKG/.MainActivity --ei sr_tab 2
+sleep 2
 adb exec-out screencap -p > $OUT/7-settings.png
-adb shell input swipe 540 1900 540 600 400; sleep 1
-adb exec-out screencap -p > $OUT/8-settings-2.png
-adb shell input swipe 540 1900 540 600 400; sleep 1
-adb exec-out screencap -p > $OUT/9-settings-log.png
-adb shell input swipe 540 1900 540 600 400; sleep 1
+adb shell input swipe 540 1700 540 600 400; sleep 1
+adb exec-out screencap -p > $OUT/8-settings-log.png
+adb shell input swipe 540 1700 540 600 400; sleep 1
+adb exec-out screencap -p > $OUT/9-settings-log2.png
+adb shell input swipe 540 1700 540 600 400; sleep 1
 adb exec-out screencap -p > $OUT/10-settings-bottom.png
 
 # ---- 7. The "left" notification posted after a purchase

@@ -35,9 +35,12 @@ class WalletListener : NotificationListenerService() {
             val n = sbn.notification ?: return
             if (n.flags and Notification.FLAG_GROUP_SUMMARY != 0) return
             val ex = n.extras
-            val title = ex?.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: ""
+            val title = (ex?.getCharSequence(Notification.EXTRA_TITLE)?.toString() ?: "")
+                .ifBlank { ex?.getCharSequence(Notification.EXTRA_TITLE_BIG)?.toString() ?: "" }
             val big = ex?.getCharSequence(Notification.EXTRA_BIG_TEXT)?.toString() ?: ""
-            val text = big.ifBlank { ex?.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: "" }
+            val lines = ex?.getCharSequenceArray(Notification.EXTRA_TEXT_LINES)?.joinToString("\n") { it.toString() } ?: ""
+            val text = big.ifBlank { ex?.getCharSequence(Notification.EXTRA_TEXT)?.toString() ?: "" }.ifBlank { lines }
+                .ifBlank { n.tickerText?.toString() ?: "" }
             val sub = ex?.getCharSequence(Notification.EXTRA_SUB_TEXT)?.toString() ?: ""
             if (title.isBlank() && text.isBlank()) return
 
@@ -55,12 +58,12 @@ class WalletListener : NotificationListenerService() {
                 is Parser.Outcome.Skip -> "Skipped: ${o.reason}"
                 is Parser.Outcome.Purchase -> {
                     val r = o.r
-                    if (store.isDuplicate(r.merchant, r.amount, ts)) {
+                    if (store.isDuplicate(r.merchant, r.amount, ts, "wallet:$pkg")) {
                         "Skipped: already recorded"
                     } else {
                         val t = Txn(
                             id = Store.newId(), merchant = r.merchant, amount = r.amount,
-                            cat = store.guessCategory(r.merchant), ts = ts, source = "wallet",
+                            cat = store.guessCategory(r.merchant), ts = ts, source = "wallet:$pkg",
                             raw = "$title\n$text".trim(),
                         )
                         store.add(t)
