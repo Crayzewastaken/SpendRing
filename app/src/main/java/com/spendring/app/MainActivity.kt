@@ -112,6 +112,7 @@ class MainActivity : Activity() {
             try { NotificationListenerService.requestRebind(ComponentName(this, WalletListener::class.java)) } catch (_: Exception) {}
         }
         refresh()
+        Updater.autoCheck(this)
         if (Build.VERSION.SDK_INT >= 33 &&
             checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED &&
             !store.sp.getBoolean("askedNotif", false)
@@ -259,7 +260,7 @@ class MainActivity : Activity() {
         recentBox = card(pad = 0)
         col.addView(recentBox, lp(8))
 
-        col.addView(label("Everything stays on this phone. No internet, no accounts.", 12f, Colors.MUTED).apply {
+        col.addView(label("Your money data stays on this phone. No accounts.", 12f, Colors.MUTED).apply {
             gravity = Gravity.CENTER; setPadding(0, dp(24), 0, dp(8))
         })
         return scroll(col)
@@ -418,6 +419,19 @@ class MainActivity : Activity() {
         n.addView(notifySw, lp(18))
         col.addView(n, lp(8))
 
+        col.addView(section("UPDATES"))
+        val up = card()
+        up.addView(label("You have build ${Updater.currentBuild(this)}", 15f, Colors.FG, true))
+        up.addView(label("When a new version is out, Spend Ring downloads it by itself and Android asks you to tap Install. Your purchases and budget are kept. Checking is the only thing it uses the internet for.", 13f, Colors.MUTED), lp(6))
+        up.addView(Switch(this).apply {
+            text = "Update automatically"
+            setTextColor(Colors.FG); textSize = 15f
+            isChecked = store.sp.getBoolean("autoUpdate", true)
+            setOnCheckedChangeListener { _, on -> store.sp.edit().putBoolean("autoUpdate", on).apply() }
+        }, lp(12))
+        up.addView(button("Check for updates now", Colors.FIELD, Colors.FG) { Updater.check(this) }, lp(12))
+        col.addView(up, lp(8))
+
         col.addView(section("RECENT WALLET NOTIFICATIONS"))
         col.addView(label("Every payment notification and what Spend Ring did with it.", 12.5f, Colors.MUTED).apply { setPadding(dp(2), dp(4), 0, 0) })
         logBox = card()
@@ -462,7 +476,7 @@ class MainActivity : Activity() {
         col.addView(adv, lp(8))
 
         val ver = try { packageManager.getPackageInfo(packageName, 0).versionName } catch (_: Exception) { "" }
-        col.addView(label("Spend Ring $ver · works offline", 12f, Colors.MUTED).apply {
+        col.addView(label("Spend Ring $ver", 12f, Colors.MUTED).apply {
             gravity = Gravity.CENTER; setPadding(0, dp(20), 0, dp(8))
         })
         return scroll(col)
