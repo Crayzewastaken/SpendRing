@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spend Ring</string>
+    <string name="widget_name">Money left</string>
+    <string name="widget_desc">How much you have left until your next refill</string>
+</resources>
