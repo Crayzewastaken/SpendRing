@@ -614,8 +614,11 @@ class MainActivity : Activity() {
         }
 
         pastBox.removeAllViews()
-        val past = store.pastCycles(4).map { it to store.spentIn(it) }
-        if (cyc == null || past.all { it.second == 0.0 }) {
+        // Only fortnights that have purchases in them, so ones from before tracking started aren't shown as "saved".
+        val all = store.txns()
+        val past = store.pastCycles(6).filter { c -> all.any { it.ts >= c.start && it.ts < c.end } }
+            .take(4).map { it to store.spentIn(it) }
+        if (cyc == null || past.isEmpty()) {
             pastBox.addView(label("Your previous cycles will show here.", 14f, Colors.MUTED))
         } else {
             past.forEachIndexed { i, (c, spent) ->
