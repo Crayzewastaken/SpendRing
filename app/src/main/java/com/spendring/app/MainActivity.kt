@@ -516,6 +516,11 @@ class MainActivity : Activity() {
 
         statLeft.text = if (cyc != null) Store.money(s.left, false) else "–"
         statLeft.setTextColor(if (cyc != null) col else Colors.FG)
+        (statLeft.parent as? LinearLayout)?.let { tile ->
+            val tc = if (cyc != null) col else Colors.GREEN
+            tile.background = rounded(Colors.alpha(tc, 0x1F), 18f, Colors.alpha(tc, 0x55))
+            (tile.getChildAt(0) as? TextView)?.setTextColor(tc)
+        }
         statSpent.text = Store.money(s.spent, false)
         statDays.text = if (cyc != null) "${s.daysLeft}" else "–"
         statRefill.text = if (cyc != null) dayFmt.format(Date(cyc.end)) else "–"

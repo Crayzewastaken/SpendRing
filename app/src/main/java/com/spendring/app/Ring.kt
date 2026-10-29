@@ -109,9 +109,10 @@ object RingDraw {
         // Time marker: how far through the cycle you are.
         if (s.cycle != null) {
             val ang = Math.toRadians((-90.0 + 360.0 * (1.0 - s.timeFrac)))
-            val tick = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Colors.alpha(Colors.FG, 0xB0); strokeWidth = stroke * 0.16f; strokeCap = Paint.Cap.ROUND }
-            val r1 = r - stroke * 0.85f
-            val r2 = r - stroke * 0.62f
+            // drawn across the ring itself so it never touches the text inside
+            val tick = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Colors.BG; strokeWidth = stroke * 0.2f; strokeCap = Paint.Cap.ROUND }
+            val r1 = r - stroke * 0.42f
+            val r2 = r + stroke * 0.42f
             c.drawLine(
                 cx + (r1 * Math.cos(ang)).toFloat(), cy + (r1 * Math.sin(ang)).toFloat(),
                 cx + (r2 * Math.cos(ang)).toFloat(), cy + (r2 * Math.sin(ang)).toFloat(), tick,
@@ -124,7 +125,7 @@ object RingDraw {
         text.color = Colors.MUTED
         text.textSize = size * 0.055f
         text.letterSpacing = 0.14f
-        c.drawText("SPENDING MONEY LEFT", cx, cy - size * 0.13f, text)
+        c.drawText("LEFT TO SPEND", cx, cy - size * 0.13f, text)
 
         val big = if (s.state == Summary.State.NOT_SET) "—" else Store.money(s.left, kotlin.math.abs(s.left) < 10_000)
         text.letterSpacing = 0f
