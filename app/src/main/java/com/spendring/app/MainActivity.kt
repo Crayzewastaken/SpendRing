@@ -50,6 +50,13 @@ class MainActivity : Activity() {
     private lateinit var statSpent: TextView
     private lateinit var statDays: TextView
     private lateinit var statRefill: TextView
+    private lateinit var greeting: TextView
+    private lateinit var safeChip: TextView
+    private lateinit var paceHint: TextView
+    private lateinit var dayBars: DayBars
+    private lateinit var dayCard: LinearLayout
+    private lateinit var recentBox: LinearLayout
+    private val tabColors = listOf(Colors.GREEN, Colors.BLUE, Colors.PURPLE)
 
     // Budget
     private lateinit var budgetField: EditText
@@ -82,12 +89,14 @@ class MainActivity : Activity() {
         pages.forEach { content.addView(it) }
         root.addView(content, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
         root.addView(View(this).apply { setBackgroundColor(Colors.LINE) }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1))
-        root.addView(buildTabBar())
+        val tabBar = buildTabBar()
+        root.addView(tabBar)
         setContentView(root)
+        fitSystemBars(root, content, tabBar)
 
         handleTestIntent(intent)
         loadBudgetFields()
-        show(if (store.isSetUp) 0 else 1)
+        show(0)
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -138,6 +147,35 @@ class MainActivity : Activity() {
         if (tabExtra in 0..2 && ::pages.isInitialized) show(tabExtra)
     }
 
+    /**
+     * Draw behind the status bar and Samsung's navigation buttons (Android 15 does this anyway),
+     * then pad the content and tab bar so nothing sits underneath them.
+     */
+    private fun fitSystemBars(root: View, content: View, tabBar: View) {
+        val baseBottom = tabBar.paddingBottom
+        if (Build.VERSION.SDK_INT >= 30) {
+            window.setDecorFitsSystemWindows(false)
+            @Suppress("DEPRECATION")
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            @Suppress("DEPRECATION")
+            window.navigationBarColor = Colors.SURFACE
+        }
+        root.setOnApplyWindowInsetsListener { _, ins ->
+            val v = if (Build.VERSION.SDK_INT >= 30) {
+                val i = ins.getInsets(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.displayCutout())
+                intArrayOf(i.left, i.top, i.right, i.bottom)
+            } else {
+                @Suppress("DEPRECATION")
+                intArrayOf(ins.systemWindowInsetLeft, ins.systemWindowInsetTop, ins.systemWindowInsetRight, ins.systemWindowInsetBottom)
+            }
+            val l = v[0]; val t = v[1]; val r = v[2]; val b = v[3]
+            content.setPadding(l, t, r, 0)
+            tabBar.setPadding(dp(8) + l, tabBar.paddingTop, dp(8) + r, baseBottom + b)
+            ins
+        }
+        root.requestApplyInsets()
+    }
+
     // ================================================================== tabs
 
     private fun buildTabBar(): View {
@@ -146,31 +184,30 @@ class MainActivity : Activity() {
             setBackgroundColor(Colors.SURFACE)
             setPadding(dp(8), dp(4), dp(8), dp(4))
         }
-        listOf("◔" to "Main", "＄" to "Budget", "⚙" to "Settings").forEachIndexed { i, (icon, name) ->
+        listOf("◉" to "Main", "＄" to "Budget", "⚙" to "Settings").forEachIndexed { i, (icon, name) ->
             val t = TextView(this).apply {
                 text = "$icon\n$name"
-                textSize = 12.5f
+                textSize = 13f
                 gravity = Gravity.CENTER
                 typeface = Typeface.DEFAULT_BOLD
                 setLineSpacing(0f, 1.1f)
-                setPadding(0, dp(8), 0, dp(8))
+                setPadding(0, dp(10), 0, dp(10))
                 contentDescription = name
                 setOnClickListener { show(i) }
             }
             tabViews.add(t)
-            bar.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
+            bar.addView(t, LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { setMargins(dp(4), 0, dp(4), 0) })
         }
         return bar
     }
 
     private fun show(i: Int) {
-        if (i != 1 && !store.isSetUp && i != 2) { toast("Save your budget first"); return }
         tab = i
         pages.forEachIndexed { j, p -> p.visibility = if (j == i) View.VISIBLE else View.GONE }
         tabViews.forEachIndexed { j, t ->
             val on = j == i
-            t.setTextColor(if (on) Colors.ACCENT else Colors.MUTED)
-            t.background = if (on) rounded(Colors.FIELD, 12f) else null
+            t.setTextColor(if (on) tabColors[j] else Colors.MUTED)
+            t.background = if (on) rounded(Colors.alpha(tabColors[j], 0x26), 16f) else null
         }
         if (i == 1) loadBudgetFields()
         refresh()
@@ -180,25 +217,47 @@ class MainActivity : Activity() {
 
     private fun buildMain(): ScrollView {
         val col = column()
-        col.addView(label("Spend Ring", 26f, Colors.FG, true))
+        col.addView(label("Spend Ring", 28f, Colors.FG, true))
+        greeting = label("", 14f, Colors.MUTED).apply { setPadding(0, dp(2), 0, 0) }
+        col.addView(greeting)
 
         accessBox = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         col.addView(accessBox, lp(12))
 
         ring = RingView(this)
         ring.setOnClickListener { if (!store.isSetUp) show(1) }
-        col.addView(ring, lp(16))
+        col.addView(ring, lp(12))
+
+        safeChip = label("", 15f, Colors.GREEN, true).apply {
+            gravity = Gravity.CENTER; setPadding(dp(18), dp(10), dp(18), dp(10))
+        }
+        col.addView(safeChip, LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+            gravity = Gravity.CENTER_HORIZONTAL; topMargin = dp(10)
+        })
+        paceHint = label("", 13f, Colors.ORANGE).apply { gravity = Gravity.CENTER; setPadding(0, dp(8), 0, 0) }
+        col.addView(paceHint)
 
         val grid = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         val r1 = row()
-        statLeft = bigStat(r1, "LEFT TO SPEND", 0)
-        statSpent = bigStat(r1, "SPENT", 10)
+        statLeft = bigStat(r1, "LEFT TO SPEND", 0, Colors.GREEN)
+        statSpent = bigStat(r1, "SPENT", 10, Colors.PINK)
         val r2 = row()
-        statDays = bigStat(r2, "DAYS LEFT", 0)
-        statRefill = bigStat(r2, "REFILL IN", 10)
+        statDays = bigStat(r2, "DAYS LEFT", 0, Colors.BLUE)
+        statRefill = bigStat(r2, "REFILL ON", 10, Colors.YELLOW)
         grid.addView(r1)
         grid.addView(r2, lp(10))
-        col.addView(grid, lp(20))
+        col.addView(grid, lp(18))
+
+        col.addView(section("DAY BY DAY"))
+        dayCard = card()
+        dayBars = DayBars(this)
+        dayCard.addView(dayBars)
+        dayCard.addView(label("Dashed line is what you can spend each day. Green is under it, orange up to double, red over that.", 12f, Colors.MUTED), lp(8))
+        col.addView(dayCard, lp(8))
+
+        col.addView(section("LATEST"))
+        recentBox = card(pad = 0)
+        col.addView(recentBox, lp(8))
 
         col.addView(label("Everything stays on this phone. No internet, no accounts.", 12f, Colors.MUTED).apply {
             gravity = Gravity.CENTER; setPadding(0, dp(24), 0, dp(8))
@@ -206,13 +265,13 @@ class MainActivity : Activity() {
         return scroll(col)
     }
 
-    private fun bigStat(parent: LinearLayout, title: String, leftMarginDp: Int): TextView {
+    private fun bigStat(parent: LinearLayout, title: String, leftMarginDp: Int, color: Int): TextView {
         val c = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = rounded(Colors.SURFACE, 16f, Colors.LINE)
+            background = rounded(Colors.alpha(color, 0x1F), 18f, Colors.alpha(color, 0x55))
             setPadding(dp(16), dp(14), dp(16), dp(14))
         }
-        c.addView(label(title, 11f, Colors.MUTED, true).apply { letterSpacing = 0.09f })
+        c.addView(label(title, 11f, color, true).apply { letterSpacing = 0.09f })
         val v = label("–", 24f, Colors.FG, true).apply {
             typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD); setPadding(0, dp(6), 0, 0)
             maxLines = 1
@@ -447,14 +506,51 @@ class MainActivity : Activity() {
                 "Turn on",
             ) { openListenerSettings() })
         } else if (!store.isSetUp) {
-            accessBox.addView(warnCard("Set your budget", "Add your budget and next refill date to start.", "Set up") { show(1) })
+            accessBox.addView(warnCard("Set up your budget", "Paste your budget code or type your spending money in on the Budget tab.", "Set up") { show(1) })
         }
-        statLeft.text = if (s.cycle != null) Store.money(s.left, false) else "–"
-        statLeft.setTextColor(if (s.left < 0) Colors.BAD else Colors.of(s.state).let { if (s.state == Summary.State.NOT_SET) Colors.FG else it })
-        statSpent.text = Store.money(s.spent, false)
+        val col = Colors.of(s.state)
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val hello = when (hour) { in 5..11 -> "Good morning"; in 12..17 -> "Good afternoon"; else -> "Good evening" }
         val cyc = s.cycle
+        greeting.text = if (cyc != null) "$hello · ${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} until payday" else hello
+
+        statLeft.text = if (cyc != null) Store.money(s.left, false) else "–"
+        statLeft.setTextColor(if (cyc != null) col else Colors.FG)
+        statSpent.text = Store.money(s.spent, false)
         statDays.text = if (cyc != null) "${s.daysLeft}" else "–"
         statRefill.text = if (cyc != null) dayFmt.format(Date(cyc.end)) else "–"
+
+        if (cyc != null) {
+            safeChip.visibility = View.VISIBLE
+            safeChip.text = if (s.left > 0) "Safe to spend today  ${Store.money(s.perDay)}" else "Nothing left until payday"
+            safeChip.setTextColor(col)
+            safeChip.background = rounded(Colors.alpha(col, 0x24), 22f, Colors.alpha(col, 0x66))
+            paceHint.visibility = if (s.fast && s.left >= 0) View.VISIBLE else View.GONE
+            paceHint.text = "You're spending faster than the days are passing. Ease off and it evens out."
+
+            val (days, today) = store.daily(cyc, s.txns)
+            val allowance = s.budget / days.size.coerceAtLeast(1)
+            dayBars.set(days, allowance, today)
+            dayCard.visibility = View.VISIBLE
+        } else {
+            safeChip.visibility = View.GONE
+            paceHint.visibility = View.GONE
+            dayCard.visibility = View.GONE
+        }
+
+        recentBox.removeAllViews()
+        val recent = s.txns.take(3)
+        if (recent.isEmpty()) {
+            recentBox.addView(label("Your purchases show up here as soon as Google Wallet tells us.", 14f, Colors.MUTED).apply { setPadding(dp(16), dp(16), dp(16), dp(16)) })
+        } else {
+            recent.forEachIndexed { i, t ->
+                if (i > 0) recentBox.addView(View(this).apply { setBackgroundColor(Colors.LINE) }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1))
+                recentBox.addView(txnRow(t))
+            }
+            recentBox.addView(label("See all purchases  ›", 14f, Colors.BLUE, true).apply {
+                setPadding(dp(16), dp(12), dp(16), dp(14)); setOnClickListener { show(1) }
+            })
+        }
 
         // ---- Budget
         budgetSummary.text = if (cyc != null)

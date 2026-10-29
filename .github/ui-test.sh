@@ -91,6 +91,12 @@ adb shell dumpsys notification --noredact | grep -E "pkg=|coles1|sum1" | head -2
 adb shell am start -n $PKG/.MainActivity --ei sr_tab 0
 sleep 2
 adb exec-out screencap -p > $OUT/3-main.png
+adb shell input swipe 540 1700 540 500 400
+sleep 1
+adb exec-out screencap -p > $OUT/3b-main-scrolled.png
+adb shell input swipe 540 1700 540 500 400
+sleep 1
+adb exec-out screencap -p > $OUT/3c-main-bottom.png
 
 # Budget tab
 adb shell am start -n $PKG/.MainActivity --ei sr_tab 1

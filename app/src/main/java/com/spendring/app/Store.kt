@@ -56,7 +56,11 @@ data class Summary(
     val timeFrac: Double,
     val state: State,
 ) {
-    enum class State { NOT_SET, ON_TRACK, FAST, OVER }
+    /** Ring colour comes from how much is left: over half green, under half orange, under a quarter red. */
+    enum class State { NOT_SET, PLENTY, HALF, LOW, OVER }
+
+    /** Spending faster than the days are passing. */
+    val fast: Boolean get() = cycle != null && budget > 0 && spent / budget > timeFrac + 0.10
 }
 
 data class Category(val name: String, val color: Int, val keywords: List<String>)
@@ -244,13 +248,30 @@ class Store(ctx: Context) {
         val state = when {
             cyc == null || b <= 0 -> Summary.State.NOT_SET
             left < 0 -> Summary.State.OVER
-            spent / b > timeFrac + 0.10 -> Summary.State.FAST
-            else -> Summary.State.ON_TRACK
+            left / b < 0.25 -> Summary.State.LOW
+            left / b < 0.50 -> Summary.State.HALF
+            else -> Summary.State.PLENTY
         }
         return Summary(b, cyc, inCycle, spent, fuel, fuelBudget, left, daysLeft, perDay, timeFrac, state)
     }
 
     fun spentIn(c: Cycle): Double = txns().filter { it.ts >= c.start && it.ts < c.end && it.cat != FUEL }.sumOf { it.amount }
+
+    /** Spending (fuel not included) for each day of the cycle, with the index of today. */
+    fun daily(c: Cycle, txns: List<Txn>, now: Long = System.currentTimeMillis()): Pair<List<Pair<Long, Double>>, Int> {
+        val days = ArrayList<Pair<Long, Double>>()
+        val cal = Calendar.getInstance().apply { timeInMillis = c.start }
+        var today = -1
+        var guard = 0
+        while (cal.timeInMillis < c.end && guard++ < 40) {
+            val start = cal.timeInMillis
+            cal.add(Calendar.DAY_OF_MONTH, 1)
+            val end = cal.timeInMillis
+            if (now in start until end) today = days.size
+            days.add(start to txns.filter { it.ts in start until end && it.cat != FUEL }.sumOf { it.amount })
+        }
+        return days to today
+    }
 
     /** Everything put on the card this calendar month (for the cashback target). */
     fun cardThisMonth(now: Long = System.currentTimeMillis()): Double {
