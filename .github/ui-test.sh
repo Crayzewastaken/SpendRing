@@ -70,12 +70,15 @@ feed "Kmart" "Refund of \$15.00 with Visa ••4821" 3
 feed "Uber Eats" "\$31.45 with Visa ••4821" 6
 
 # ---- 5. A real posted notification, read by the listener service itself
-adb shell "cmd notification post -S bigtext -t 'Coles' coles1 '\$23.10 with Visa ••4821'"
-sleep 3
-adb shell "cmd notification post -S bigtext -t 'Weekly summary' sum1 'You have 3 new offers'"
+for U in "su 2000" ""; do
+  adb shell "$U cmd notification post -S bigtext -t 'Coles' coles1 '\$23.10 with Visa ••4821'" >> $OUT/post-output.txt 2>&1
+  sleep 3
+  if adb shell cat /data/data/$PKG/shared_prefs/spendring.xml | grep -q "Coles"; then echo "recorded via: $U" >> $OUT/post-output.txt; break; fi
+done
+adb shell "su 2000 cmd notification post -S bigtext -t 'Weekly summary' sum1 'You have 3 new offers'" >> $OUT/post-output.txt 2>&1
 sleep 2
+adb shell dumpsys notification --noredact | grep -E "pkg=|coles1|sum1" | head -20 >> $OUT/post-output.txt 2>&1
 
-# Main tab
 adb shell am start -n $PKG/.MainActivity --ei sr_tab 0
 sleep 2
 adb exec-out screencap -p > $OUT/3-main.png
