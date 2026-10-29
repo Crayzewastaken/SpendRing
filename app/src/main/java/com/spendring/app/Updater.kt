@@ -66,6 +66,10 @@ object Updater {
             if (r.build <= currentBuild(act)) sp.edit().putLong("latestCheckedAt", System.currentTimeMillis()).apply()
             act.runOnUiThread {
                 if (act.isFinishing || r.build <= currentBuild(act)) return@runOnUiThread
+                // If you tapped Cancel on the installer, don't ask again for this build for 6 hours.
+                if (sp.getInt("offeredBuild", 0) == r.build &&
+                    System.currentTimeMillis() - sp.getLong("offeredAt", 0L) < 6 * 3_600_000L) return@runOnUiThread
+                sp.edit().putInt("offeredBuild", r.build).putLong("offeredAt", System.currentTimeMillis()).apply()
                 Toast.makeText(act, "New Spend Ring update (build ${r.build}), downloading…", Toast.LENGTH_LONG).show()
                 download(act, r)
             }
