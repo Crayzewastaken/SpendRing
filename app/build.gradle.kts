@@ -18,22 +18,23 @@ android {
         versionName = "build-$run"
     }
 
-    // A fixed key kept in this private repo, so every new build installs over the old one
-    // and your purchases are kept.
+    // A fixed signing key from the repo's hidden GitHub secrets, so every new build installs
+    // over the old one and your purchases are kept. The key itself is never in the code.
+    val ksFile = rootProject.file("keystore.jks")
     signingConfigs {
-        create("fixed") {
-            storeFile = file("spendring.jks")
-            storePassword = "spendring"
-            keyAlias = "spendring"
-            keyPassword = "spendring"
+        if (ksFile.exists()) {
+            create("fixed") {
+                storeFile = ksFile
+                storePassword = System.getenv("KEYSTORE_PASSWORD")
+                keyAlias = "spendring"
+                keyPassword = System.getenv("KEYSTORE_PASSWORD")
+            }
         }
     }
 
     buildTypes {
-        debug { signingConfig = signingConfigs.getByName("fixed") }
-        release {
-            isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("fixed")
+        debug {
+            if (ksFile.exists()) signingConfig = signingConfigs.getByName("fixed")
         }
     }
 
