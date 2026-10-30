@@ -125,7 +125,7 @@ object RingDraw {
         text.color = Colors.MUTED
         text.textSize = size * 0.055f
         text.letterSpacing = 0.14f
-        c.drawText("LEFT TO SPEND", cx, cy - size * 0.13f, text)
+        c.drawText(if (s.weekNo > 0) "LEFT THIS WEEK" else "LEFT TO SPEND", cx, cy - size * 0.13f, text)
 
         val big = if (s.state == Summary.State.NOT_SET) "—" else Store.money(s.left, kotlin.math.abs(s.left) < 10_000)
         text.letterSpacing = 0f
@@ -140,11 +140,15 @@ object RingDraw {
         text.typeface = Typeface.DEFAULT
         text.color = Colors.MUTED
         text.textSize = size * 0.056f
-        val sub = if (s.budget > 0) "of ${Store.money(s.budget, false)}" else "Tap to set up"
+        val sub = when {
+            s.weekNo > 0 -> "of ${Store.money(s.budget, false)} · week ${s.weekNo} of 2"
+            s.budget > 0 -> "of ${Store.money(s.budget, false)}"
+            else -> "Tap to set up"
+        }
         c.drawText(sub, cx, cy + size * 0.13f, text)
 
         // state pill
-        val st = if (widget && s.cycle != null) "${s.daysLeft}d to payday" else Colors.label(s.state)
+        val st = if (widget && s.cycle != null) "${s.daysToPayday}d to payday" else Colors.label(s.state)
         text.typeface = Typeface.DEFAULT_BOLD
         text.textSize = size * 0.05f
         val pw = text.measureText(st) + size * 0.08f
@@ -257,7 +261,7 @@ class RingWidget : AppWidgetProvider() {
             val sideDp = min(wDp, hDp).coerceIn(100, 220)
             val px = (sideDp * d).toInt().coerceIn(200, 600)
             val bmp = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888)
-            RingDraw.draw(Canvas(bmp), px.toFloat(), px.toFloat(), Store(ctx).summary(), widget = true)
+            RingDraw.draw(Canvas(bmp), px.toFloat(), px.toFloat(), Store(ctx).view(), widget = true)
 
             val rv = RemoteViews(ctx.packageName, R.layout.widget_ring)
             rv.setImageViewBitmap(R.id.widget_ring, bmp)

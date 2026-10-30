@@ -322,6 +322,12 @@ class MainActivity : Activity() {
             setOnClickListener { pickRefillDate() }
         }
         b.addView(dateBtn, lp(6))
+        b.addView(Switch(this).apply {
+            text = "Show it week by week (half each week, leftovers roll over)"
+            setTextColor(Colors.FG); textSize = 15f
+            isChecked = store.weekly
+            setOnCheckedChangeListener { _, on -> store.weekly = on; Notifier.changed(this@MainActivity); refresh() }
+        }, lp(16))
         b.addView(button("Save budget", Colors.ACCENT, Colors.BG) { saveBudget() }, lp(16))
         col.addView(b, lp(8))
 
@@ -510,10 +516,11 @@ class MainActivity : Activity() {
     private fun refresh() {
         if (!::ring.isInitialized) return
         val s = store.summary()
+        val w = store.view()   // this week (or the whole cycle if weekly view is off)
         val listening = WalletListener.isEnabled(this)
 
         // ---- Main
-        ring.summary = s
+        ring.summary = w
         accessBox.removeAllViews()
         if (!listening) {
             accessBox.addView(warnCard(
@@ -524,30 +531,48 @@ class MainActivity : Activity() {
         } else if (!store.isSetUp) {
             accessBox.addView(warnCard("Set up your budget", "Paste your budget code or type your spending money in on the Budget tab.", "Set up") { show(1) })
         }
-        val col = Colors.of(s.state)
+        val col = Colors.of(w.state)
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val hello = when (hour) { in 5..11 -> "Good morning"; in 12..17 -> "Good afternoon"; else -> "Good evening" }
         val cyc = s.cycle
         greeting.text = if (cyc != null) "$hello · ${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} until payday" else hello
+        val weekly = w.weekNo > 0
+        (statLeft.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = if (weekly) "LEFT THIS WEEK" else "LEFT TO SPEND" }
+        (statSpent.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = if (weekly) "SPENT THIS WEEK" else "SPENT" }
+        (statDays.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = if (weekly) "DAYS LEFT IN WEEK" else "DAYS LEFT" }
+        (statRefill.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = "PAYDAY" }
 
-        statLeft.text = if (cyc != null) Store.money(s.left, false) else "–"
+        statLeft.text = if (cyc != null) Store.money(w.left, false) else "–"
         statLeft.setTextColor(if (cyc != null) col else Colors.FG)
         (statLeft.parent as? LinearLayout)?.let { tile ->
             val tc = if (cyc != null) col else Colors.GREEN
             tile.background = rounded(Colors.alpha(tc, 0x1F), 18f, Colors.alpha(tc, 0x55))
             (tile.getChildAt(0) as? TextView)?.setTextColor(tc)
         }
-        statSpent.text = Store.money(s.spent, false)
-        statDays.text = if (cyc != null) "${s.daysLeft}" else "–"
+        statSpent.text = Store.money(w.spent, false)
+        statDays.text = if (cyc != null) "${w.daysLeft}" else "–"
         statRefill.text = if (cyc != null) dayFmt.format(Date(cyc.end)) else "–"
 
         if (cyc != null) {
             safeChip.visibility = View.VISIBLE
-            safeChip.text = if (s.left > 0) "Safe to spend today  ${Store.money(s.perDay)}" else "Nothing left until payday"
+            safeChip.text = when {
+                w.left > 0 -> "Safe to spend today  ${Store.money(w.perDay)}"
+                w.weekNo == 1 -> "Nothing left this week"
+                else -> "Nothing left until payday"
+            }
             safeChip.setTextColor(col)
             safeChip.background = rounded(Colors.alpha(col, 0x24), 22f, Colors.alpha(col, 0x66))
-            paceHint.visibility = if (s.fast && s.left >= 0) View.VISIBLE else View.GONE
-            paceHint.text = "You're spending faster than the days are passing. Ease off and it evens out."
+            val note = when {
+                w.weekNo == 1 && w.left < 0 -> "${Store.money(-w.left)} over this week. It comes out of week 2, which starts with ${Store.money(s.budget / 2 + w.left)}."
+                w.weekNo == 1 && w.left > 0 -> "Whatever's left on ${dayFmt.format(Date(w.cycle!!.end))} rolls into week 2."
+                w.weekNo == 2 && w.carry > 0.005 -> "Includes ${Store.money(w.carry)} left over from week 1."
+                w.weekNo == 2 && w.carry < -0.005 -> "${Store.money(-w.carry)} less this week because week 1 went over."
+                w.fast && w.left >= 0 -> "You're spending faster than the days are passing. Ease off and it evens out."
+                else -> ""
+            }
+            paceHint.visibility = if (note.isNotEmpty()) View.VISIBLE else View.GONE
+            paceHint.text = note
+            paceHint.setTextColor(if (w.left < 0 || w.carry < -0.005) Colors.ORANGE else Colors.MUTED)
 
             val (days, today) = store.daily(cyc, s.txns)
             val allowance = s.budget / days.size.coerceAtLeast(1)

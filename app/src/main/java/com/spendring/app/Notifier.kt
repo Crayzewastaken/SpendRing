@@ -32,15 +32,17 @@ object Notifier {
                 description = "Shows how much you have left after Google Wallet charges your card"
             }
         )
-        val s = store.summary()
+        val s = store.view()
         val title = if (t.amount < 0) "Refund ${Store.money(-t.amount)} from ${t.merchant}"
         else "${Store.money(t.amount)} at ${t.merchant}"
-        val days = "${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} to payday"
+        val days = if (s.weekNo > 0) "${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} left this week"
+        else "${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} to payday"
         val body = if (t.cat == Store.FUEL) {
             val fl = s.fuelBudget - s.fuelSpent
             (if (fl >= 0) "${Store.money(fl)} fuel money left" else "${Store.money(-fl)} over the fuel budget") + " · $days"
         } else {
-            val left = if (s.left >= 0) "${Store.money(s.left)} left" else "${Store.money(-s.left)} over budget"
+            val wk = if (s.weekNo > 0) " this week" else ""
+            val left = if (s.left >= 0) "${Store.money(s.left)} left$wk" else "${Store.money(-s.left)} over$wk"
             "$left · $days · ${Store.money(s.perDay, false)}/day"
         }
 

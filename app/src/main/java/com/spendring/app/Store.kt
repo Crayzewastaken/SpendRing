@@ -55,7 +55,12 @@ data class Summary(
     val perDay: Double,
     val timeFrac: Double,
     val state: State,
+    val weekNo: Int = 0,        // 1 or 2 when showing one week of a fortnight, else 0
+    val carry: Double = 0.0,    // week 2 only: left over (+) or overspent (-) from week 1
+    val payday: Long = 0L,      // when the money next comes in
 ) {
+    val daysToPayday: Int get() = if (payday > 0) max(1, ceil((payday - System.currentTimeMillis()) / Store.DAY.toDouble()).toInt()) else daysLeft
+
     /** Ring colour comes from how much is left: over half green, under half orange, under a quarter red. */
     enum class State { NOT_SET, PLENTY, HALF, LOW, OVER }
 
@@ -90,6 +95,11 @@ class Store(ctx: Context) {
     var fuelBudget: Double
         get() = sp.getFloat("fuelBudget", 92f).toDouble()
         set(v) = sp.edit().putFloat("fuelBudget", v.toFloat()).apply()
+
+    /** Show spending money a week at a time (half the fortnight each week). */
+    var weekly: Boolean
+        get() = sp.getBoolean("weekly", true)
+        set(v) = sp.edit().putBoolean("weekly", v).apply()
 
     var notifyOnPurchase: Boolean
         get() = sp.getBoolean("notifyOnPurchase", true)
@@ -310,7 +320,39 @@ class Store(ctx: Context) {
             left / b < 0.50 -> Summary.State.HALF
             else -> Summary.State.PLENTY
         }
-        return Summary(b, cyc, inCycle, spent, fuel, fuelBudget, left, daysLeft, perDay, timeFrac, state)
+        return Summary(b, cyc, inCycle, spent, fuel, fuelBudget, left, daysLeft, perDay, timeFrac, state, payday = cyc?.end ?: 0L)
+    }
+
+    /**
+     * What the main screen shows. With [weekly] on and a fortnightly budget, it's this week only:
+     * half the money each week, and whatever's left (or overspent) in week 1 carries into week 2.
+     */
+    fun view(now: Long = System.currentTimeMillis()): Summary {
+        val f = summary(now)
+        val cyc = f.cycle
+        if (!weekly || cyc == null || cycleKind != "fortnightly") return f
+        val mid = Calendar.getInstance().apply { timeInMillis = cyc.start; add(Calendar.DAY_OF_MONTH, 7) }.timeInMillis
+        val second = now >= mid
+        val half = f.budget / 2
+        val wk = if (second) Cycle(mid, cyc.end) else Cycle(cyc.start, mid)
+        val tx = f.txns.filter { it.ts >= wk.start && it.ts < wk.end }
+        val spent = tx.filter { it.cat != FUEL }.sumOf { it.amount }
+        val week1 = f.txns.filter { it.ts < mid && it.cat != FUEL }.sumOf { it.amount }
+        val carry = if (second) half - week1 else 0.0
+        val b = half + carry
+        val left = b - spent
+        val daysLeft = max(1, ceil((wk.end - now) / DAY.toDouble()).toInt())
+        val perDay = max(0.0, left) / daysLeft
+        val timeFrac = ((now - wk.start).toDouble() / wk.length).coerceIn(0.0, 1.0)
+        val state = when {
+            left < 0 -> Summary.State.OVER
+            b <= 0 -> Summary.State.LOW
+            left / b < 0.25 -> Summary.State.LOW
+            left / b < 0.50 -> Summary.State.HALF
+            else -> Summary.State.PLENTY
+        }
+        return Summary(b, wk, tx, spent, f.fuelSpent, f.fuelBudget, left, daysLeft, perDay, timeFrac, state,
+            weekNo = if (second) 2 else 1, carry = carry, payday = cyc.end)
     }
 
     fun spentIn(c: Cycle): Double = txns().filter { it.ts >= c.start && it.ts < c.end && it.cat != FUEL }.sumOf { it.amount }
