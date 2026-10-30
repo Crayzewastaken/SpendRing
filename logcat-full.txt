@@ -1,0 +1,1187 @@
+--------- beginning of system
+10-30 10:43:17.837   507  2369 V SplashScreenExceptionList: SplashScreen checking exception for package com.spendring.app (target sdk:35) -> false
+10-30 10:43:17.838   507  2369 I ActivityTaskManager: Add Task{e9a5f10 #8 type=standard A=10141:com.spendring.app} to hidden list because adding Task{c870753 #9 type=standard A=10141:com.spendring.app}
+10-30 10:43:17.846   507  2369 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+10-30 10:43:17.905   507   530 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10141; state: DISABLED
+10-30 10:43:17.905   507   530 D CompatibilityChangeReporter: Compat change id reported: 177438394; UID 10141; state: DISABLED
+10-30 10:43:17.905   507   530 D CompatibilityChangeReporter: Compat change id reported: 135772972; UID 10141; state: DISABLED
+10-30 10:43:17.905   507   530 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10141; state: ENABLED
+--------- beginning of main
+10-30 10:43:17.930  1506  1506 I ProvidersCache: Updating roots due to change on user 0at content://com.android.externalstorage.documents
+10-30 10:43:17.933   507   540 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10141; state: ENABLED
+10-30 10:43:17.963   328   328 D Zygote  : Forked child process 2394
+10-30 10:43:17.966   507   540 W ActivityManager: Slow operation: 61ms so far, now at startProcess: returned from zygote!
+10-30 10:43:17.968   507   540 W ActivityManager: Slow operation: 64ms so far, now at startProcess: done updating battery stats
+10-30 10:43:17.969   507   540 W ActivityManager: Slow operation: 64ms so far, now at startProcess: building log message
+10-30 10:43:17.969   507   540 I ActivityManager: Start proc 2394:com.spendring.app/u0a141 for next-top-activity {com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:17.969   507   540 W ActivityManager: Slow operation: 65ms so far, now at startProcess: starting to update pids map
+10-30 10:43:17.969   507   540 W ActivityManager: Slow operation: 65ms so far, now at startProcess: done updating pids map
+10-30 10:43:17.987   802   842 D SplashScreenView: Build android.window.SplashScreenView{62c03c6 V.E...... ......ID 0,0-0,0}
+10-30 10:43:17.987   802   842 D SplashScreenView: Icon: view: null drawable: null size: 0
+10-30 10:43:17.987   802   842 D SplashScreenView: Branding: view: android.view.View{b081f87 G.ED..... ......I. 0,0-0,0 #10204ef android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+10-30 10:43:18.001  2394  2394 I m.spendring.app: Late-enabling -Xcheck:jni
+10-30 10:43:18.011   507  1326 D CoreBackPreview: Window{19adbc u0 Splash Screen com.spendring.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9df709a, mPriority=0, mIsAnimationCallback=false}
+10-30 10:43:18.082  2394  2394 I m.spendring.app: Using CollectorTypeCC GC.
+10-30 10:43:18.083  2394  2394 W m.spendring.app: Unexpected CPU variant for x86: x86_64.
+10-30 10:43:18.083  2394  2394 W m.spendring.app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+10-30 10:43:18.086  1961  1970 I adbd    : jdwp connection from 2394
+10-30 10:43:18.149  1506  1506 I ProvidersCache: Updating roots due to change on user 0at content://com.android.externalstorage.documents
+10-30 10:43:18.153  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10141; state: ENABLED
+10-30 10:43:18.153  1506  1506 I ProvidersCache: Updating roots due to change on user 0at content://com.android.externalstorage.documents
+10-30 10:43:18.153  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10141; state: ENABLED
+10-30 10:43:18.196  2394  2394 W ziparchive: Unable to open '/data/app/~~cf6HbOAbtyuny0ZS6PKX8A==/com.spendring.app--V5aMAvz5i2UobkZcyHU4g==/base.dm': No such file or directory
+10-30 10:43:18.196  2394  2394 W ziparchive: Unable to open '/data/app/~~cf6HbOAbtyuny0ZS6PKX8A==/com.spendring.app--V5aMAvz5i2UobkZcyHU4g==/base.dm': No such file or directory
+10-30 10:43:18.218  1051  1051 I Choreographer: Skipped 41 frames!  The application may be doing too much work on its main thread.
+10-30 10:43:18.224   390   617 D PermissionCache: checking android.permission.READ_FRAME_BUFFER for uid=1000 => granted (49 us)
+10-30 10:43:18.247  2394  2394 D nativeloader: Configuring clns-6 for other apk /data/app/~~cf6HbOAbtyuny0ZS6PKX8A==/com.spendring.app--V5aMAvz5i2UobkZcyHU4g==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~cf6HbOAbtyuny0ZS6PKX8A==/com.spendring.app--V5aMAvz5i2UobkZcyHU4g==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.spendring.app
+10-30 10:43:18.250  1051  1067 I OpenGLRenderer: Davey! duration=701ms; Flags=1, FrameTimelineVsyncId=3201, IntendedVsync=41181511658, Vsync=41181511658, InputEventId=0, HandleInputStart=41182542451, AnimationStart=41182542832, PerformTraversalsStart=41182543043, DrawStart=41261081487, FrameDeadline=41198178324, FrameInterval=41182482109, FrameStartTime=16666666, SyncQueued=41261796891, SyncStart=41262876962, IssueDrawCommandsStart=41266824913, SwapBuffers=41766550088, FrameCompleted=41883633948, DequeueBufferDuration=2605, QueueBufferDuration=202979, GpuCompleted=41883633948, SwapBuffersCompleted=41879952034, DisplayPresentTime=0, CommandSubmissionCompleted=41766550088, 
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment: Currently set values for:
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+10-30 10:43:18.256   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:18.256   507  1326 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment: ANGLE GameManagerService for com.spendring.app: false
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment: com.spendring.app is not listed in per-application setting
+10-30 10:43:18.256  2394  2394 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of kernel
+10-30 10:43:18.419     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:18.266   507  1697 I ActivityManager: Flag disabled. Ignoring finishAttachApplication from uid: 10141. pid: 2394
+10-30 10:43:18.277   802   833 V WindowManagerShell: onTransitionReady android.os.BinderProxy@ebff3ab: {id=8 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@9409daa} m=OPEN f=MOVE_TO_TOP leash=Surface(name=Task=9)/@0xd2b787f sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@c091d9b} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0xb73304c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+10-30 10:43:18.277   802   833 V WindowManagerShell: Playing animation for (#8)android.os.BinderProxy@ebff3ab@0
+10-30 10:43:18.277   802   833 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@f202f53
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@c51a090
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@d0d6d89
+10-30 10:43:18.278   507   527 V WindowManager: Sent Transition #8 createdAt=10-30 10:43:17.495 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=false baseIntent=Intent { flg=0x10000000 cmp=com.spendring.app/.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.spendring.app/com.spendring.app.MainActivity} numActivities=0 lastActiveTime=37063 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{bcab81b Task{e9a5f10 #8 type=standard A=10141:com.spendring.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+10-30 10:43:18.278   507   527 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+10-30 10:43:18.278   507   527 V WindowManager:     info={id=8 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{e2462f9 Task{c870753 #9 type=standard A=10141:com.spendring.app}}} m=OPEN f=MOVE_TO_TOP leash=Surface(name=Task=9)/@0xf378f2 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{bcab81b Task{e9a5f10 #8 type=standard A=10141:com.spendring.app}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x7935f15 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@70d918e
+10-30 10:43:18.278   802   833 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@4f46daf
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@9d835bc
+10-30 10:43:18.278   802   833 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@cd65945
+10-30 10:43:18.278   802   833 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=8 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@9409daa} m=OPEN f=MOVE_TO_TOP leash=Surface(name=Task=9)/@0xd2b787f sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@c091d9b} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0xb73304c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+10-30 10:43:18.278   507  2071 W WindowManager: Failed to deliver inset control state change to w=Window{ae9794 u0 com.spendring.app/com.spendring.app.MainActivity EXITING}
+10-30 10:43:18.278   507  2071 W WindowManager: android.os.DeadObjectException
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:584)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.view.IWindow$Stub$Proxy.insetsControlChanged(IWindow.java:479)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowState.notifyInsetsControlChanged(WindowState.java:3802)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.InsetsStateController.lambda$notifyPendingInsetsControlChanged$3(InsetsStateController.java:343)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.InsetsStateController.$r8$lambda$8yykPRG1GyNq_J17QvL9d5xANMc(InsetsStateController.java:0)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.InsetsStateController$$ExternalSyntheticLambda2.run(R8$$SyntheticClass:0)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowAnimator.executeAfterPrepareSurfacesRunnables(WindowAnimator.java:294)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace(RootWindowContainer.java:811)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.RootWindowContainer.performSurfacePlacement(RootWindowContainer.java:756)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacementLoop(WindowSurfacePlacer.java:177)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement(WindowSurfacePlacer.java:126)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement(WindowSurfacePlacer.java:115)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.continueLayout(WindowSurfacePlacer.java:97)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.ActivityTaskManagerService.continueWindowLayout(ActivityTaskManagerService.java:4660)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.ActivityRecord.activityPaused(ActivityRecord.java:6353)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.ActivityClientController.activityPaused(ActivityClientController.java:216)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.app.IActivityClientController$Stub.onTransact(IActivityClientController.java:663)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at com.android.server.wm.ActivityClientController.onTransact(ActivityClientController.java:153)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1339)
+10-30 10:43:18.278   507  2071 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1275)
+10-30 10:43:18.280   802   833 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher}},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@6d5389a, appThread = android.app.IApplicationThread$Stub$Proxy@12435cb, debugName = QuickstepLaunchHome }}
+10-30 10:43:18.280   802   833 V WindowManagerShell:  Delegate animation for #8 to null
+10-30 10:43:18.280   802   833 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultTransitionHandler@ad0f1a8
+10-30 10:43:18.280   802   833 V WindowManagerShell: start default transition animation, info = {id=8 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@9409daa} m=OPEN f=MOVE_TO_TOP leash=Surface(name=Task=9)/@0xd2b787f sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{android.window.IWindowContainerToken$Stub$Proxy@c091d9b} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0xb73304c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+10-30 10:43:18.281   802   833 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@fe2ea76 animAttr=0xb type=CLOSE isEntrance=false
+10-30 10:43:18.292   507   531 W WindowManager: Failed to deliver inset control state change to w=Window{ae9794 u0 com.spendring.app/com.spendring.app.MainActivity EXITING}
+10-30 10:43:18.292   507   531 W WindowManager: android.os.DeadObjectException
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:584)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.view.IWindow$Stub$Proxy.insetsControlChanged(IWindow.java:479)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowState.notifyInsetsControlChanged(WindowState.java:3802)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.InsetsStateController.lambda$notifyPendingInsetsControlChanged$3(InsetsStateController.java:343)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.InsetsStateController.$r8$lambda$8yykPRG1GyNq_J17QvL9d5xANMc(InsetsStateController.java:0)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.InsetsStateController$$ExternalSyntheticLambda2.run(R8$$SyntheticClass:0)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowAnimator.executeAfterPrepareSurfacesRunnables(WindowAnimator.java:294)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.RootWindowContainer.performSurfacePlacementNoTrace(RootWindowContainer.java:811)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.RootWindowContainer.performSurfacePlacement(RootWindowContainer.java:756)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacementLoop(WindowSurfacePlacer.java:177)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement(WindowSurfacePlacer.java:126)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer.performSurfacePlacement(WindowSurfacePlacer.java:115)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.wm.WindowSurfacePlacer$Traverser.run(WindowSurfacePlacer.java:57)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.Handler.handleCallback(Handler.java:958)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.Looper.loopOnce(Looper.java:205)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.Looper.loop(Looper.java:294)
+10-30 10:43:18.292   507   531 W WindowManager: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+10-30 10:43:18.292   507   531 W WindowManager: 	at com.android.server.ServiceThread.run(ServiceThread.java:46)
+10-30 10:43:18.301   802   833 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@578d24e animAttr=0xa type=CLOSE isEntrance=true
+10-30 10:43:18.303   802   833 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@ad0f1a8
+10-30 10:43:18.309  2394  2425 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+10-30 10:43:18.311  2394  2425 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+10-30 10:43:18.313  2394  2425 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+10-30 10:43:18.317   802   833 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#8)android.os.BinderProxy@ebff3ab@0
+10-30 10:43:18.317   507   527 V WindowManager: Finish Transition #8: created at 10-30 10:43:17.495 collect-started=0.024ms request-sent=0.11ms started=5.108ms ready=727.181ms sent=779.826ms finished=821.746ms
+10-30 10:43:18.318   507  1697 W WindowManager: Exception thrown during dispatchAppVisibility Window{ae9794 u0 com.spendring.app/com.spendring.app.MainActivity EXITING}
+10-30 10:43:18.318   507  1697 W WindowManager: android.os.DeadObjectException
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:584)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:546)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3271)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1221)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:409)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:6946)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.ActivityRecord.postApplyAnimation(ActivityRecord.java:5637)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5580)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.Transition.finishTransition(Transition.java:1151)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:868)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:396)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:286)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:181)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1339)
+10-30 10:43:18.318   507  1697 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1275)
+10-30 10:43:18.318   507  1697 I Process : Sending signal. PID: 2290 SIG: 9
+10-30 10:43:18.323   507   530 W ActivityManager: setHasOverlayUi called on unknown pid: 2290
+10-30 10:43:18.323   802   833 V WindowManagerShell: Track 0 became idle
+10-30 10:43:18.323   802   833 V WindowManagerShell: All active transition animations finished
+10-30 10:43:18.349   390   390 E BpTransactionCompletedListener: Failed to transact (-32)
+10-30 10:43:18.353  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 210923482; UID 10141; state: ENABLED
+10-30 10:43:18.373  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 10141; state: ENABLED
+10-30 10:43:18.429   507  2427 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-30 10:43:18.495  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10141; state: DISABLED
+10-30 10:43:18.496  2394  2394 W OpenGLRenderer: Unknown dataspace 0
+10-30 10:43:18.507  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:18.510  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:18.512   507  1697 D CoreBackPreview: Window{1221987 u0 com.spendring.app/com.spendring.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@3a1c4dd, mPriority=0, mIsAnimationCallback=false}
+10-30 10:43:18.571  2394  2423 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+10-30 10:43:18.586   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:18.751     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:18.591  2394  2423 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:18.610   327  2432 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10141 0}
+10-30 10:43:18.611   327  2434 I resolv  : res_nmkquery: (QUERY, IN, A)
+10-30 10:43:18.611   327  2434 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x78476a082430
+10-30 10:43:18.611   327  2434 I resolv  : doQuery: rcode=0, ancount=1, return value=48
+10-30 10:43:18.614   327  2433 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+10-30 10:43:18.614   327  2433 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7845fa080e30
+10-30 10:43:18.615   327  2433 I resolv  : doQuery: rcode=0, ancount=0, return value=97
+10-30 10:43:18.646  2394  2428 D TrafficStats: tagSocket(84) with statsTag=0xffffffff, statsUid=-1
+10-30 10:43:18.939   507   527 W ziparchive: Unable to open '/data/app/~~cf6HbOAbtyuny0ZS6PKX8A==/com.spendring.app--V5aMAvz5i2UobkZcyHU4g==/base.dm': No such file or directory
+10-30 10:43:18.941   507   527 I ActivityTaskManager: Displayed com.spendring.app/.MainActivity for user 0: +1s159ms
+10-30 10:43:18.961   507  1776 D CompatibilityChangeReporter: Compat change id reported: 214016041; UID 10141; state: ENABLED
+10-30 10:43:18.961   507  1776 I ImeTracker: com.spendring.app:a68df8c9: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+10-30 10:43:18.961   507  1776 I ImeTracker: com.spendring.app:a68df8c9: onCancelled at PHASE_SERVER_SHOULD_HIDE
+10-30 10:43:18.965  1051  1101 I ImeTracker: com.android.launcher3:47fb96be: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT
+10-30 10:43:18.966  1051  1101 I ImeTracker: com.android.launcher3:47fb96be: onFailed at PHASE_CLIENT_VIEW_SERVED
+10-30 10:43:18.979   802   841 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@fd49652
+10-30 10:43:18.980   507  2071 D CoreBackPreview: Window{19adbc u0 Splash Screen com.spendring.app EXITING}: Setting back callback null
+10-30 10:43:18.980   507  1326 W InputManager-JNI: Input channel object '19adbc Splash Screen com.spendring.app (client)' was disposed without first being removed with the input manager!
+10-30 10:43:19.571   507   595 D ActivityManager: freezing 1244 com.android.cellbroadcastreceiver
+10-30 10:43:19.792   507  2071 W OverlayManager: service 'idmap' died
+10-30 10:43:19.959     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 442) process group...
+10-30 10:43:19.966     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 442 in 5ms
+10-30 10:43:19.967     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 507 (system_server)
+10-30 10:43:19.969     0     0 I init    : Service 'idmap2d' (pid 442) received signal 9
+10-30 10:43:19.867   507   563 I AppsFilter: interaction: PackageSetting{444475a com.spendring.app/10141} -> PackageSetting{86bfd8b com.android.rkpdapp/10134} BLOCKED
+10-30 10:43:19.872   804  2175 I PermissionControllerServiceImpl: Updating user sensitive for uid 10108
+10-30 10:43:19.874  1009  1009 D CarrierSvcBindHelper: onPackageModified: com.android.messaging
+10-30 10:43:19.875   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.875   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.876  1009  1009 D CarrierSvcBindHelper: No carrier app for: 0
+10-30 10:43:19.876   507   608 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+10-30 10:43:19.879  1051  1051 D b/267448330: provider: ComponentInfo{com.android.quicksearchbox/com.android.quicksearchbox.SearchWidgetProvider}, paddedSizes: [382.09525x136.38095, 732.5714x62.095238, 732.5714x62.095238], getMinMaxSizes: Rect(382, 62 - 732, 136)
+10-30 10:43:19.883   802   863 D StylusManager: Stylus InputDevice changed: 14 virtio_input_multi_touch_11
+10-30 10:43:19.883   802   802 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-30 10:43:19.884   802   863 D StylusManager: Stylus InputDevice changed: 13 virtio_input_multi_touch_10
+10-30 10:43:19.885  1009  1276 D ImsResolver: maybeAddedImsService, packageName: com.android.messaging
+10-30 10:43:19.886   804  2175 I PermissionControllerServiceImpl: Updating user sensitive for uid 10058
+10-30 10:43:19.887   802   863 D StylusManager: Stylus InputDevice changed: 12 virtio_input_multi_touch_9
+10-30 10:43:19.888   802   863 D StylusManager: Stylus InputDevice changed: 11 virtio_input_multi_touch_8
+10-30 10:43:19.888   507   608 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+10-30 10:43:19.891  1009  1009 D CarrierSvcBindHelper: onPackageModified: com.android.statementservice
+10-30 10:43:19.891  1009  1009 D CarrierSvcBindHelper: No carrier app for: 0
+10-30 10:43:19.895   804  2175 I PermissionControllerServiceImpl: Updating user sensitive for uid 10134
+10-30 10:43:19.896  1009  1009 D CarrierSvcBindHelper: onPackageModified: com.android.rkpdapp
+10-30 10:43:19.896  1009  1009 D CarrierSvcBindHelper: No carrier app for: 0
+10-30 10:43:19.896  1009  1276 D ImsResolver: maybeAddedImsService, packageName: com.android.statementservice
+10-30 10:43:19.897   802   863 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+10-30 10:43:19.898   507   608 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+10-30 10:43:19.901  1009  1276 D ImsResolver: maybeAddedImsService, packageName: com.android.rkpdapp
+10-30 10:43:19.902   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.902   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.902   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.902   980   980 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+10-30 10:43:19.903   802   863 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+10-30 10:43:19.907   802   863 D StylusManager: Stylus InputDevice changed: 4 virtio_input_multi_touch_1
+10-30 10:43:19.907   802   863 D StylusManager: Stylus InputDevice changed: 5 virtio_input_multi_touch_2
+10-30 10:43:19.908   802   863 D StylusManager: Stylus InputDevice changed: 9 virtio_input_multi_touch_6
+10-30 10:43:19.908   802   863 D StylusManager: Stylus InputDevice changed: 6 virtio_input_multi_touch_3
+10-30 10:43:19.908   802   863 D StylusManager: Stylus InputDevice changed: 10 virtio_input_multi_touch_7
+10-30 10:43:19.909   802   863 D StylusManager: Stylus InputDevice changed: 14 virtio_input_multi_touch_11
+10-30 10:43:19.909   802   863 D StylusManager: Stylus InputDevice changed: 13 virtio_input_multi_touch_10
+10-30 10:43:19.909   802   863 D StylusManager: Stylus InputDevice changed: 12 virtio_input_multi_touch_9
+10-30 10:43:19.909   802   863 D StylusManager: Stylus InputDevice changed: 11 virtio_input_multi_touch_8
+10-30 10:43:19.910   802   863 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+10-30 10:43:19.910   507   538 D AppWidgetServiceImpl: Provider info from ComponentInfo{com.android.messaging/com.android.messaging.widget.BugleWidgetProvider} won't be persisted.
+10-30 10:43:19.910   507   538 D AppWidgetServiceImpl: Provider info from ComponentInfo{com.android.messaging/com.android.messaging.widget.WidgetConversationProvider} won't be persisted.
+10-30 10:43:19.910   802   863 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+10-30 10:43:19.912   507   538 W VoiceInteractionManager: no available voice recognition services found for user 0
+10-30 10:43:19.914   802   802 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-30 10:43:19.916   802   802 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+10-30 10:43:19.917   507   538 W VoiceInteractionManager: no available voice recognition services found for user 0
+10-30 10:43:19.918   507   538 W VoiceInteractionManager: no available voice recognition services found for user 0
+10-30 10:43:20.124  2394  2423 D EGL_emulation: app_time_stats: avg=397.15ms min=22.51ms max=1092.82ms count=3
+10-30 10:43:20.231   507   595 D ActivityManager: freezing 1696 com.android.printspooler
+10-30 10:43:20.324   507   529 I DropBoxManagerService: add tag=system_app_strictmode isTagEnabled=true flags=0x2
+10-30 10:43:20.970  2451  2451 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:20.970  2451  2451 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:20.979   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:20.979  2451  2452 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:21.145     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:21.183   507   953 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:21.185  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.185   802  2066 D KeyguardService: setOccluded(false)
+10-30 10:43:21.185   802  2066 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:21.185   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:21.186   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:21.197  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.197  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.201  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.201  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.210  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.210  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.213  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.213  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:21.227  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741824
+10-30 10:43:21.227  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741825
+10-30 10:43:21.412  2394  2423 D EGL_emulation: app_time_stats: avg=103.40ms min=10.34ms max=966.32ms count=12
+10-30 10:43:21.698   507   595 D ActivityManager: freezing 1833 com.android.carrierdefaultapp
+10-30 10:43:21.841   507  1797 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+10-30 10:43:22.284  1028  1039 W ndroid.settings: Cleared Reference was only reachable from finalizer (only reported once)
+10-30 10:43:22.698  1506  1506 I ProvidersCache: Updating roots due to change on user 0at content://com.android.providers.media.documents/root
+10-30 10:43:22.812  2394  2423 D EGL_emulation: app_time_stats: avg=693.37ms min=20.49ms max=1366.25ms count=2
+10-30 10:43:23.251  2465  2465 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:23.252  2465  2465 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:23.266   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:23.268  2465  2466 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:23.432     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:23.482  1417  1434 W putmethod.latin: Cleared Reference was only reachable from finalizer (only reported once)
+10-30 10:43:23.483   507   595 D ActivityManager: freezing 1794 com.android.externalstorage
+10-30 10:43:23.486   157   921 I keystore2: system/security/keystore2/src/watchdog.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 265464455; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 265452344; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 266124927; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 265451093; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 265456536; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 255940284; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 236283604; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 263959004; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 264304459; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 264301586; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 254631730; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 273509367; UID 10141; state: DISABLED
+10-30 10:43:23.496   507   522 D CompatibilityChangeReporter: Compat change id reported: 263259275; UID 10141; state: DISABLED
+10-30 10:43:23.497   507   522 D CompatibilityChangeReporter: Compat change id reported: 174042980; UID 10141; state: DISABLED
+10-30 10:43:23.497   507   522 D CompatibilityChangeReporter: Compat change id reported: 174042936; UID 10141; state: DISABLED
+10-30 10:43:23.497   507   522 D CompatibilityChangeReporter: Compat change id reported: 181136395; UID 10141; state: DISABLED
+10-30 10:43:23.497   507   522 D CompatibilityChangeReporter: Compat change id reported: 194480991; UID 10141; state: ENABLED
+10-30 10:43:23.498   507   522 D CompatibilityChangeReporter: Compat change id reported: 197654537; UID 10141; state: ENABLED
+10-30 10:43:23.499   802  2066 D KeyguardService: setOccluded(false)
+10-30 10:43:23.499   802  2066 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:23.500   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:23.500   507   522 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:23.501   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:23.509   507   953 D AutofillManagerServiceImpl: Reset component for user 0:null
+10-30 10:43:23.509   507   528 D AutofillUI: destroySaveUiUiThread(): already destroyed
+10-30 10:43:23.510   507   507 D OomAdjuster: Not killing cached processes
+10-30 10:43:23.525  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:23.525  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:43:23.580   507   588 D ActivityManager: sync unfroze 1794 com.android.externalstorage for 10
+10-30 10:43:23.750   507   522 D WifiNl80211Manager: Scan result ready event
+10-30 10:43:23.750   507   522 D WifiNative: Scan result ready event
+10-30 10:43:24.327   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:43:24.327   507   774 I SdkSandboxManager: Reconciling sdk data package directories for 0
+10-30 10:43:24.865   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:25.023  1376  1388 D StrictMode: StrictMode policy violation: android.os.strictmode.SqliteObjectLeakedViolation: Finalizing a Cursor that has not been deactivated or closed. database = /data/user/0/com.android.providers.contacts/databases/contacts2.db, table = raw_contacts, query = SELECT contacts_view._id AS _id, contacts_view.display_name AS display_name, contacts_view.photo_thumb_uri AS photo_thumb_uri, data1 AS number, data2 AS type, data3 AS label, contacts_view.lookup AS lookup FROM raw_contacts JOIN view_contacts as contacts_view ON (contacts_view._id = raw_contacts.contact_id) JOIN (SELECT data_id,normalized_number FROM phone_lookup WHERE (phone_lookup.min_match = '7654321')) AS lookup ON lookup.data_id=data._id JOIN data ON data.raw_contact_id=raw_contacts._id WHERE (PHONE_NUMBERS_EQUAL(data.data1, '+15551234567', 0, 7)) ORDER BY  length(lookup.normalized_number) DESC
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at android.os.StrictMode.onSqliteObjectLeaked(StrictMode.java:2222)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:282)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:339)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.processReference(Daemons.java:324)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:300)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:145)
+10-30 10:43:25.023  1376  1388 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+10-30 10:43:25.024  1376  1388 D StrictMode: StrictMode policy violation: android.os.strictmode.LeakedClosableViolation: A resource was acquired at attached stack trace but never released. See java.io.Closeable for information on avoiding resource leaks.
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.os.StrictMode$AndroidCloseGuardReporter.report(StrictMode.java:1994)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at dalvik.system.CloseGuard.warnIfOpen(CloseGuard.java:336)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.AbstractCursor.finalize(AbstractCursor.java:531)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteCursor.finalize(SQLiteCursor.java:291)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.doFinalize(Daemons.java:339)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.processReference(Daemons.java:324)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at java.lang.Daemons$FinalizerDaemon.runInternal(Daemons.java:300)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at java.lang.Daemons$Daemon.run(Daemons.java:145)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at java.lang.Thread.run(Thread.java:1012)
+10-30 10:43:25.024  1376  1388 D StrictMode: Caused by: java.lang.Throwable: Explicit termination method 'AbstractCursor.close' not called
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at dalvik.system.CloseGuard.openWithCallSite(CloseGuard.java:288)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at dalvik.system.CloseGuard.open(CloseGuard.java:257)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.AbstractCursor.<init>(AbstractCursor.java:227)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.AbstractWindowedCursor.<init>(AbstractWindowedCursor.java:39)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteCursor.<init>(SQLiteCursor.java:98)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteDirectCursorDriver.query(SQLiteDirectCursorDriver.java:52)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteDatabase.rawQueryWithFactory(SQLiteDatabase.java:1714)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.database.sqlite.SQLiteQueryBuilder.query(SQLiteQueryBuilder.java:592)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.doQuery(ContactsProvider2.java:7543)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:7249)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryCorpLookupIfNecessary(ContactsProvider2.java:7728)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLookupEnterprise(ContactsProvider2.java:7867)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryPhoneLookupEnterprise(ContactsProvider2.java:7838)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryLocal(ContactsProvider2.java:7172)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryDirectoryIfNecessary(ContactsProvider2.java:5883)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.queryInternal(ContactsProvider2.java:5728)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at com.android.providers.contacts.ContactsProvider2.query(ContactsProvider2.java:5673)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.content.ContentProvider.query(ContentProvider.java:1692)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.content.ContentProvider$Transport.query(ContentProvider.java:292)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:107)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+10-30 10:43:25.024  1376  1388 D StrictMode: 	at android.os.Binder.execTransact(Binder.java:1275)
+10-30 10:43:25.519   507  2369 I ConditionProviders:  Allowing condition provider com.spendring.app/com.spendring.app.WalletListener (userSet: true)
+10-30 10:43:25.519   507  2369 I NotificationListeners:  Allowing notification listener com.spendring.app/com.spendring.app.WalletListener (userSet: true)
+10-30 10:43:25.519   507  2369 V NotificationListeners: enabling notification listener for 0: ComponentInfo{com.spendring.app/com.spendring.app.WalletListener}
+10-30 10:43:25.519   507  2369 V NotificationListeners: binding: Intent { act=android.service.notification.NotificationListenerService cmp=com.spendring.app/.WalletListener (has extras) }
+10-30 10:43:25.522   507   507 V NotificationListeners: 0 notification listener service connected: ComponentInfo{com.spendring.app/com.spendring.app.WalletListener}
+10-30 10:43:26.185   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:28.502   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:28.542   507  2071 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:28.543   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:28.543   802  2066 D KeyguardService: setOccluded(false)
+10-30 10:43:28.543   802  2066 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:28.543   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:28.564  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10141; state: ENABLED
+10-30 10:43:28.671   507   588 D OomAdjuster: Not killing cached processes
+10-30 10:43:28.691  2394  2423 D EGL_emulation: app_time_stats: avg=528.59ms min=22.88ms max=5055.36ms count=11
+10-30 10:43:28.767   507   507 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:43:28.790   802   864 D EGL_emulation: app_time_stats: avg=8836.20ms min=572.86ms max=17099.54ms count=2
+10-30 10:43:29.767   507  2071 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:29.767   802  2393 D KeyguardService: setOccluded(false)
+10-30 10:43:29.767   802  2393 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:29.769   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:29.769   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:29.911  2394  2423 D EGL_emulation: app_time_stats: avg=1219.84ms min=1219.84ms max=1219.84ms count=1
+10-30 10:43:29.988   802   864 D EGL_emulation: app_time_stats: avg=399.27ms min=18.74ms max=1123.73ms count=3
+10-30 10:43:30.991   507   574 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:30.992   802  1269 D KeyguardService: setOccluded(false)
+10-30 10:43:30.992   802  1269 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:30.992   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:30.993   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:30.994  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 247079863; UID 10141; state: ENABLED
+10-30 10:43:31.155  2394  2423 D EGL_emulation: app_time_stats: avg=1243.81ms min=1243.81ms max=1243.81ms count=1
+10-30 10:43:31.207   507   507 D FlashNotifController: requestStartFlashNotification
+10-30 10:43:31.208   507   507 I FlashNotifController: startFlashNotification: type=1, tag=android
+10-30 10:43:31.208   507   507 D FlashNotifController: Flash notification is disabled
+10-30 10:43:31.210   507   507 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:43:31.216   447   461 D NuPlayerDriver: NuPlayerDriver(0x7945e32c9290) created, clientPid(802)
+10-30 10:43:31.216   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+10-30 10:43:31.217   447   461 D MediaPlayerService: OMX service is not available
+10-30 10:43:31.219   447  2510 D GenericSource: FileSource remote
+10-30 10:43:31.226   507   521 I MediaFocusControl: requestAudioFocus() from uid/pid 10117/802 AA=USAGE_NOTIFICATION/CONTENT_TYPE_SONIFICATION clientId=android.media.AudioManager@1b55aaf callingPack=com.android.systemui req=3 flags=0x0 sdk=34
+10-30 10:43:31.226   802   864 D EGL_emulation: app_time_stats: avg=619.06ms min=49.48ms max=1188.65ms count=2
+10-30 10:43:31.227   507   521 I AudioService.FadeOutManager: unfadeOutUid() uid:10117
+10-30 10:43:31.728   447  2507 I GenericSource: start
+10-30 10:43:31.731   802   802 D MediaRouter: onRestoreRoute() : route=RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:31.731   802   802 V MediaRouter: Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:31.733   447  2514 D CCodec  : allocate(c2.android.vorbis.decoder)
+10-30 10:43:31.734   447  2514 I CCodec  : setting up 'default' as default (vendor) store
+10-30 10:43:31.735   447  2514 I CCodec  : Created component [c2.android.vorbis.decoder]
+10-30 10:43:31.735   447  2514 D CCodecConfig: read media type: audio/vorbis
+10-30 10:43:31.736   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+10-30 10:43:31.736   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+10-30 10:43:31.737   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+10-30 10:43:31.737   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+10-30 10:43:31.737   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+10-30 10:43:31.737   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+10-30 10:43:31.737   447  2514 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+10-30 10:43:31.738   447  2514 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:31.738   447  2514 D CCodecConfig: c2 config diff is Dict {
+10-30 10:43:31.738   447  2514 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+10-30 10:43:31.738   447  2514 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 32768
+10-30 10:43:31.738   447  2514 D CCodecConfig:   c2::u32 input.delay.value = 0
+10-30 10:43:31.738   447  2514 D CCodecConfig:   string input.media-type.value = "audio/vorbis"
+10-30 10:43:31.738   447  2514 D CCodecConfig:   string output.media-type.value = "audio/raw"
+10-30 10:43:31.738   447  2514 D CCodecConfig:   c2::u32 raw.channel-count.value = 1
+10-30 10:43:31.738   447  2514 D CCodecConfig:   c2::u32 raw.sample-rate.value = 48000
+10-30 10:43:31.738   447  2514 D CCodecConfig: }
+10-30 10:43:31.739   447  2514 D MediaCodec: flushMediametrics
+10-30 10:43:31.739   447  2514 D CCodec  : [c2.android.vorbis.decoder] buffers are bound to CCodec for this session
+10-30 10:43:31.739   447  2514 D CCodecConfig: no c2 equivalents for durationUs
+10-30 10:43:31.739   447  2514 D CCodecConfig: no c2 equivalents for csd-1
+10-30 10:43:31.739   447  2514 D CCodecConfig: no c2 equivalents for flags
+10-30 10:43:31.740   447  2514 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 70000
+10-30 10:43:31.740   447  2514 W Codec2Client: query -- param skipped: index = 1107298332.
+10-30 10:43:31.740   447  2514 D CCodec  : encoding statistics level = 0
+10-30 10:43:31.740   447  2514 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t bitrate = 70000
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t max-input-size = 32768
+10-30 10:43:31.740   447  2514 D CCodec  :   string mime = "audio/vorbis"
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:31.740   447  2514 D CCodec  : }
+10-30 10:43:31.740   447  2514 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:31.740   447  2514 D CCodec  :   string mime = "audio/raw"
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t channel-mask = 1
+10-30 10:43:31.740   447  2514 D CCodec  :   int32_t android._config-pcm-encoding = 2
+10-30 10:43:31.740   447  2514 D CCodec  : }
+10-30 10:43:31.740   447  2514 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:31.741   447  2514 I MediaCodec: MediaCodec will operate in async mode
+10-30 10:43:31.741   447  2513 D MediaCodec: keep callback message for reclaim
+10-30 10:43:31.741   447  2514 W Codec2Client: query -- param skipped: index = 1342179345.
+10-30 10:43:31.741   447  2514 W Codec2Client: query -- param skipped: index = 2415921170.
+10-30 10:43:31.741   447  2514 D C2Store : Using DMABUF Heaps
+10-30 10:43:31.742   447  2514 D CCodecBufferChannel: [c2.android.vorbis.decoder#376] Created input block pool with allocatorID 16 => poolID 17 - OK (0)
+10-30 10:43:31.742   507   852 D BufferPoolAccessor2.0: bufferpool2 0x7128a8160328 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/18 (fetch/transfer)
+10-30 10:43:31.746   507   852 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a8160328 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 18, 67% unfetched
+10-30 10:43:31.746   507   606 D BufferPoolAccessor2.0: bufferpool2 0x7128a81625d8 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+10-30 10:43:31.747   507   606 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a81625d8 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+10-30 10:43:31.747   507   606 D BufferPoolAccessor2.0: bufferpool2 0x7128a8136488 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/34 (fetch/transfer)
+10-30 10:43:31.747   507   606 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a8136488 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 34, 85% unfetched
+10-30 10:43:31.747   507   606 D BufferPoolAccessor2.0: bufferpool2 0x7128a8156148 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/34 (fetch/transfer)
+10-30 10:43:31.747   507   606 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a8156148 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 34, 82% unfetched
+10-30 10:43:31.747   507   611 D BufferPoolAccessor2.0: bufferpool2 0x7128a815ee58 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+10-30 10:43:31.747   507   611 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a815ee58 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+10-30 10:43:31.747   507   611 D BufferPoolAccessor2.0: bufferpool2 0x7128a8164ad8 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/26 (fetch/transfer)
+10-30 10:43:31.747   507   611 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a8164ad8 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 26, 81% unfetched
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: bufferpool2 0x7128a8143258 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/36 (fetch/transfer)
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a8143258 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 36, 83% unfetched
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: bufferpool2 0x7128a81459a8 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/38 (fetch/transfer)
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a81459a8 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 38, 87% unfetched
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: bufferpool2 0x7128a814bf68 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/18 (fetch/transfer)
+10-30 10:43:31.747   802  1160 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7128a814bf68 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 18, 72% unfetched
+10-30 10:43:31.747   447  2514 I CCodecBufferChannel: [c2.android.vorbis.decoder#376] Created output block pool with allocatorID 16 => poolID 26 - OK
+10-30 10:43:31.747   447  2514 D CCodecBufferChannel: [c2.android.vorbis.decoder#376] Configured output block pool ids 26 => OK
+10-30 10:43:31.748   447  2514 I DMABUFHEAPS: Using DMA-BUF heap named: system
+10-30 10:43:31.749   457  2518 D SimpleC2Component: Using output block pool with poolID 26 => got 26 - 0
+10-30 10:43:31.753   387   576 D AudioFlinger: Client defaulted notificationFrames to 12512 for frameCount 25024
+10-30 10:43:31.753   387   576 D AF::TrackHandle: OpPlayAudio: track:55 usage:5 not muted
+10-30 10:43:31.755   387   576 D audioserver: FGS Logger Transaction failed
+10-30 10:43:31.755   387   576 D audioserver: -129
+10-30 10:43:31.762   447  2512 D AudioTrack: getTimestamp_l(15): device stall time corrected using current time 55428352504
+10-30 10:43:31.831   387   480 D AudioFlinger: mixer(0x7ef392e42930) throttle end: throttle time(33)
+10-30 10:43:32.216   802  1269 D KeyguardService: setOccluded(false)
+10-30 10:43:32.216   802  1269 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:32.216   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:32.217   507   521 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:32.217   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:32.388  2394  2423 D EGL_emulation: app_time_stats: avg=1232.90ms min=1232.90ms max=1232.90ms count=1
+10-30 10:43:32.437   802   864 D EGL_emulation: app_time_stats: avg=131.42ms min=1.88ms max=727.89ms count=9
+10-30 10:43:33.088   447  2512 D AudioTrack: stop(15): called with 82980 frames delivered
+10-30 10:43:33.446   507   521 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:33.447   802  1510 D KeyguardService: setOccluded(false)
+10-30 10:43:33.447   802  1510 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:33.447   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:33.447   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:33.515   507   521 I MediaFocusControl: abandonAudioFocus() from uid/pid 10117/802 clientId=android.media.AudioManager@1b55aaf
+10-30 10:43:33.515   802  2505 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-30 10:43:33.515   802  2505 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-30 10:43:33.515   447   461 D NuPlayerDriver: reset(0x7945e32c9290) at state 6
+10-30 10:43:33.517   447  2513 D MediaCodec: flushMediametrics
+10-30 10:43:33.518   447  2507 D NuPlayerDriver: notifyResetComplete(0x7945e32c9290)
+10-30 10:43:33.519   447   461 W AMessage: failed to post message as target looper for handler 0 is gone.
+10-30 10:43:33.520   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:33.520   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:33.520   447  2537 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:33.543   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:33.576   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:33.576   387   480 D audioserver: -129
+10-30 10:43:33.589   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:33.589   387   480 D audioserver: -129
+10-30 10:43:33.636  2394  2423 D EGL_emulation: app_time_stats: avg=1247.62ms min=1247.62ms max=1247.62ms count=1
+10-30 10:43:33.666   507   507 D FlashNotifController: requestStartFlashNotification
+10-30 10:43:33.667   507   507 I FlashNotifController: startFlashNotification: type=1, tag=android
+10-30 10:43:33.667   507   507 D FlashNotifController: Flash notification is disabled
+10-30 10:43:33.667   507   507 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:43:33.672   802   864 D EGL_emulation: app_time_stats: avg=411.68ms min=49.02ms max=984.04ms count=3
+10-30 10:43:33.673   447   461 D NuPlayerDriver: NuPlayerDriver(0x7945e32c6350) created, clientPid(802)
+10-30 10:43:33.674   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+10-30 10:43:33.674   447   461 D MediaPlayerService: OMX service is not available
+10-30 10:43:33.675   447  2543 D GenericSource: FileSource remote
+10-30 10:43:33.677   507   521 I MediaFocusControl: requestAudioFocus() from uid/pid 10117/802 AA=USAGE_NOTIFICATION/CONTENT_TYPE_SONIFICATION clientId=android.media.AudioManager@2bc87fd callingPack=com.android.systemui req=3 flags=0x0 sdk=34
+10-30 10:43:33.678   507   521 I AudioService.FadeOutManager: unfadeOutUid() uid:10117
+10-30 10:43:33.876   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:34.178   447  2542 I GenericSource: start
+10-30 10:43:34.179   802   802 D MediaRouter: onRestoreRoute() : route=RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:34.179   802   802 V MediaRouter: Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:34.180   447  2547 D CCodec  : allocate(c2.android.vorbis.decoder)
+10-30 10:43:34.181   447  2547 I CCodec  : setting up 'default' as default (vendor) store
+10-30 10:43:34.182   447  2547 I CCodec  : Created component [c2.android.vorbis.decoder]
+10-30 10:43:34.182   447  2547 D CCodecConfig: read media type: audio/vorbis
+10-30 10:43:34.183   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+10-30 10:43:34.183   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+10-30 10:43:34.183   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+10-30 10:43:34.183   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+10-30 10:43:34.183   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+10-30 10:43:34.184   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+10-30 10:43:34.184   447  2547 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+10-30 10:43:34.184   447  2547 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:34.184   447  2547 D CCodecConfig: c2 config diff is Dict {
+10-30 10:43:34.184   447  2547 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+10-30 10:43:34.184   447  2547 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 32768
+10-30 10:43:34.184   447  2547 D CCodecConfig:   c2::u32 input.delay.value = 0
+10-30 10:43:34.184   447  2547 D CCodecConfig:   string input.media-type.value = "audio/vorbis"
+10-30 10:43:34.184   447  2547 D CCodecConfig:   string output.media-type.value = "audio/raw"
+10-30 10:43:34.184   447  2547 D CCodecConfig:   c2::u32 raw.channel-count.value = 1
+10-30 10:43:34.184   447  2547 D CCodecConfig:   c2::u32 raw.sample-rate.value = 48000
+10-30 10:43:34.184   447  2547 D CCodecConfig: }
+10-30 10:43:34.185   447  2547 D MediaCodec: flushMediametrics
+10-30 10:43:34.185   447  2547 D CCodec  : [c2.android.vorbis.decoder] buffers are bound to CCodec for this session
+10-30 10:43:34.185   447  2547 D CCodecConfig: no c2 equivalents for durationUs
+10-30 10:43:34.185   447  2547 D CCodecConfig: no c2 equivalents for csd-1
+10-30 10:43:34.185   447  2547 D CCodecConfig: no c2 equivalents for flags
+10-30 10:43:34.186   447  2547 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 70000
+10-30 10:43:34.186   447  2547 W Codec2Client: query -- param skipped: index = 1107298332.
+10-30 10:43:34.186   447  2547 D CCodec  : encoding statistics level = 0
+10-30 10:43:34.186   447  2547 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t bitrate = 70000
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t max-input-size = 32768
+10-30 10:43:34.186   447  2547 D CCodec  :   string mime = "audio/vorbis"
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:34.186   447  2547 D CCodec  : }
+10-30 10:43:34.186   447  2547 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:34.186   447  2547 D CCodec  :   string mime = "audio/raw"
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t channel-mask = 1
+10-30 10:43:34.186   447  2547 D CCodec  :   int32_t android._config-pcm-encoding = 2
+10-30 10:43:34.186   447  2547 D CCodec  : }
+10-30 10:43:34.186   447  2547 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:34.186   447  2547 I MediaCodec: MediaCodec will operate in async mode
+10-30 10:43:34.186   447  2546 D MediaCodec: keep callback message for reclaim
+10-30 10:43:34.186   447  2547 W Codec2Client: query -- param skipped: index = 1342179345.
+10-30 10:43:34.187   447  2547 W Codec2Client: query -- param skipped: index = 2415921170.
+10-30 10:43:34.187   447  2547 D CCodecBufferChannel: [c2.android.vorbis.decoder#207] Created input block pool with allocatorID 16 => poolID 18 - OK (0)
+10-30 10:43:34.187   447  2547 I CCodecBufferChannel: [c2.android.vorbis.decoder#207] Created output block pool with allocatorID 16 => poolID 27 - OK
+10-30 10:43:34.187   447  2547 D CCodecBufferChannel: [c2.android.vorbis.decoder#207] Configured output block pool ids 27 => OK
+10-30 10:43:34.188   457  2548 D SimpleC2Component: Using output block pool with poolID 27 => got 27 - 0
+10-30 10:43:34.192   387   576 D AudioFlinger: Client defaulted notificationFrames to 12512 for frameCount 25024
+10-30 10:43:34.193   387   576 D AF::TrackHandle: OpPlayAudio: track:56 usage:5 not muted
+10-30 10:43:34.194   387   576 D audioserver: FGS Logger Transaction failed
+10-30 10:43:34.194   387   576 D audioserver: -129
+10-30 10:43:34.206   507   595 D ActivityManager: freezing 1794 com.android.externalstorage
+10-30 10:43:34.326   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:43:34.672   507   521 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:34.672   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:34.673   802  2066 D KeyguardService: setOccluded(false)
+10-30 10:43:34.673   802  2066 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:34.673   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:34.766   507   595 D ActivityManager: freezing 1506 com.android.documentsui
+10-30 10:43:34.774   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:34.845  2394  2423 D EGL_emulation: app_time_stats: avg=1208.69ms min=1208.69ms max=1208.69ms count=1
+10-30 10:43:34.849   507   530 D OomAdjuster: Not killing cached processes
+10-30 10:43:35.527   447  2547 D CCodecBufferChannel: [c2.android.vorbis.decoder#207] buffers after EOS ignored (0 us)
+10-30 10:43:35.528   447  2547 D CCodecBufferChannel: [c2.android.vorbis.decoder#207] buffers after EOS ignored (0 us)
+10-30 10:43:35.528   447  2545 D AudioTrack: stop(16): called with 82980 frames delivered
+10-30 10:43:35.897   802  2066 D KeyguardService: setOccluded(false)
+10-30 10:43:35.897   802  2066 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:35.897   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:35.898   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:35.898   507  2495 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:35.991   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:36.008   507   521 I MediaFocusControl: abandonAudioFocus() from uid/pid 10117/802 clientId=android.media.AudioManager@2bc87fd
+10-30 10:43:36.008   802  2540 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-30 10:43:36.008   802  2540 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-30 10:43:36.008   447   461 D NuPlayerDriver: reset(0x7945e32c6350) at state 6
+10-30 10:43:36.010   447  2546 D MediaCodec: flushMediametrics
+10-30 10:43:36.011   447  2542 D NuPlayerDriver: notifyResetComplete(0x7945e32c6350)
+10-30 10:43:36.011   447   461 W AMessage: failed to post message as target looper for handler 0 is gone.
+10-30 10:43:36.012   447  2561 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:36.012   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:36.012   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:36.067  2394  2423 D EGL_emulation: app_time_stats: avg=1222.65ms min=1222.65ms max=1222.65ms count=1
+10-30 10:43:36.074   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:36.074   387   480 D audioserver: -129
+10-30 10:43:36.089   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:36.089   387   480 D audioserver: -129
+10-30 10:43:36.336  1028  1028 D BatteryUsageBroadcastReceiver: onReceive:android.intent.action.BATTERY_LEVEL_CHANGED
+10-30 10:43:36.337  1028  1028 D BatteryUsageBroadcastReceiver: fetch data because of event: ACTION_BATTERY_LEVEL_CHANGED
+10-30 10:43:36.337   507   788 D CompatibilityChangeReporter: Compat change id reported: 161145287; UID 1000; state: ENABLED
+10-30 10:43:36.338  1028  1028 D BatteryUsageBroadcastReceiver: cancel sendBroadcastToFetchUsageData when broadcastDelay is 2339997ms.
+10-30 10:43:36.749   802  1159 D BufferPoolAccessor2.0: evictor expired: 3, evicted: 0
+10-30 10:43:36.749   507   846 D BufferPoolAccessor2.0: evictor expired: 6, evicted: 0
+10-30 10:43:36.880   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:37.124   507   788 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:37.124   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:37.124   802  1269 D KeyguardService: setOccluded(false)
+10-30 10:43:37.124   802  1269 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:37.124   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:37.154   507   595 D ActivityManager: freezing 1810 com.android.traceur
+10-30 10:43:37.216   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:37.314  2394  2423 D EGL_emulation: app_time_stats: avg=1246.54ms min=1246.54ms max=1246.54ms count=1
+10-30 10:43:37.353   507   595 D ActivityManager: freezing 1214 com.android.cellbroadcastreceiver.module
+10-30 10:43:37.353   802   864 D EGL_emulation: app_time_stats: avg=920.29ms min=25.83ms max=3413.91ms count=4
+10-30 10:43:37.665   507   595 D ActivityManager: freezing 1867 com.android.camera2
+10-30 10:43:37.799   507   595 D ActivityManager: freezing 1850 com.android.calendar
+10-30 10:43:38.067   507   595 D ActivityManager: freezing 1624 com.android.providers.calendar
+10-30 10:43:38.350   507  2147 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:38.350   802  1269 D KeyguardService: setOccluded(false)
+10-30 10:43:38.350   802  1269 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:38.351   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:38.351   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:38.442   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:38.552  2394  2423 D EGL_emulation: app_time_stats: avg=1237.66ms min=1237.66ms max=1237.66ms count=1
+10-30 10:43:38.589   802   864 D EGL_emulation: app_time_stats: avg=411.98ms min=49.11ms max=984.68ms count=3
+10-30 10:43:38.674   507   595 D ActivityManager: freezing 1948 com.android.contacts
+10-30 10:43:38.724   507   595 D ActivityManager: freezing 1913 com.android.imsserviceentitlement
+10-30 10:43:38.743   447  2517 D BufferPoolAccessor2.0: bufferpool2 0x7944432c7538 : 0(0 size) total buffers - 0(0 size) used buffers - 93/101 (recycle/alloc) - 8/198 (fetch/transfer)
+10-30 10:43:38.743   447  2517 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:38.743   457   800 D BufferPoolAccessor2.0: bufferpool2 0x7c952f0d0128 : 0(0 size) total buffers - 0(0 size) used buffers - 94/97 (recycle/alloc) - 3/96 (fetch/transfer)
+10-30 10:43:38.743   457   800 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:38.937   333  2521 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 347072
+10-30 10:43:39.532   507   595 D ActivityManager: freezing 2037 com.android.dynsystem:dynsystem
+10-30 10:43:39.532   507   595 D ActivityManager: freezing 1991 com.android.dynsystem
+10-30 10:43:39.532   507   595 D ActivityManager: freezing 1905 com.android.localtransport
+10-30 10:43:39.532   507   595 D ActivityManager: freezing 1673 com.android.keychain
+10-30 10:43:39.575   507  2147 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:39.576   802  2393 D KeyguardService: setOccluded(false)
+10-30 10:43:39.576   802  2393 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:39.577   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:39.577   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:39.672   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:39.765  2394  2423 D EGL_emulation: app_time_stats: avg=1212.79ms min=1212.79ms max=1212.79ms count=1
+10-30 10:43:39.800   507   595 D ActivityManager: freezing 2025 com.android.messaging
+10-30 10:43:40.474   507   595 D ActivityManager: freezing 2109 com.android.rkpdapp
+10-30 10:43:40.743   447  2517 D BufferPoolAccessor2.0: bufferpool2 0x7944432c7c28 : 0(0 size) total buffers - 0(0 size) used buffers - 95/103 (recycle/alloc) - 8/198 (fetch/transfer)
+10-30 10:43:40.743   447  2517 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:40.744   457   800 D BufferPoolAccessor2.0: bufferpool2 0x7c952f0d1158 : 0(0 size) total buffers - 0(0 size) used buffers - 93/97 (recycle/alloc) - 4/96 (fetch/transfer)
+10-30 10:43:40.744   457   800 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:40.784   507   595 D ActivityManager: freezing 2150 com.android.statementservice
+10-30 10:43:40.816   507   788 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:40.817   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:40.817   802  1269 D KeyguardService: setOccluded(false)
+10-30 10:43:40.817   802  1269 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:40.817   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:40.829  2394  2394 D CompatibilityChangeReporter: Compat change id reported: 147798919; UID 10141; state: ENABLED
+10-30 10:43:40.863   507   788 D CoreBackPreview: Window{4d205dc u0 Toast}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@2bed5ba, mPriority=0, mIsAnimationCallback=false}
+10-30 10:43:41.143  2394  2423 D EGL_emulation: app_time_stats: avg=1378.19ms min=1378.19ms max=1378.19ms count=1
+10-30 10:43:41.146   507   530 D OomAdjuster: Not killing cached processes
+10-30 10:43:41.420   802   864 D EGL_emulation: app_time_stats: avg=943.52ms min=66.22ms max=2564.89ms count=3
+10-30 10:43:42.841   507   788 V NotificationService: created channel: NotificationChannel{mId='shell_cmd', mName=Shell command, mDescription=, mImportance=3, mBypassDnd=false, mLockscreenVisibility=-1000, mSound=content://settings/system/notification_sound, mLights=false, mLightColor=0, mVibration=null, mUserLockedFields=0, mUserVisibleTaskShown=false, mVibrationEnabled=false, mShowBadge=true, mDeleted=false, mDeletedTimeMs=-1, mGroup='null', mAudioAttributes=AudioAttributes: usage=USAGE_NOTIFICATION content=CONTENT_TYPE_SONIFICATION flags=0x800 tags= bundle=null, mBlockableSystem=false, mAllowBubbles=-1, mImportanceLockedDefaultApp=true, mOriginalImp=3, mParent=null, mConversationId=null, mDemoted=false, mImportantConvo=false}
+10-30 10:43:42.841   507   788 V NotificationManager: posting: Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE)
+10-30 10:43:42.888   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:43.042   507   507 D FlashNotifController: requestStartFlashNotification
+10-30 10:43:43.042   507   507 I FlashNotifController: startFlashNotification: type=1, tag=android
+10-30 10:43:43.043   507   507 D FlashNotifController: Flash notification is disabled
+10-30 10:43:43.045   507   507 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:43:43.053   447   461 D NuPlayerDriver: NuPlayerDriver(0x7945e32c9290) created, clientPid(802)
+10-30 10:43:43.053   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+10-30 10:43:43.054   447   461 D MediaPlayerService: OMX service is not available
+10-30 10:43:43.058   802   864 D EGL_emulation: app_time_stats: avg=1637.47ms min=1637.47ms max=1637.47ms count=1
+10-30 10:43:43.060   447  2601 D GenericSource: FileSource remote
+10-30 10:43:43.064   507   788 I MediaFocusControl: requestAudioFocus() from uid/pid 10117/802 AA=USAGE_NOTIFICATION/CONTENT_TYPE_SONIFICATION clientId=android.media.AudioManager@7845b5b callingPack=com.android.systemui req=3 flags=0x0 sdk=34
+10-30 10:43:43.064   507   788 I AudioService.FadeOutManager: unfadeOutUid() uid:10117
+10-30 10:43:43.166   802   802 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@40074b9
+10-30 10:43:43.166   507  2147 D CoreBackPreview: Window{4d205dc u0 Toast}: Setting back callback null
+10-30 10:43:43.167   507  2147 W InputManager-JNI: Input channel object '4d205dc Toast (client)' was disposed without first being removed with the input manager!
+10-30 10:43:43.168   507  2147 W NotificationService: Toast already killed. pkg=com.spendring.app token=android.os.BinderProxy@486b699
+10-30 10:43:43.354  2394  2423 D EGL_emulation: app_time_stats: avg=2210.40ms min=2210.40ms max=2210.40ms count=1
+10-30 10:43:43.565   447  2600 I GenericSource: start
+10-30 10:43:43.567   447  2605 D CCodec  : allocate(c2.android.vorbis.decoder)
+10-30 10:43:43.568   447  2605 I CCodec  : setting up 'default' as default (vendor) store
+10-30 10:43:43.570   447  2605 I CCodec  : Created component [c2.android.vorbis.decoder]
+10-30 10:43:43.570   447  2605 D CCodecConfig: read media type: audio/vorbis
+10-30 10:43:43.571   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+10-30 10:43:43.571   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+10-30 10:43:43.571   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+10-30 10:43:43.572   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+10-30 10:43:43.572   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+10-30 10:43:43.572   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+10-30 10:43:43.572   447  2605 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+10-30 10:43:43.573   447  2605 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:43.573   802   802 D MediaRouter: onRestoreRoute() : route=RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:43.573   447  2605 D CCodecConfig: c2 config diff is Dict {
+10-30 10:43:43.573   447  2605 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+10-30 10:43:43.573   447  2605 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 32768
+10-30 10:43:43.573   447  2605 D CCodecConfig:   c2::u32 input.delay.value = 0
+10-30 10:43:43.573   447  2605 D CCodecConfig:   string input.media-type.value = "audio/vorbis"
+10-30 10:43:43.573   447  2605 D CCodecConfig:   string output.media-type.value = "audio/raw"
+10-30 10:43:43.573   447  2605 D CCodecConfig:   c2::u32 raw.channel-count.value = 1
+10-30 10:43:43.573   447  2605 D CCodecConfig:   c2::u32 raw.sample-rate.value = 48000
+10-30 10:43:43.573   447  2605 D CCodecConfig: }
+10-30 10:43:43.573   802   802 V MediaRouter: Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:43.574   447  2605 D MediaCodec: flushMediametrics
+10-30 10:43:43.574   447  2605 D CCodec  : [c2.android.vorbis.decoder] buffers are bound to CCodec for this session
+10-30 10:43:43.574   447  2605 D CCodecConfig: no c2 equivalents for durationUs
+10-30 10:43:43.574   447  2605 D CCodecConfig: no c2 equivalents for csd-1
+10-30 10:43:43.574   447  2605 D CCodecConfig: no c2 equivalents for flags
+10-30 10:43:43.575   447  2605 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 70000
+10-30 10:43:43.575   447  2605 W Codec2Client: query -- param skipped: index = 1107298332.
+10-30 10:43:43.575   447  2605 D CCodec  : encoding statistics level = 0
+10-30 10:43:43.575   447  2605 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t bitrate = 70000
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t max-input-size = 32768
+10-30 10:43:43.575   447  2605 D CCodec  :   string mime = "audio/vorbis"
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:43.575   447  2605 D CCodec  : }
+10-30 10:43:43.575   447  2605 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:43.575   447  2605 D CCodec  :   string mime = "audio/raw"
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t channel-mask = 1
+10-30 10:43:43.575   447  2605 D CCodec  :   int32_t android._config-pcm-encoding = 2
+10-30 10:43:43.575   447  2605 D CCodec  : }
+10-30 10:43:43.576   447  2605 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:43.576   447  2605 I MediaCodec: MediaCodec will operate in async mode
+10-30 10:43:43.576   447  2604 D MediaCodec: keep callback message for reclaim
+10-30 10:43:43.577   447  2605 W Codec2Client: query -- param skipped: index = 1342179345.
+10-30 10:43:43.577   447  2605 W Codec2Client: query -- param skipped: index = 2415921170.
+10-30 10:43:43.578   457  1171 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7c952f0d0128 cached: 0/0M, 0/0% in use; allocs: 97, 97% recycled; transfers: 96, 97% unfetched
+10-30 10:43:43.578   457  1171 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7c952f0d1158 cached: 0/0M, 0/0% in use; allocs: 97, 96% recycled; transfers: 96, 96% unfetched
+10-30 10:43:43.578   447  2605 D CCodecBufferChannel: [c2.android.vorbis.decoder#145] Created input block pool with allocatorID 16 => poolID 19 - OK (0)
+10-30 10:43:43.579   447  2508 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7944432c7538 cached: 0/0M, 0/0% in use; allocs: 101, 92% recycled; transfers: 198, 96% unfetched
+10-30 10:43:43.579   447  2508 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7944432c7c28 cached: 0/0M, 0/0% in use; allocs: 103, 92% recycled; transfers: 198, 96% unfetched
+10-30 10:43:43.579   447  2605 I CCodecBufferChannel: [c2.android.vorbis.decoder#145] Created output block pool with allocatorID 16 => poolID 28 - OK
+10-30 10:43:43.579   447  2605 D CCodecBufferChannel: [c2.android.vorbis.decoder#145] Configured output block pool ids 28 => OK
+10-30 10:43:43.580   457  2606 D SimpleC2Component: Using output block pool with poolID 28 => got 28 - 0
+10-30 10:43:43.585   387   403 D AudioFlinger: Client defaulted notificationFrames to 12512 for frameCount 25024
+10-30 10:43:43.586   387   403 D AF::TrackHandle: OpPlayAudio: track:57 usage:5 not muted
+10-30 10:43:43.588   387   403 D audioserver: FGS Logger Transaction failed
+10-30 10:43:43.588   387   403 D audioserver: -129
+10-30 10:43:43.591   447  2603 D AudioTrack: getTimestamp_l(17): device stall time corrected using current time 67257570350
+10-30 10:43:43.683   387   480 D AudioFlinger: mixer(0x7ef392e42930) throttle end: throttle time(31)
+10-30 10:43:43.750   507   788 D WifiNl80211Manager: Scan result ready event
+10-30 10:43:43.751   507   788 D WifiNative: Scan result ready event
+10-30 10:43:44.326   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:43:44.669   447  2605 D CCodecBufferChannel: [c2.android.vorbis.decoder#145] buffers after EOS ignored (0 us)
+10-30 10:43:44.669   447  2605 D CCodecBufferChannel: [c2.android.vorbis.decoder#145] buffers after EOS ignored (0 us)
+10-30 10:43:44.872   507   595 D ActivityManager: freezing 1741 android.process.media
+10-30 10:43:44.930   447  2603 D AudioTrack: stop(17): called with 82980 frames delivered
+10-30 10:43:45.216   507   595 D ActivityManager: freezing 804 com.android.permissioncontroller
+10-30 10:43:45.344   507  2147 I MediaFocusControl: abandonAudioFocus() from uid/pid 10117/802 clientId=android.media.AudioManager@7845b5b
+10-30 10:43:45.344   802  2598 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-30 10:43:45.344   802  2598 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-30 10:43:45.344   447   461 D NuPlayerDriver: reset(0x7945e32c9290) at state 6
+10-30 10:43:45.346   447  2605 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:45.346   457   482 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:45.346   457   482 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:45.346   447  2604 D MediaCodec: flushMediametrics
+10-30 10:43:45.347   447  2600 D NuPlayerDriver: notifyResetComplete(0x7945e32c9290)
+10-30 10:43:45.347   447   461 W AMessage: failed to post message as target looper for handler 0 is gone.
+10-30 10:43:45.406   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:45.406   387   480 D audioserver: -129
+10-30 10:43:45.418   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:45.418   387   480 D audioserver: -129
+10-30 10:43:45.877   507  2147 V NotificationService: created channel: NotificationChannel{mId='shell_cmd', mName=Shell command, mDescription=, mImportance=3, mBypassDnd=false, mLockscreenVisibility=-1000, mSound=content://settings/system/notification_sound, mLights=false, mLightColor=0, mVibration=null, mUserLockedFields=0, mUserVisibleTaskShown=false, mVibrationEnabled=false, mShowBadge=true, mDeleted=false, mDeletedTimeMs=-1, mGroup='null', mAudioAttributes=AudioAttributes: usage=USAGE_NOTIFICATION content=CONTENT_TYPE_SONIFICATION flags=0x800 tags= bundle=null, mBlockableSystem=false, mAllowBubbles=-1, mImportanceLockedDefaultApp=true, mOriginalImp=3, mParent=null, mConversationId=null, mDemoted=false, mImportantConvo=false}
+10-30 10:43:45.877   507  2147 V NotificationManager: posting: Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE)
+10-30 10:43:45.891   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:46.079   507   507 D FlashNotifController: requestStartFlashNotification
+10-30 10:43:46.079   507   507 I FlashNotifController: startFlashNotification: type=1, tag=android
+10-30 10:43:46.079   507   507 D FlashNotifController: Flash notification is disabled
+10-30 10:43:46.081   507   507 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:43:46.090   447   461 D NuPlayerDriver: NuPlayerDriver(0x7945e32c6a50) created, clientPid(802)
+10-30 10:43:46.090   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+10-30 10:43:46.090   447   461 D MediaPlayerService: OMX service is not available
+10-30 10:43:46.092   447  2623 D GenericSource: FileSource remote
+10-30 10:43:46.095   507   788 I MediaFocusControl: requestAudioFocus() from uid/pid 10117/802 AA=USAGE_NOTIFICATION/CONTENT_TYPE_SONIFICATION clientId=android.media.AudioManager@7131e60 callingPack=com.android.systemui req=3 flags=0x0 sdk=34
+10-30 10:43:46.095   507   788 I AudioService.FadeOutManager: unfadeOutUid() uid:10117
+10-30 10:43:46.105   802   864 D EGL_emulation: app_time_stats: avg=435.35ms min=15.67ms max=2418.33ms count=7
+10-30 10:43:46.340   507   595 D ActivityManager: freezing 1028 com.android.settings
+10-30 10:43:46.365  2394  2423 D EGL_emulation: app_time_stats: avg=3011.37ms min=3011.37ms max=3011.37ms count=1
+10-30 10:43:46.596   802   802 D MediaRouter: onRestoreRoute() : route=RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:46.596   802   802 V MediaRouter: Selecting route: RouteInfo{ name=Phone, description=null, status=null, category=RouteCategory{ name=System types=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO  groupable=false }, supportedTypes=ROUTE_TYPE_LIVE_AUDIO ROUTE_TYPE_LIVE_VIDEO , presentationDisplay=null }
+10-30 10:43:46.597   447  2622 I GenericSource: start
+10-30 10:43:46.612   447  2627 D CCodec  : allocate(c2.android.vorbis.decoder)
+10-30 10:43:46.613   447  2627 I CCodec  : setting up 'default' as default (vendor) store
+10-30 10:43:46.614   447  2627 I CCodec  : Created component [c2.android.vorbis.decoder]
+10-30 10:43:46.614   447  2627 D CCodecConfig: read media type: audio/vorbis
+10-30 10:43:46.614   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+10-30 10:43:46.615   447  2627 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+10-30 10:43:46.615   447  2627 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:46.615   447  2627 D CCodecConfig: c2 config diff is Dict {
+10-30 10:43:46.615   447  2627 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+10-30 10:43:46.615   447  2627 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 32768
+10-30 10:43:46.615   447  2627 D CCodecConfig:   c2::u32 input.delay.value = 0
+10-30 10:43:46.615   447  2627 D CCodecConfig:   string input.media-type.value = "audio/vorbis"
+10-30 10:43:46.615   447  2627 D CCodecConfig:   string output.media-type.value = "audio/raw"
+10-30 10:43:46.615   447  2627 D CCodecConfig:   c2::u32 raw.channel-count.value = 1
+10-30 10:43:46.615   447  2627 D CCodecConfig:   c2::u32 raw.sample-rate.value = 48000
+10-30 10:43:46.615   447  2627 D CCodecConfig: }
+10-30 10:43:46.620   507   529 I DropBoxManagerService: add tag=system_app_strictmode isTagEnabled=true flags=0x2
+10-30 10:43:46.622   447  2627 D MediaCodec: flushMediametrics
+10-30 10:43:46.622   447  2627 D CCodec  : [c2.android.vorbis.decoder] buffers are bound to CCodec for this session
+10-30 10:43:46.622   447  2627 D CCodecConfig: no c2 equivalents for durationUs
+10-30 10:43:46.622   447  2627 D CCodecConfig: no c2 equivalents for csd-1
+10-30 10:43:46.622   447  2627 D CCodecConfig: no c2 equivalents for flags
+10-30 10:43:46.622   447  2627 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 70000
+10-30 10:43:46.623   447  2627 W Codec2Client: query -- param skipped: index = 1107298332.
+10-30 10:43:46.623   447  2627 D CCodec  : encoding statistics level = 0
+10-30 10:43:46.623   447  2627 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t bitrate = 70000
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t max-input-size = 32768
+10-30 10:43:46.623   447  2627 D CCodec  :   string mime = "audio/vorbis"
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:46.623   447  2627 D CCodec  : }
+10-30 10:43:46.623   447  2627 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t channel-count = 1
+10-30 10:43:46.623   447  2627 D CCodec  :   string mime = "audio/raw"
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t sample-rate = 48000
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t channel-mask = 1
+10-30 10:43:46.623   447  2627 D CCodec  :   int32_t android._config-pcm-encoding = 2
+10-30 10:43:46.623   447  2627 D CCodec  : }
+10-30 10:43:46.623   447  2627 I CCodecConfig: query failed after returning 7 values (BAD_INDEX)
+10-30 10:43:46.623   447  2627 I MediaCodec: MediaCodec will operate in async mode
+10-30 10:43:46.623   447  2626 D MediaCodec: keep callback message for reclaim
+10-30 10:43:46.625   447  2627 W Codec2Client: query -- param skipped: index = 1342179345.
+10-30 10:43:46.625   447  2627 W Codec2Client: query -- param skipped: index = 2415921170.
+10-30 10:43:46.625   447  2627 D CCodecBufferChannel: [c2.android.vorbis.decoder#732] Created input block pool with allocatorID 16 => poolID 20 - OK (0)
+10-30 10:43:46.627   447  2627 I CCodecBufferChannel: [c2.android.vorbis.decoder#732] Created output block pool with allocatorID 16 => poolID 29 - OK
+10-30 10:43:46.627   447  2627 D CCodecBufferChannel: [c2.android.vorbis.decoder#732] Configured output block pool ids 29 => OK
+10-30 10:43:46.630   457  2628 D SimpleC2Component: Using output block pool with poolID 29 => got 29 - 0
+10-30 10:43:46.637   387   405 D AudioFlinger: Client defaulted notificationFrames to 12512 for frameCount 25024
+10-30 10:43:46.637   387   405 D AF::TrackHandle: OpPlayAudio: track:58 usage:5 not muted
+10-30 10:43:46.639   387   405 D audioserver: FGS Logger Transaction failed
+10-30 10:43:46.640   387   405 D audioserver: -129
+10-30 10:43:46.948     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+10-30 10:43:47.312   507   725 E WifiHealthMonitor:  Hit PackageManager exception
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: android.content.pm.PackageManager$NameNotFoundException: No module info for package: com.android.wifi
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.app.ApplicationPackageManager.getModuleInfo(ApplicationPackageManager.java:1190)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor.getWifiStackVersion(WifiHealthMonitor.java:367)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor.extractCurrentSoftwareBuildInfo(WifiHealthMonitor.java:588)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor.postBootSwBuildCheck(WifiHealthMonitor.java:523)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor.postBootDetectionHandler(WifiHealthMonitor.java:514)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor.-$$Nest$mpostBootDetectionHandler(WifiHealthMonitor.java:0)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.WifiHealthMonitor$2.onAlarm(WifiHealthMonitor.java:190)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.app.AlarmManager$ListenerWrapper.run(AlarmManager.java:375)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.os.Handler.handleCallback(Handler.java:958)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at com.android.server.wifi.RunnerHandler.dispatchMessage(RunnerHandler.java:122)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.os.Looper.loopOnce(Looper.java:205)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.os.Looper.loop(Looper.java:294)
+10-30 10:43:47.312   507   725 E WifiHealthMonitor: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+10-30 10:43:47.926   507   788 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:47.930   802  1635 D KeyguardService: setOccluded(false)
+10-30 10:43:47.930   802  1635 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:47.930   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:47.930   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:47.971   447  2627 D CCodecBufferChannel: [c2.android.vorbis.decoder#732] buffers after EOS ignored (0 us)
+10-30 10:43:47.971   447  2627 D CCodecBufferChannel: [c2.android.vorbis.decoder#732] buffers after EOS ignored (0 us)
+10-30 10:43:47.972   447  2625 D AudioTrack: stop(18): called with 82980 frames delivered
+10-30 10:43:48.449   507  2147 I MediaFocusControl: abandonAudioFocus() from uid/pid 10117/802 clientId=android.media.AudioManager@7131e60
+10-30 10:43:48.449   802  2620 V MediaPlayer: resetDrmState:  mDrmInfo=null mDrmProvisioningThread=null mPrepareDrmInProgress=false mActiveDrmScheme=false
+10-30 10:43:48.449   802  2620 V MediaPlayer: cleanDrmObj: mDrmObj=null mDrmSessionId=null
+10-30 10:43:48.449   447   461 D NuPlayerDriver: reset(0x7945e32c6a50) at state 6
+10-30 10:43:48.452   447  2626 D MediaCodec: flushMediametrics
+10-30 10:43:48.453   447  2622 D NuPlayerDriver: notifyResetComplete(0x7945e32c6a50)
+10-30 10:43:48.453   447   461 W AMessage: failed to post message as target looper for handler 0 is gone.
+10-30 10:43:48.454   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:48.454   457  1218 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:48.454   447  2637 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+10-30 10:43:48.511   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:48.511   387   480 D audioserver: -129
+10-30 10:43:48.523   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:43:48.523   387   480 D audioserver: -129
+10-30 10:43:48.562   507   595 D ActivityManager: freezing 1376 android.process.acore
+10-30 10:43:48.578   457   800 D BufferPoolAccessor2.0: evictor expired: 2, evicted: 0
+10-30 10:43:48.892   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:49.010  2394  2423 D EGL_emulation: app_time_stats: avg=2644.44ms min=2644.44ms max=2644.44ms count=1
+10-30 10:43:49.022  2394  2411 I OpenGLRenderer: Davey! duration=1084ms; Flags=0, FrameTimelineVsyncId=4818, IntendedVsync=71598177108, Vsync=71881510430, InputEventId=0, HandleInputStart=71890232609, AnimationStart=71890235504, PerformTraversalsStart=71890257616, DrawStart=71896995548, FrameDeadline=71614843774, FrameInterval=71890025623, FrameStartTime=16666666, SyncQueued=71921896666, SyncStart=71921959919, IssueDrawCommandsStart=71922220475, SwapBuffers=72567886312, FrameCompleted=72682442959, DequeueBufferDuration=4368, QueueBufferDuration=307162, GpuCompleted=72682442959, SwapBuffersCompleted=72676056935, DisplayPresentTime=0, CommandSubmissionCompleted=72567886312, 
+10-30 10:43:49.058   507   530 D OomAdjuster: Not killing cached processes
+10-30 10:43:49.578   447  2517 D BufferPoolAccessor2.0: evictor expired: 2, evicted: 0
+10-30 10:43:50.014  2640  2640 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:50.015  2640  2640 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:50.029   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:50.029  2640  2641 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:50.196     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:50.047  2394  2423 D EGL_emulation: app_time_stats: avg=73.22ms min=14.88ms max=199.78ms count=14
+10-30 10:43:50.578   447  2517 D BufferPoolAccessor2.0: bufferpool2 0x7944432c5038 : 0(0 size) total buffers - 0(0 size) used buffers - 95/103 (recycle/alloc) - 8/198 (fetch/transfer)
+10-30 10:43:50.578   447  2517 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:50.582   457   800 D BufferPoolAccessor2.0: bufferpool2 0x7c952f0d1158 : 0(0 size) total buffers - 0(0 size) used buffers - 93/97 (recycle/alloc) - 4/96 (fetch/transfer)
+10-30 10:43:50.582   457   800 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:51.057  2394  2423 D EGL_emulation: app_time_stats: avg=59.51ms min=17.34ms max=194.92ms count=16
+10-30 10:43:51.379   333  2521 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 723520
+10-30 10:43:51.872  2649  2649 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:51.873  2649  2649 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:51.889   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:51.889  2649  2650 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:52.055     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:51.896   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:52.123  2394  2423 D EGL_emulation: app_time_stats: avg=73.69ms min=25.23ms max=207.91ms count=14
+10-30 10:43:52.927   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:43:53.134  2394  2423 D EGL_emulation: app_time_stats: avg=52.58ms min=22.40ms max=155.80ms count=18
+10-30 10:43:53.583   447  2517 D BufferPoolAccessor2.0: bufferpool2 0x7944432c5bc8 : 0(0 size) total buffers - 0(0 size) used buffers - 95/103 (recycle/alloc) - 8/198 (fetch/transfer)
+10-30 10:43:53.583   447  2517 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:53.583   457   800 D BufferPoolAccessor2.0: bufferpool2 0x7c952f0cce48 : 0(0 size) total buffers - 0(0 size) used buffers - 93/97 (recycle/alloc) - 4/96 (fetch/transfer)
+10-30 10:43:53.583   457   800 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+10-30 10:43:53.657  2658  2658 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:53.658  2658  2658 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:53.664   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:53.831     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:53.665  2658  2659 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:53.895   507   788 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:43:53.895   802   861 D KeyguardService: setOccluded(false)
+10-30 10:43:53.895   802   861 D KeyguardViewMediator: setOccluded(false)
+10-30 10:43:53.895   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:43:53.898   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:43:54.261  2394  2423 D EGL_emulation: app_time_stats: avg=107.04ms min=18.98ms max=487.47ms count=10
+10-30 10:43:54.262   507   530 D OomAdjuster: Not killing cached processes
+10-30 10:43:54.327   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:43:54.334   802   864 D EGL_emulation: app_time_stats: avg=1025.99ms min=2.27ms max=7724.46ms count=8
+10-30 10:43:55.513  2394  2423 D EGL_emulation: app_time_stats: avg=1252.00ms min=1252.00ms max=1252.00ms count=1
+10-30 10:43:55.979  2667  2667 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:55.980  2667  2667 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:55.992   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:55.992  2667  2668 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:56.157     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:56.104   802   864 D EGL_emulation: app_time_stats: avg=1769.87ms min=1769.87ms max=1769.87ms count=1
+10-30 10:43:56.543  2394  2423 D EGL_emulation: app_time_stats: avg=52.54ms min=19.69ms max=378.95ms count=18
+10-30 10:43:57.733  2676  2676 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:57.734  2676  2676 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:57.910     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:57.745   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:57.746  2676  2677 I Gralloc4: mapper 4.x is not supported
+10-30 10:43:57.906   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:43:57.998  2394  2423 D EGL_emulation: app_time_stats: avg=93.04ms min=23.68ms max=611.77ms count=15
+10-30 10:43:58.783   507   784 D ActivityManager: sync unfroze 804 com.android.permissioncontroller for 6
+10-30 10:43:58.798   804  2683 I PermissionControllerServiceImpl: Updating user sensitive for user 0
+10-30 10:43:59.017  2394  2423 D EGL_emulation: app_time_stats: avg=52.63ms min=19.35ms max=347.90ms count=18
+10-30 10:43:59.447  2686  2686 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:43:59.447  2686  2686 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:43:59.625     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:43:59.460   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:43:59.460  2686  2687 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:00.054  2394  2423 D EGL_emulation: app_time_stats: avg=76.37ms min=23.03ms max=595.47ms count=13
+10-30 10:44:00.111   802   864 D EGL_emulation: app_time_stats: avg=4007.32ms min=4007.32ms max=4007.32ms count=1
+10-30 10:44:01.208  2695  2695 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:01.208  2695  2695 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:01.222   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:01.387     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:01.223  2695  2696 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:01.482  2394  2423 D EGL_emulation: app_time_stats: avg=96.79ms min=17.64ms max=621.98ms count=14
+10-30 10:44:02.547  2394  2423 D EGL_emulation: app_time_stats: avg=46.02ms min=22.10ms max=316.45ms count=21
+10-30 10:44:02.965  2704  2704 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:02.965  2704  2704 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:02.980   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:02.980  2704  2705 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:03.142     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:03.230  2706  2706 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+10-30 10:44:03.233  2706  2706 I AndroidRuntime: Using default boot image
+10-30 10:44:03.233  2706  2706 I AndroidRuntime: Leaving lock profiling enabled
+10-30 10:44:03.234  2706  2706 I app_process: Core platform API reporting enabled, enforcing=false
+10-30 10:44:03.235  2706  2706 I app_process: Using CollectorTypeCC GC.
+10-30 10:44:03.285  2706  2706 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+10-30 10:44:03.297  2706  2706 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+10-30 10:44:03.297  2706  2706 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt72l.dat
+10-30 10:44:03.302  2706  2706 W app_process: Unexpected CPU variant for x86: x86_64.
+10-30 10:44:03.302  2706  2706 W app_process: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+10-30 10:44:03.304  2706  2706 W app_process: ClassLoaderContext shared library size mismatch. Expected=2, found=0 (PCL[]{PCL[/system/framework/android.test.base.jar*836642756]#PCL[/system/framework/android.test.mock.jar*3186112116]} | PCL[])
+10-30 10:44:03.307  2706  2706 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[]{PCL[/system/framework/android.test.runner.jar*4168958247]{PCL[/system/framework/android.test.base.jar*836642756]#PCL[/system/framework/android.test.mock.jar*3186112116]}#PCL[/system/framework/android.test.base.jar*836642756]} | PCL[/system/framework/android.test.runner.jar*4168958247])
+10-30 10:44:03.320  2706  2706 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+10-30 10:44:03.322  2706  2706 D UiAutomationConnection: Created on user UserHandle{0}
+10-30 10:44:03.322  2706  2706 I UiAutomation: Initialized for user 0 on display 0
+10-30 10:44:03.323  2706  2706 W UiAutomation: Created with deprecatead constructor, assumes DEFAULT_DISPLAY
+10-30 10:44:03.324   507   788 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+10-30 10:44:03.324   507   788 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation) when called by user 0
+10-30 10:44:03.326   507   788 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:03.327  2706  2720 V UiAutomation: Init UiAutomation@3e5a6c2[id=1, displayId=0, flags=0]
+10-30 10:44:03.330   507   507 D BatterySaverPolicy: accessibility changed to true, updating policy.
+10-30 10:44:03.333   507   788 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:03.340   507  2495 D SafetySourceDataValidator: No cert check requested for package com.android.permissioncontroller
+10-30 10:44:04.327   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:44:04.336  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@11d2d; boundsInParent: Rect(0, 0 - 986, 99); boundsInScreen: Rect(47, 63 - 1033, -4107); boundsInWindow: Rect(47, 63 - 1033, -4107); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.336  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@12870; boundsInParent: Rect(0, 0 - 986, 65); boundsInScreen: Rect(47, 63 - 1033, -4042); boundsInWindow: Rect(47, 63 - 1033, -4042); packageName: com.spendring.app; className: android.widget.TextView; text: Tue 27 Oct → Tue 10 Nov  ·  $2 a day left; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.336  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@12c31; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 63 - 1033, -3930); boundsInWindow: Rect(47, 63 - 1033, -3930); packageName: com.spendring.app; className: android.widget.TextView; text: SPENDING MONEY; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.337  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@12ff2; boundsInParent: Rect(0, 0 - 986, 1061); boundsInScreen: Rect(47, 63 - 1033, -2848); boundsInWindow: Rect(47, 63 - 1033, -2848); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.338  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@15cfe; boundsInParent: Rect(0, 0 - 986, 129); boundsInScreen: Rect(47, 63 - 1033, -2677); boundsInWindow: Rect(47, 63 - 1033, -2677); packageName: com.spendring.app; className: android.widget.TextView; text: +  Add a purchase; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: true; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_CLICK - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.339  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@160bf; boundsInParent: Rect(0, 0 - 986, 129); boundsInScreen: Rect(47, 63 - 1033, -2522); boundsInWindow: Rect(47, 63 - 1033, -2522); packageName: com.spendring.app; className: android.widget.TextView; text: Import purchases from a code; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: true; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_CLICK - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.339  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@16480; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 63 - 1033, -2410); boundsInWindow: Rect(47, 63 - 1033, -2410); packageName: com.spendring.app; className: android.widget.TextView; text: FUEL; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.342  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@16841; boundsInParent: Rect(0, 0 - 986, 282); boundsInScreen: Rect(47, 63 - 1033, -2107); boundsInWindow: Rect(47, 63 - 1033, -2107); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.343  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@18649; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 63 - 1033, -1995); boundsInWindow: Rect(47, 63 - 1033, -1995); packageName: com.spendring.app; className: android.widget.TextView; text: YOUR PLAN; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.343  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@18a0a; boundsInParent: Rect(0, 0 - 986, 1680); boundsInScreen: Rect(47, 63 - 1033, -294); boundsInWindow: Rect(47, 63 - 1033, -294); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.344  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1a090; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 63 - 1033, -182); boundsInWindow: Rect(47, 63 - 1033, -182); packageName: com.spendring.app; className: android.widget.TextView; text: WHERE IT WENT; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.346  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@29ac7b; boundsInParent: Rect(0, 0 - 902, 53); boundsInScreen: Rect(89, 63 - 991, -66); boundsInWindow: Rect(89, 63 - 991, -66); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.346  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@29bf40; boundsInParent: Rect(0, 0 - 902, 13); boundsInScreen: Rect(89, 63 - 991, -38); boundsInWindow: Rect(89, 63 - 991, -38); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.347  2706  2706 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@29c6c2; boundsInParent: Rect(0, 0 - 902, 53); boundsInScreen: Rect(89, 63 - 991, 46); boundsInWindow: Rect(89, 63 - 991, 46); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:04.408  2706  2706 W AccessibilityNodeInfoDumper: Fetch time: 74ms
+10-30 10:44:04.411   507  2495 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:04.411   507  2495 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+10-30 10:44:04.411   507   507 D BatterySaverPolicy: accessibility changed to false, updating policy.
+10-30 10:44:04.413  2706  2706 D AndroidRuntime: Shutting down VM
+10-30 10:44:04.692   507  2147 W BatteryExternalStatsWorker: error reading Bluetooth stats: 11
+10-30 10:44:05.292   387   387 W AudioFlinger: createTrack_l(): mismatch between requested flags (00000004) and output flags (00000002)
+10-30 10:44:05.292   387   387 D AF::TrackHandle: OpPlayAudio: track:59 usage:13 not muted
+10-30 10:44:05.294   387   387 D audioserver: FGS Logger Transaction failed
+10-30 10:44:05.295   387   387 D audioserver: -129
+10-30 10:44:05.345   387   480 D AudioFlinger: mixer(0x7ef392e42930) throttle end: throttle time(33)
+10-30 10:44:05.459   387   480 D audioserver: FGS Logger Transaction failed
+10-30 10:44:05.459   387   480 D audioserver: -129
+10-30 10:44:05.532  2394  2423 D EGL_emulation: app_time_stats: avg=293.79ms min=19.04ms max=2656.10ms count=10
+10-30 10:44:05.539   507  2495 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10141; state: DISABLED
+10-30 10:44:05.539   507  2495 D CompatibilityChangeReporter: Compat change id reported: 273564678; UID 10141; state: DISABLED
+10-30 10:44:05.575   507   953 D CoreBackPreview: Window{820fdbe u0 com.spendring.app/com.spendring.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9b97c58, mPriority=0, mIsAnimationCallback=false}
+10-30 10:44:05.636  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741835
+10-30 10:44:05.637  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741836
+10-30 10:44:05.638  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741837
+10-30 10:44:05.638  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741838
+10-30 10:44:05.639  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741839
+10-30 10:44:06.059   507  2147 I ImeTracker: com.spendring.app:bbe1c6bc: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+10-30 10:44:06.059   507  2147 I ImeTracker: com.spendring.app:bbe1c6bc: onCancelled at PHASE_SERVER_SHOULD_HIDE
+10-30 10:44:06.845  2736  2736 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:06.846  2736  2736 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:06.856   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:06.856  2736  2737 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:07.022     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:07.067   507   528 D AutofillManagerService: onBackKeyPressed()
+10-30 10:44:07.068  2394  2394 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=falsecallback=android.view.ViewRootImpl$$ExternalSyntheticLambda17@9662ec2
+10-30 10:44:07.068   507   953 D CoreBackPreview: Window{820fdbe u0 com.spendring.app/com.spendring.app.MainActivity}: Setting back callback null
+10-30 10:44:07.072   507   953 W InputManager-JNI: Input channel object '820fdbe com.spendring.app/com.spendring.app.MainActivity (client)' was disposed without first being removed with the input manager!
+10-30 10:44:07.075  2394  2394 W InputEventReceiver: Attempted to finish an input event but the input event receiver has already been disposed.
+10-30 10:44:07.088   507   530 V WindowManager: Unknown focus tokens, dropping reportFocusChanged
+10-30 10:44:07.107   507  2495 I ImeTracker: com.spendring.app:2d6e65d5: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+10-30 10:44:07.108   507  2495 I ImeTracker: com.spendring.app:2d6e65d5: onCancelled at PHASE_SERVER_SHOULD_HIDE
+10-30 10:44:07.148  2394  2423 D EGL_emulation: app_time_stats: avg=322.10ms min=43.49ms max=1017.38ms count=5
+10-30 10:44:08.165  2394  2423 D EGL_emulation: app_time_stats: avg=508.68ms min=47.94ms max=969.42ms count=2
+10-30 10:44:08.339   333  2521 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 871488
+10-30 10:44:08.908   507   784 D OomAdjuster: Not killing cached processes
+10-30 10:44:09.187  2394  2423 D EGL_emulation: app_time_stats: avg=35.41ms min=15.23ms max=62.36ms count=26
+10-30 10:44:10.081  2758  2758 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+10-30 10:44:10.084  2758  2758 I AndroidRuntime: Using default boot image
+10-30 10:44:10.084  2758  2758 I AndroidRuntime: Leaving lock profiling enabled
+10-30 10:44:10.086  2758  2758 I app_process: Core platform API reporting enabled, enforcing=false
+10-30 10:44:10.086  2758  2758 I app_process: Using CollectorTypeCC GC.
+10-30 10:44:10.132  2758  2758 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+10-30 10:44:10.140  2758  2758 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+10-30 10:44:10.140  2758  2758 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt72l.dat
+10-30 10:44:10.144  2758  2758 W app_process: Unexpected CPU variant for x86: x86_64.
+10-30 10:44:10.144  2758  2758 W app_process: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
+10-30 10:44:10.145  2758  2758 W app_process: ClassLoaderContext shared library size mismatch. Expected=2, found=0 (PCL[]{PCL[/system/framework/android.test.base.jar*836642756]#PCL[/system/framework/android.test.mock.jar*3186112116]} | PCL[])
+10-30 10:44:10.145  2758  2758 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[]{PCL[/system/framework/android.test.runner.jar*4168958247]{PCL[/system/framework/android.test.base.jar*836642756]#PCL[/system/framework/android.test.mock.jar*3186112116]}#PCL[/system/framework/android.test.base.jar*836642756]} | PCL[/system/framework/android.test.runner.jar*4168958247])
+10-30 10:44:10.156  2758  2758 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+10-30 10:44:10.158  2758  2758 D UiAutomationConnection: Created on user UserHandle{0}
+10-30 10:44:10.158  2758  2758 I UiAutomation: Initialized for user 0 on display 0
+10-30 10:44:10.158  2758  2758 W UiAutomation: Created with deprecatead constructor, assumes DEFAULT_DISPLAY
+10-30 10:44:10.159   507   953 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+10-30 10:44:10.159   507   953 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation) when called by user 0
+10-30 10:44:10.160   507   953 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:10.163  2758  2772 V UiAutomation: Init UiAutomation@657dfa1[id=2, displayId=0, flags=0]
+10-30 10:44:10.163   507   507 D BatterySaverPolicy: accessibility changed to true, updating policy.
+10-30 10:44:10.165   507  2495 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:10.167   507  2147 D SafetySourceDataValidator: No cert check requested for package com.android.permissioncontroller
+10-30 10:44:11.188  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@18655; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 2214 - 1033, 2105); boundsInWindow: Rect(47, 2214 - 1033, 2105); packageName: com.spendring.app; className: android.widget.TextView; text: YOUR PLAN; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.189  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@18a16; boundsInParent: Rect(0, 0 - 986, 1680); boundsInScreen: Rect(47, 2347 - 1033, 2105); boundsInWindow: Rect(47, 2347 - 1033, 2105); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.190  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1a09c; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 4027 - 1033, 2105); boundsInWindow: Rect(47, 4027 - 1033, 2105); packageName: com.spendring.app; className: android.widget.TextView; text: WHERE IT WENT; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.191  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1a45d; boundsInParent: Rect(0, 0 - 986, 389); boundsInScreen: Rect(47, 4160 - 1033, 2105); boundsInWindow: Rect(47, 4160 - 1033, 2105); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.192  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1abdf; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 4549 - 1033, 2105); boundsInWindow: Rect(47, 4549 - 1033, 2105); packageName: com.spendring.app; className: android.widget.TextView; text: PURCHASES THIS CYCLE; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.192  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1afa0; boundsInParent: Rect(0, 0 - 986, 54); boundsInScreen: Rect(47, 4661 - 1033, 2105); boundsInWindow: Rect(47, 4661 - 1033, 2105); packageName: com.spendring.app; className: android.widget.TextView; text: Tap one to change it or delete it.; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.193  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1b361; boundsInParent: Rect(0, 0 - 986, 1351); boundsInScreen: Rect(47, 4736 - 1033, 2105); boundsInWindow: Rect(47, 4736 - 1033, 2105); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.194  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1bae3; boundsInParent: Rect(0, 0 - 986, 112); boundsInScreen: Rect(47, 6087 - 1033, 2105); boundsInWindow: Rect(47, 6087 - 1033, 2105); packageName: com.spendring.app; className: android.widget.TextView; text: PAST CYCLES; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.195  2758  2758 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@1bea4; boundsInParent: Rect(0, 0 - 986, 133); boundsInScreen: Rect(47, 6220 - 1033, 2105); boundsInWindow: Rect(47, 6220 - 1033, 2105); packageName: com.spendring.app; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+10-30 10:44:11.198  2758  2758 W AccessibilityNodeInfoDumper: Fetch time: 32ms
+10-30 10:44:11.200   507  2495 W WindowMagnificationMgr: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+10-30 10:44:11.200   507  2495 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+10-30 10:44:11.201  2758  2758 D AndroidRuntime: Shutting down VM
+10-30 10:44:11.202   507   507 D BatterySaverPolicy: accessibility changed to false, updating policy.
+10-30 10:44:13.591  2777  2777 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:13.591  2777  2777 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:13.606   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:13.606  2777  2778 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:13.772     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:13.809   507   528 D AutofillManagerService: onBackKeyPressed()
+10-30 10:44:13.997  2394  2423 D EGL_emulation: app_time_stats: avg=340.52ms min=18.90ms max=4028.42ms count=14
+10-30 10:44:14.327   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:44:14.975   802   861 D KeyguardService: setOccluded(false)
+10-30 10:44:14.975   802   861 D KeyguardViewMediator: setOccluded(false)
+10-30 10:44:14.975   802   802 D KeyguardViewMediator: handleSetOccluded(false)
+10-30 10:44:14.976   507  2147 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=com.spendring.app/.MainActivity (has extras)} with LAUNCH_SINGLE_TOP from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=3
+10-30 10:44:14.976   802   833 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{com.spendring.app/com.spendring.app.MainActivity}
+10-30 10:44:14.978  2394  2394 D AutofillManager: view not autofillable - has multiline input type
+10-30 10:44:15.011  2394  2407 W m.spendring.app: Cleared Reference was only reachable from finalizer (only reported once)
+10-30 10:44:15.281  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741827
+10-30 10:44:15.281  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741828
+10-30 10:44:15.282  2394  2394 D AutofillManager: notifyViewEnteredForFillDialog:1073741829
+10-30 10:44:15.313  2394  2423 D EGL_emulation: app_time_stats: avg=219.28ms min=40.19ms max=492.14ms count=6
+10-30 10:44:15.314   507   530 D OomAdjuster: Not killing cached processes
+10-30 10:44:15.932   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:44:16.597  2394  2423 D EGL_emulation: app_time_stats: avg=637.49ms min=34.53ms max=1240.45ms count=2
+10-30 10:44:17.056  2791  2791 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:17.056  2791  2791 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:17.065   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:17.065  2791  2792 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:17.231     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:17.633  2394  2423 D EGL_emulation: app_time_stats: avg=50.23ms min=23.34ms max=340.51ms count=19
+10-30 10:44:18.800  2394  2423 D EGL_emulation: app_time_stats: avg=46.61ms min=21.44ms max=306.63ms count=23
+10-30 10:44:18.905  2800  2800 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:18.906  2800  2800 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:19.119     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:18.954   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:18.954  2800  2801 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:18.958   507   595 D ActivityManager: freezing 804 com.android.permissioncontroller
+10-30 10:44:19.837  2394  2423 D EGL_emulation: app_time_stats: avg=48.28ms min=21.46ms max=240.31ms count=20
+10-30 10:44:19.975   507   530 E BLASTSyncEngine: WM sent Transaction to organized, but never received commit callback. Application ANR likely to follow.
+10-30 10:44:20.867  2394  2423 D EGL_emulation: app_time_stats: avg=50.00ms min=21.33ms max=315.20ms count=19
+10-30 10:44:20.947  2809  2809 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:20.947  2809  2809 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:20.992   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:20.992  2809  2810 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:21.152     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:21.883  2394  2423 D EGL_emulation: app_time_stats: avg=49.19ms min=22.38ms max=242.12ms count=19
+10-30 10:44:21.940   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:44:22.898  2818  2818 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:22.899  2818  2818 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:23.076     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:22.911   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:22.911  2818  2819 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:23.115   802   802 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+10-30 10:44:23.115   802   802 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+10-30 10:44:23.115   802   802 D CentralSurfaces: Received new disable state: enaihbcrso.qingr (unchanged)
+10-30 10:44:23.166   802   802 D CentralSurfaces: Received new disable state: enaihbcrso.qingr (unchanged)
+10-30 10:44:23.204   802  2826 W RingtonePlayer: STOP command without a player
+10-30 10:44:23.557   802   864 D EGL_emulation: app_time_stats: avg=23445.56ms min=23445.56ms max=23445.56ms count=1
+10-30 10:44:23.566   802   864 D EGL_emulation: app_time_stats: avg=39047.45ms min=452.80ms max=77642.11ms count=2
+10-30 10:44:23.700   507   953 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+10-30 10:44:23.712   507   953 D SystemServerTiming: getUserSwitchability-0
+10-30 10:44:23.716   507   953 D SystemServerTiming: TM.isInCall
+10-30 10:44:23.716   507   953 V SystemServerTiming: TM.isInCall took to complete: 0ms
+10-30 10:44:23.716   507   953 D SystemServerTiming: hasUserRestriction-DISALLOW_USER_SWITCH
+10-30 10:44:23.716   507   953 V SystemServerTiming: hasUserRestriction-DISALLOW_USER_SWITCH took to complete: 0ms
+10-30 10:44:23.716   507   953 D SystemServerTiming: getInt-ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED
+10-30 10:44:23.716   507   953 V SystemServerTiming: getInt-ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED took to complete: 0ms
+10-30 10:44:23.716   507   953 D SystemServerTiming: isUserUnlocked-USER_SYSTEM
+10-30 10:44:23.716   507   953 V SystemServerTiming: isUserUnlocked-USER_SYSTEM took to complete: 0ms
+10-30 10:44:23.716   507   953 V SystemServerTiming: getUserSwitchability-0 took to complete: 1ms
+10-30 10:44:23.718   507   953 D SystemServerTiming: getUserSwitchability-0
+10-30 10:44:23.718   507   953 D SystemServerTiming: TM.isInCall
+10-30 10:44:23.718   507   953 V SystemServerTiming: TM.isInCall took to complete: 0ms
+10-30 10:44:23.718   507   953 D SystemServerTiming: hasUserRestriction-DISALLOW_USER_SWITCH
+10-30 10:44:23.718   507   953 V SystemServerTiming: hasUserRestriction-DISALLOW_USER_SWITCH took to complete: 0ms
+10-30 10:44:23.718   507   953 D SystemServerTiming: getInt-ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED
+10-30 10:44:23.718   507   953 V SystemServerTiming: getInt-ALLOW_USER_SWITCHING_WHEN_SYSTEM_USER_LOCKED took to complete: 0ms
+10-30 10:44:23.718   507   953 D SystemServerTiming: isUserUnlocked-USER_SYSTEM
+10-30 10:44:23.718   507   953 V SystemServerTiming: isUserUnlocked-USER_SYSTEM took to complete: 0ms
+10-30 10:44:23.718   507   953 V SystemServerTiming: getUserSwitchability-0 took to complete: 1ms
+10-30 10:44:23.755   507   953 D WifiNl80211Manager: Scan result ready event
+10-30 10:44:23.755   507   953 D WifiNative: Scan result ready event
+10-30 10:44:23.761   802   802 W FrameTracker: Missed App frame:UNKNOWN: 74, 8250, 0, CUJ=J<NOTIFICATION_SHADE_EXPAND_COLLAPSE::Expand>
+10-30 10:44:23.762   802   802 W FrameTracker: Missed SF frame:UNKNOWN: 74, 8250, 0, CUJ=J<NOTIFICATION_SHADE_EXPAND_COLLAPSE::Expand>
+10-30 10:44:23.762   802   802 W FrameTracker: Missing HWUI jank callback for vsyncId: 8250, CUJ=J<NOTIFICATION_SHADE_EXPAND_COLLAPSE::Expand>
+10-30 10:44:23.762   802   802 W FrameTracker: Missed App frame:UNKNOWN: 74, 8267, 483602139, CUJ=J<NOTIFICATION_SHADE_EXPAND_COLLAPSE::Expand>
+10-30 10:44:23.762   802   802 W FrameTracker: Missed SF frame:UNKNOWN: 74, 8267, 483602139, CUJ=J<NOTIFICATION_SHADE_EXPAND_COLLAPSE::Expand>
+10-30 10:44:23.763   802   836 V PerfettoTrigger: Not triggering com.android.telemetry.interaction-jank-monitor-0 - not enough time since last trigger
+10-30 10:44:23.765   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.767   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.767   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.768   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.769   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.770   802   802 D BiometricsRepositoryImpl: currentUser authFlags changed, new value: AuthenticationFlags(userId=0, flag=0)
+10-30 10:44:23.778   802   863 E QuickAccessWalletKeyguardQuickAffordanceConfig: Wallet card retrieval error, message: "null"
+10-30 10:44:23.778   802   863 D ControlsListingControllerImpl: Subscribing callback, service count: 0
+10-30 10:44:23.782   802   863 E QuickAccessWalletKeyguardQuickAffordanceConfig: Wallet card retrieval error, message: "null"
+10-30 10:44:23.783   802   863 D ControlsListingControllerImpl: Subscribing callback, service count: 0
+10-30 10:44:23.786   802   863 E QuickAccessWalletKeyguardQuickAffordanceConfig: Wallet card retrieval error, message: "null"
+10-30 10:44:23.789   802   863 D ControlsListingControllerImpl: Subscribing callback, service count: 0
+10-30 10:44:24.333   802   802 D StatusBarIconController: ignoring old pipeline callbacks, because the new mobile icons are enabled
+10-30 10:44:24.943   802   802 D StatusBarIconController: ignoring old pipeline callback because the new wifi icon is enabled
+10-30 10:44:25.174  2835  2835 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+10-30 10:44:25.174  2835  2835 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+10-30 10:44:25.351     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+10-30 10:44:25.186   134   134 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+10-30 10:44:25.186  2835  2836 I Gralloc4: mapper 4.x is not supported
+10-30 10:44:25.400   802   802 D CentralSurfaces: Received new disable state: enaihbcrso.qingr (unchanged)

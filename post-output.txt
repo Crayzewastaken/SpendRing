@@ -1,0 +1,25 @@
+posting:
+  Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE)
+recorded via: su 2000
+posting:
+  Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE)
+    NotificationRecord(0x0a556e7d: pkg=com.android.shell user=UserHandle{0} id=2147483647 tag=ranker_group importance=3 key=0|com.android.shell|2147483647|ranker_group|2000|ranker_group: Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x700 color=0x00000000 groupKey=ranker_group vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=android id=0x01080077)
+    NotificationRecord(0x0a7799c3: pkg=com.android.shell user=UserHandle{0} id=2020 tag=sum1 importance=3 key=0|com.android.shell|2020|sum1|2000: Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=android id=0x01080077)
+      key=0|com.android.shell|2020|sum1|2000
+    NotificationRecord(0x05981240: pkg=com.android.shell user=UserHandle{0} id=2020 tag=coles1 importance=3 key=0|com.android.shell|2020|coles1|2000: Notification(channel=shell_cmd shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x0 color=0x00000000 vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=android id=0x01080077)
+      key=0|com.android.shell|2020|coles1|2000
+    NotificationRecord(0x06b612be: pkg=com.spendring.app user=UserHandle{0} id=2147483647 tag=ranker_group importance=3 key=0|com.spendring.app|2147483647|ranker_group|10141|ranker_group: Notification(channel=alerts shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x710 color=0xfffb923c groupKey=ranker_group vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=com.spendring.app id=0x0108009b)
+    NotificationRecord(0x0248f035: pkg=com.spendring.app user=UserHandle{0} id=7002 tag=null importance=3 key=0|com.spendring.app|7002|null|10141: Notification(channel=alerts shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x10 color=0xfff87171 vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=com.spendring.app id=0x0108009b)
+    NotificationRecord(0x0edde958: pkg=com.spendring.app user=UserHandle{0} id=7001 tag=null importance=2 key=0|com.spendring.app|7001|null|10141: Notification(channel=purchases shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x10 color=0xff7a9bff vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=com.spendring.app id=0x0108004a)
+    NotificationRecord(0x013ec317: pkg=android user=UserHandle{-1} id=2147483647 tag=ranker_group importance=2 key=-1|android|2147483647|ranker_group|1000|ranker_group: Notification(channel=DEVELOPER shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x702 color=0x00000000 groupKey=ranker_group vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=android id=0x01080864)
+    NotificationRecord(0x0a83f0ed: pkg=android user=UserHandle{-1} id=55 tag=null importance=2 key=-1|android|55|null|1000: Notification(channel=DEVELOPER shortcut=null contentView=null vibrate=null sound=null tick defaults=0x0 flags=0x802 color=0x00000000 vis=PUBLIC))
+      icon=Icon(typ=RESOURCE pkg=android id=0x01080864)
+    NotificationRecord(0x01e3fb22: pkg=android user=UserHandle{-1} id=19 tag=null importance=2 key=-1|android|19|null|1000: Notification(channel=PHYSICAL_KEYBOARD shortcut=null contentView=null vibrate=null sound=null defaults=0x0 flags=0x810 color=0x00000000 vis=PRIVATE))
+      icon=Icon(typ=RESOURCE pkg=android id=0x0108054f)
