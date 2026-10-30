@@ -53,6 +53,7 @@ class MainActivity : Activity() {
     private lateinit var greeting: TextView
     private lateinit var safeChip: TextView
     private lateinit var paceHint: TextView
+    private lateinit var paydayView: PaydayView
     private lateinit var dayBars: DayBars
     private lateinit var dayCard: LinearLayout
     private lateinit var recentBox: LinearLayout
@@ -239,7 +240,9 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER_HORIZONTAL; topMargin = dp(10)
         })
         paceHint = label("", 13f, Colors.ORANGE).apply { gravity = Gravity.CENTER; setPadding(0, dp(8), 0, 0) }
-        col.addView(paceHint)
+        paceHint.visibility = View.GONE
+        paydayView = PaydayView(this)
+        col.addView(paydayView, lp(18))
 
         val grid = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         val r1 = row()
@@ -250,7 +253,8 @@ class MainActivity : Activity() {
         statRefill = bigStat(r2, "REFILL ON", 10, Colors.YELLOW)
         grid.addView(r1)
         grid.addView(r2, lp(10))
-        col.addView(grid, lp(18))
+        grid.visibility = View.GONE   // the four number tiles are kept off the home screen
+        col.addView(grid, lp(0))
 
         col.addView(section("WHAT YOU'RE SAVING"))
         savingsCard = card()
@@ -585,7 +589,7 @@ class MainActivity : Activity() {
                 w.fast && w.left >= 0 -> "You're spending faster than the days are passing. Ease off and it evens out."
                 else -> ""
             }
-            paceHint.visibility = if (note.isNotEmpty()) View.VISIBLE else View.GONE
+            paceHint.visibility = View.GONE
             paceHint.text = note
             paceHint.setTextColor(if (w.left < 0 || w.carry < -0.005) Colors.ORANGE else Colors.MUTED)
 
@@ -600,6 +604,7 @@ class MainActivity : Activity() {
         }
 
         val plan = Plan.load(this)
+        paydayView.set(s.cycle, if (plan.isEmpty) 0.0 else plan.pay)
         if (plan.isEmpty) {
             savingsCard.visibility = View.GONE
             (savingsCard.parent as? LinearLayout)?.let { p -> p.getChildAt(p.indexOfChild(savingsCard) - 1)?.visibility = View.GONE }

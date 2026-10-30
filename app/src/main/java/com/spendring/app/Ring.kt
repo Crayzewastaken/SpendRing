@@ -9,7 +9,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.DashPathEffect
+import android.graphics.LinearGradient
 import android.graphics.Matrix
+import android.graphics.Path
+import android.graphics.Shader
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.SweepGradient
@@ -229,14 +232,111 @@ class SavingsView @JvmOverloads constructor(ctx: Context, attrs: AttributeSet? =
         if (l.measureText(big) > maxW) l.textSize *= maxW / l.measureText(big)
         canvas.drawText(big, x, cy + 8 * d, l)
 
-        val perDay = p.saving / 14.0
         l.typeface = Typeface.DEFAULT; l.textSize = 12.5f * d; l.color = Colors.GREEN
-        canvas.drawText("+${Store.money(perDay)} a day · +${Store.money(perDay * 7, false)} a week", x, cy + 28 * d, l)
+        canvas.drawText("+${Store.money(p.saving, false)} goes in every payday", x, cy + 28 * d, l)
         p.goalDate(goal)?.let {
             l.color = Colors.MUTED
             val m = java.text.SimpleDateFormat("MMM yyyy", java.util.Locale.getDefault()).format(java.util.Date(it))
             canvas.drawText("${Store.money(goal, false)} around $m", x, cy + 46 * d, l)
         }
+    }
+}
+
+/**
+ * Big payday countdown: a colourful card with the days to go, a live hours/minutes/seconds
+ * clock, the date, how far through the fortnight you are, and how much is coming in.
+ */
+class PaydayView @JvmOverloads constructor(ctx: Context, attrs: AttributeSet? = null) : View(ctx, attrs) {
+    private var cycle: Cycle? = null
+    private var pay = 0.0
+    private val tick = object : Runnable {
+        override fun run() { invalidate(); postDelayed(this, 1000) }
+    }
+
+    fun set(c: Cycle?, payAmount: Double) { cycle = c; pay = payAmount; invalidate() }
+
+    override fun onAttachedToWindow() { super.onAttachedToWindow(); post(tick) }
+    override fun onDetachedFromWindow() { removeCallbacks(tick); super.onDetachedFromWindow() }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        setMeasuredDimension(View.MeasureSpec.getSize(widthMeasureSpec), (resources.displayMetrics.density * 250).toInt())
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        val c = cycle ?: return
+        val d = resources.displayMetrics.density
+        val w = width.toFloat()
+        val h = height.toFloat()
+        val now = System.currentTimeMillis()
+        val ms = (c.end - now).coerceAtLeast(0L)
+        val days = ms / Store.DAY
+        val hrs = (ms / 3_600_000L) % 24
+        val mins = (ms / 60_000L) % 60
+        val secs = (ms / 1000L) % 60
+
+        // card: deep blue → purple → pink gradient with soft glow circles
+        val rect = RectF(0f, 0f, w, h)
+        val bg = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            shader = LinearGradient(0f, 0f, w, h, intArrayOf(0xFF1D4ED8.toInt(), 0xFF7C3AED.toInt(), 0xFFDB2777.toInt()), floatArrayOf(0f, 0.55f, 1f), Shader.TileMode.CLAMP)
+        }
+        canvas.save()
+        val clip = Path().apply { addRoundRect(rect, 26 * d, 26 * d, Path.Direction.CW) }
+        canvas.clipPath(clip)
+        canvas.drawRect(rect, bg)
+        val glow = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x22FFFFFF }
+        canvas.drawCircle(w * 0.92f, h * 0.08f, h * 0.55f, glow)
+        canvas.drawCircle(w * 0.05f, h * 1.05f, h * 0.45f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x18FFFFFF })
+        canvas.restore()
+
+        val pad = 22 * d
+        val t = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xCCFFFFFF.toInt(); textSize = 12 * d; typeface = Typeface.DEFAULT_BOLD; letterSpacing = 0.14f }
+        canvas.drawText("NEXT PAYDAY", pad, pad + 10 * d, t)
+
+        // money coming in, top right
+        if (pay > 0) {
+            val pill = "+${Store.money(pay, false)}"
+            t.letterSpacing = 0f; t.textSize = 14 * d; t.color = 0xFFFFFFFF.toInt()
+            val pw = t.measureText(pill) + 22 * d
+            val pr = RectF(w - pad - pw, pad - 6 * d, w - pad, pad + 20 * d)
+            canvas.drawRoundRect(pr, 13 * d, 13 * d, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x33FFFFFF })
+            canvas.drawText(pill, pr.left + 11 * d, pr.bottom - 8 * d, t)
+        }
+
+        // huge day count
+        val big = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = 0xFFFFFFFF.toInt(); typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD); textSize = 78 * d
+        }
+        val dayStr = if (days > 0) "$days" else "${hrs}h"
+        val baseY = pad + 96 * d
+        canvas.drawText(dayStr, pad - 4 * d, baseY, big)
+        val bx = pad + big.measureText(dayStr) + 8 * d
+        val unit = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFFFFFFF.toInt(); textSize = 24 * d; typeface = Typeface.DEFAULT_BOLD }
+        canvas.drawText(if (days > 0) (if (days == 1L) "day" else "days") else "to go", bx, baseY - 30 * d, unit)
+        unit.textSize = 15 * d; unit.typeface = Typeface.DEFAULT; unit.color = 0xD9FFFFFF.toInt()
+        canvas.drawText("until payday", bx, baseY - 8 * d, unit)
+
+        // live clock
+        val clock = String.format(java.util.Locale.US, "%02dh  %02dm  %02ds", hrs, mins, secs)
+        val ck = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFFFFFFF.toInt(); textSize = 20 * d; typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD) }
+        val cw = ck.measureText(clock) + 24 * d
+        val cr = RectF(pad, baseY + 14 * d, pad + cw, baseY + 50 * d)
+        canvas.drawRoundRect(cr, 12 * d, 12 * d, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x2EFFFFFF })
+        canvas.drawText(clock, cr.left + 12 * d, cr.bottom - 11 * d, ck)
+        val dateStr = java.text.SimpleDateFormat("EEEE d MMMM", java.util.Locale.getDefault()).format(java.util.Date(c.end))
+        val dt = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xE6FFFFFF.toInt(); textSize = 14 * d }
+        if (cr.right + 14 * d + dt.measureText(dateStr) < w - pad) canvas.drawText(dateStr, cr.right + 14 * d, cr.bottom - 12 * d, dt)
+        else canvas.drawText(dateStr, pad, cr.bottom + 22 * d, dt)
+
+        // fortnight progress
+        val frac = ((now - c.start).toDouble() / c.length).coerceIn(0.0, 1.0).toFloat()
+        val by = h - pad - 4 * d
+        val track = RectF(pad, by - 7 * d, w - pad, by)
+        canvas.drawRoundRect(track, 4 * d, 4 * d, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0x33FFFFFF })
+        canvas.drawRoundRect(RectF(track.left, track.top, track.left + track.width() * frac.coerceAtLeast(0.03f), track.bottom), 4 * d, 4 * d,
+            Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFFFFFFF.toInt() })
+        val small = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xCCFFFFFF.toInt(); textSize = 11.5f * d }
+        canvas.drawText("${(frac * 100).toInt()}% through the fortnight", pad, track.top - 8 * d, small)
     }
 }
 
