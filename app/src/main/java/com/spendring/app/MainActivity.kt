@@ -56,6 +56,8 @@ class MainActivity : Activity() {
     private lateinit var dayBars: DayBars
     private lateinit var dayCard: LinearLayout
     private lateinit var recentBox: LinearLayout
+    private lateinit var savingsCard: LinearLayout
+    private lateinit var savingsView: SavingsView
     private val tabColors = listOf(Colors.GREEN, Colors.BLUE, Colors.PURPLE)
 
     // Budget
@@ -250,6 +252,13 @@ class MainActivity : Activity() {
         grid.addView(r2, lp(10))
         col.addView(grid, lp(18))
 
+        col.addView(section("WHAT YOU'RE SAVING"))
+        savingsCard = card()
+        savingsView = SavingsView(this)
+        savingsCard.addView(savingsView)
+        savingsCard.setOnClickListener { show(1) }
+        col.addView(savingsCard, lp(8))
+
         col.addView(section("DAY BY DAY"))
         dayCard = card()
         dayBars = DayBars(this)
@@ -425,6 +434,12 @@ class MainActivity : Activity() {
             setOnCheckedChangeListener { _, on -> store.notifyOnPurchase = on }
         }
         n.addView(notifySw, lp(18))
+        n.addView(Switch(this).apply {
+            text = "Alert me at halfway, a quarter left, and over budget"
+            setTextColor(Colors.FG); textSize = 15f
+            isChecked = store.budgetAlerts
+            setOnCheckedChangeListener { _, on -> store.budgetAlerts = on }
+        }, lp(14))
         col.addView(n, lp(8))
 
         col.addView(section("UPDATES"))
@@ -582,6 +597,16 @@ class MainActivity : Activity() {
             safeChip.visibility = View.GONE
             paceHint.visibility = View.GONE
             dayCard.visibility = View.GONE
+        }
+
+        val plan = Plan.load(this)
+        if (plan.isEmpty) {
+            savingsCard.visibility = View.GONE
+            (savingsCard.parent as? LinearLayout)?.let { p -> p.getChildAt(p.indexOfChild(savingsCard) - 1)?.visibility = View.GONE }
+        } else {
+            savingsCard.visibility = View.VISIBLE
+            (savingsCard.parent as? LinearLayout)?.let { p -> p.getChildAt(p.indexOfChild(savingsCard) - 1)?.visibility = View.VISIBLE }
+            savingsView.plan = plan
         }
 
         recentBox.removeAllViews()

@@ -161,6 +161,85 @@ object RingDraw {
     }
 }
 
+/**
+ * Live savings counter: a circle filling towards the next savings goal on the left, and the
+ * balance ticking up every few hundred milliseconds on the right.
+ */
+class SavingsView @JvmOverloads constructor(ctx: Context, attrs: AttributeSet? = null) : View(ctx, attrs) {
+    var plan: Plan? = null
+        set(v) { field = v; invalidate() }
+
+    private val goals = listOf(10_000.0, 20_000.0, 30_000.0, 40_000.0, 50_000.0, 75_000.0, 100_000.0)
+    private val tick = object : Runnable {
+        override fun run() { invalidate(); postDelayed(this, 200) }
+    }
+
+    override fun onAttachedToWindow() { super.onAttachedToWindow(); post(tick) }
+    override fun onDetachedFromWindow() { removeCallbacks(tick); super.onDetachedFromWindow() }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        setMeasuredDimension(View.MeasureSpec.getSize(widthMeasureSpec), (resources.displayMetrics.density * 124).toInt())
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        val p = plan ?: return
+        val d = resources.displayMetrics.density
+        val now = System.currentTimeMillis()
+        val v = p.liveSavings(now)
+        val goal = goals.firstOrNull { it > v } ?: (Math.ceil(v / 50_000.0) * 50_000.0 + 50_000.0)
+        val prevGoal = goals.lastOrNull { it <= v } ?: 0.0
+        val frac = ((v - prevGoal) / (goal - prevGoal)).toFloat().coerceIn(0f, 1f)
+
+        // circle
+        val size = height - 8 * d
+        val stroke = 10 * d
+        val cx = 4 * d + size / 2
+        val cy = height / 2f
+        val r = size / 2 - stroke / 2
+        val oval = RectF(cx - r, cy - r, cx + r, cy + r)
+        canvas.drawArc(oval, 0f, 360f, false, Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.STROKE; strokeWidth = stroke; color = Colors.TRACK
+        })
+        val grad = SweepGradient(cx, cy, intArrayOf(Colors.BLUE, Colors.PURPLE, Colors.PINK, Colors.BLUE), null)
+        grad.setLocalMatrix(Matrix().apply { setRotate(-90f, cx, cy) })
+        canvas.drawArc(oval, -90f, 360f * frac.coerceAtLeast(0.01f), false, Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.STROKE; strokeWidth = stroke; shader = grad; strokeCap = Paint.Cap.ROUND
+        })
+        val t = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER; typeface = Typeface.DEFAULT_BOLD }
+        t.color = Colors.FG; t.textSize = 17 * d
+        canvas.drawText("${(frac * 100).toInt()}%", cx, cy + 2 * d, t)
+        t.color = Colors.MUTED; t.textSize = 10.5f * d; t.typeface = Typeface.DEFAULT
+        canvas.drawText("to ${Store.money(goal, false).replace(",000", "k")}", cx, cy + 16 * d, t)
+
+        // text
+        val x = cx + size / 2 + 16 * d
+        val l = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.LEFT }
+        l.color = Colors.PURPLE; l.typeface = Typeface.DEFAULT_BOLD; l.textSize = 11 * d; l.letterSpacing = 0.1f
+        canvas.drawText("SAVINGS · LIVE", x, cy - 26 * d, l)
+        // pulsing dot
+        val pulse = ((Math.sin(now / 300.0) + 1) / 2).toFloat()
+        canvas.drawCircle(x + l.measureText("SAVINGS · LIVE") + 9 * d, cy - 30 * d, 3.5f * d,
+            Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Colors.alpha(Colors.GREEN, (110 + 145 * pulse).toInt()) })
+
+        l.letterSpacing = 0f
+        l.color = Colors.FG; l.typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD); l.textSize = 27 * d
+        val big = String.format(java.util.Locale.US, "$%,.2f", v)
+        val maxW = width - x - 4 * d
+        if (l.measureText(big) > maxW) l.textSize *= maxW / l.measureText(big)
+        canvas.drawText(big, x, cy + 8 * d, l)
+
+        val perDay = p.saving / 14.0
+        l.typeface = Typeface.DEFAULT; l.textSize = 12.5f * d; l.color = Colors.GREEN
+        canvas.drawText("+${Store.money(perDay)} a day · +${Store.money(perDay * 7, false)} a week", x, cy + 28 * d, l)
+        p.goalDate(goal)?.let {
+            l.color = Colors.MUTED
+            val m = java.text.SimpleDateFormat("MMM yyyy", java.util.Locale.getDefault()).format(java.util.Date(it))
+            canvas.drawText("${Store.money(goal, false)} around $m", x, cy + 46 * d, l)
+        }
+    }
+}
+
 /** Spending per day across the cycle, coloured against the daily allowance. */
 class DayBars @JvmOverloads constructor(ctx: Context, attrs: AttributeSet? = null) : View(ctx, attrs) {
     var days: List<Pair<Long, Double>> = emptyList()  // day start, amount spent

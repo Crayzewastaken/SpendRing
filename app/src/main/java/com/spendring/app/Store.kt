@@ -101,6 +101,11 @@ class Store(ctx: Context) {
         get() = sp.getBoolean("weekly", true)
         set(v) = sp.edit().putBoolean("weekly", v).apply()
 
+    /** Alert when this week's money is half gone, a quarter left, and over. */
+    var budgetAlerts: Boolean
+        get() = sp.getBoolean("budgetAlerts", true)
+        set(v) = sp.edit().putBoolean("budgetAlerts", v).apply()
+
     var notifyOnPurchase: Boolean
         get() = sp.getBoolean("notifyOnPurchase", true)
         set(v) = sp.edit().putBoolean("notifyOnPurchase", v).apply()

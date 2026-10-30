@@ -59,6 +59,19 @@ data class Plan(
         return v
     }
 
+    /**
+     * Savings as a smoothly rising number: each fortnight's transfer is spread across the
+     * fortnight, so the counter ticks up every second and lands on the real figure each payday.
+     */
+    fun liveSavings(now: Long = System.currentTimeMillis()): Double {
+        val prev = paydays(now - 15 * Store.DAY, now).lastOrNull() ?: return savingsAt(now)
+        val next = nextPayday(now) ?: return savingsAt(now)
+        val a = savingsAt(prev)
+        val b = savingsAt(next)
+        val frac = ((now - prev).toDouble() / (next - prev)).coerceIn(0.0, 1.0)
+        return a + (b - a) * frac
+    }
+
     /** First date the estimated balance reaches [goal], looking up to 4 years ahead. */
     fun goalDate(goal: Double): Long? {
         if (savingsBalance >= goal) return savingsDate
