@@ -554,7 +554,7 @@ class MainActivity : Activity() {
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val hello = when (hour) { in 5..11 -> "Good morning"; in 12..17 -> "Good afternoon"; else -> "Good evening" }
         val cyc = s.cycle
-        greeting.text = if (cyc != null) "$hello · ${s.daysLeft} ${if (s.daysLeft == 1) "day" else "days"} until payday" else hello
+        greeting.text = if (w.weekNo > 0) "$hello · week ${w.weekNo} of 2" else hello
         val weekly = w.weekNo > 0
         (statLeft.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = if (weekly) "LEFT THIS WEEK" else "LEFT TO SPEND" }
         (statSpent.parent as? LinearLayout)?.let { (it.getChildAt(0) as? TextView)?.text = if (weekly) "SPENT THIS WEEK" else "SPENT" }
